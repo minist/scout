@@ -1,549 +1,287 @@
-"use client";
-
-import { useMemo, useState } from "react";
+import Link from "next/link";
 import {
   ArrowRight,
-  Check,
   ClipboardList,
-  ExternalLink,
   FileText,
-  Gauge,
-  Loader2,
-  MessageSquareText,
-  RotateCcw,
-  Sparkles,
-  Target,
-  WandSparkles
+  FlaskConical,
+  GitBranch,
+  Layers,
+  MessagesSquare,
+  TrendingUp
 } from "lucide-react";
-import { SiteShell } from "@/components/site-shell";
-import {
-  roboticsSampleInput,
-  roboticsSampleResult,
-  scoutSamples,
-  type ScoutSample,
-  type ScoutInput,
-  type ScoutResult
-} from "@/lib/scout";
+import { MarketingShell } from "@/components/marketing-shell";
+import { IdeaGate } from "@/components/idea-gate";
 
-const emptyInput: ScoutInput = {
-  ideaName: "",
-  targetUser: "",
-  problem: "",
-  riskiestAssumption: "",
-  validationStage: "Problem discovery"
-};
+const loop = [
+  { step: "01", title: "Capture", body: "Drop in your idea or the feature you're weighing." },
+  { step: "02", title: "Decompose", body: "Scout breaks it into the assumptions it depends on." },
+  { step: "03", title: "Rank", body: "Risk × uncertainty surfaces the single riskiest belief." },
+  { step: "04", title: "Prescribe", body: "Get the cheapest experiment that actually tests it." },
+  { step: "05", title: "Generate", body: "The asset bundle to run it lands ready to use." },
+  { step: "06", title: "Decide", body: "Commit the bar, capture evidence, log the decision." }
+];
 
-const stages = ["Problem discovery", "Solution smoke test", "Manual delivery", "Pre-launch demand"];
-
-function classNames(...classes: Array<string | false | null | undefined>) {
-  return classes.filter(Boolean).join(" ");
-}
-
-function defaultSetupAction(assetType: string) {
-  const normalized = assetType.toLowerCase();
-
-  if (normalized.includes("email") || normalized.includes("outreach")) {
-    return {
-      label: "Set up outreach sequence",
-      service: "Gmail or HubSpot",
-      description:
-        "Create a draft email sequence, personalization fields, and reply tracking for this asset."
-    };
+const features = [
+  {
+    icon: GitBranch,
+    title: "Assumption modeling",
+    body: "Decompose any idea into problem, demand, willingness-to-pay, reachability, and feasibility — then rank by risk."
+  },
+  {
+    icon: FlaskConical,
+    title: "Experiment prescription",
+    body: "Scout recommends the cheapest valid experiment for the riskiest assumption. The core intelligence."
+  },
+  {
+    icon: FileText,
+    title: "Asset generation",
+    body: "Outreach emails, who-to-ask lists, Mom Test scripts, fake ads, landing-page copy — generated to run today."
+  },
+  {
+    icon: MessagesSquare,
+    title: "Interview pipeline",
+    body: "Upload conversations, get transcripts and summaries, and promote tagged quotes straight to evidence."
+  },
+  {
+    icon: ClipboardList,
+    title: "Decision log",
+    body: "Every assumption, its evidence, and each persevere / pivot / kill decision — your cumulative source of truth."
+  },
+  {
+    icon: TrendingUp,
+    title: "Continuous discovery",
+    body: "Once you're building, run the same loop on every feature using the users you now have. (Phase 2)"
   }
+];
 
-  if (normalized.includes("interview") || normalized.includes("survey") || normalized.includes("form")) {
-    return {
-      label: "Generate response form",
-      service: "Google Forms or Tally",
-      description:
-        "Turn this asset into a structured form with score fields, notes, and follow-up tracking."
-    };
+const tiers = [
+  {
+    name: "Free",
+    price: "$0",
+    tagline: "Idea-stage individuals",
+    features: ["1 active idea", "The core validation loop", "Limited asset generations", "Basic decision logging"],
+    cta: "Start free",
+    highlight: false
+  },
+  {
+    name: "Pro",
+    price: "$19",
+    tagline: "Solo founders & indie hackers",
+    features: ["Unlimited ideas", "Full asset studio", "Interview pipeline", "Full decision log + export"],
+    cta: "Start Pro",
+    highlight: true
+  },
+  {
+    name: "Team",
+    price: "$49",
+    tagline: "Teams building a live product",
+    features: ["Phase 2 feature validation", "Collaboration & roles", "Integrations", "Shared evidence repository"],
+    cta: "Start Team",
+    highlight: false
   }
+];
 
-  if (normalized.includes("landing")) {
-    return {
-      label: "Create landing page draft",
-      service: "Webflow, Framer, WordPress, or Vercel",
-      description:
-        "Create a draft page with CTA tracking, thank-you state, and motivation capture."
-    };
-  }
-
-  if (normalized.includes("ad") || normalized.includes("campaign")) {
-    return {
-      label: "Prepare campaign setup",
-      service: "Google Ads or Meta Ads",
-      description:
-        "Create campaign copy, audience notes, and conversion event mapping for the experiment."
-    };
-  }
-
-  if (normalized.includes("sheet") || normalized.includes("tracking") || normalized.includes("scorecard")) {
-    return {
-      label: "Create tracking workspace",
-      service: "Google Sheets",
-      description:
-        "Create a scorecard and roll up results against the success threshold."
-    };
-  }
-
-  return {
-    label: "Create managed setup",
-    service: "Scout workspace",
-    description:
-      "Turn this generated asset into an execution-ready workflow inside Scout."
-  };
-}
-
-function MiniResultPreview() {
+export default function LandingPage() {
   return (
-    <div className="rounded-[8px] border border-line bg-white p-4 shadow-panel">
-      <div className="flex items-start justify-between gap-4 border-b border-line pb-4">
+    <MarketingShell>
+      {/* Hero */}
+      <section className="mx-auto grid w-full max-w-[1280px] gap-12 px-5 pb-20 pt-16 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pb-28 lg:pt-24">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
-            Recommended experiment
+          <p className="mono-label">Validation workspace</p>
+          <h1 className="mt-5 font-display text-5xl font-medium leading-[0.98] tracking-tightest text-ink sm:text-6xl lg:text-7xl">
+            Validate before you build.
+          </h1>
+          <p className="mt-6 max-w-xl text-lg leading-7 text-bodymuted">
+            Scout tells you the cheapest experiment to run before you build — and hands you the
+            assets to run it — so you validate your idea with evidence instead of optimism.
           </p>
-          <h3 className="mt-2 text-xl font-semibold text-ink">Problem interview outreach</h3>
-        </div>
-        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
-          <MessageSquareText className="h-5 w-5" />
-        </div>
-      </div>
-      <div className="grid gap-3 py-4">
-        {["Generate research assets", "Manage services behind the scenes", "Turn results into next actions"].map(
-          (item) => (
-            <div key={item} className="flex items-center gap-3 text-sm text-slate-700">
-              <span className="grid h-5 w-5 place-items-center rounded-full bg-teal-50 text-teal-700">
-                <Check className="h-3.5 w-3.5" />
-              </span>
-              {item}
-            </div>
-          )
-        )}
-      </div>
-      <div className="rounded-lg border border-amber-100 bg-amber-50 p-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-amber-700">
-          Success threshold
-        </p>
-        <p className="mt-1 text-sm font-medium leading-6 text-ink">
-          5 high-pain interviews and 3 prototype review commitments in 10 business days.
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function Landing() {
-  return (
-    <section id="home" className="mx-auto grid w-full max-w-7xl gap-10 px-5 pb-16 pt-10 sm:px-8 lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:pb-24 lg:pt-16">
-      <div>
-        <h1 className="max-w-3xl text-5xl font-semibold leading-[1.02] tracking-normal text-ink sm:text-6xl lg:text-7xl">
-          Validate the riskiest part of your startup before you build.
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-          Scout is a unified AI-powered research and growth workspace. It turns raw customer
-          evidence into the right experiment, execution-ready assets, managed workflows, and clear
-          next actions.
-        </p>
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a
-            href="#validate"
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-ink px-5 text-sm font-semibold text-white hover:bg-slate-800"
-          >
-            Build my experiment <WandSparkles className="h-4 w-4" />
-          </a>
-          <button
-            type="button"
-            onClick={() => document.getElementById("results")?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-line px-5 text-sm font-semibold text-ink hover:bg-mist"
-          >
-            View sample <ArrowRight className="h-4 w-4" />
-          </button>
-        </div>
-      </div>
-      <MiniResultPreview />
-    </section>
-  );
-}
-
-function ValidationForm({
-  input,
-  setInput,
-  onSubmit,
-  onLoadSample,
-  activeSampleId,
-  isLoading
-}: {
-  input: ScoutInput;
-  setInput: (input: ScoutInput) => void;
-  onSubmit: () => void;
-  onLoadSample: (sample: ScoutSample) => void;
-  activeSampleId: string;
-  isLoading: boolean;
-}) {
-  const canSubmit = useMemo(
-    () =>
-      input.ideaName.trim() &&
-      input.targetUser.trim() &&
-      input.problem.trim() &&
-      input.riskiestAssumption.trim(),
-    [input]
-  );
-
-  return (
-    <section id="validate" className="border-y border-line bg-mist">
-      <div className="mx-auto grid w-full max-w-7xl gap-8 px-5 py-14 sm:px-8 lg:grid-cols-[0.72fr_1.28fr]">
-        <div>
-          <h2 className="text-3xl font-semibold tracking-normal text-ink">Tell Scout what needs proving.</h2>
-          <p className="mt-4 text-base leading-7 text-slate-600">
-            The best experiment depends on the assumption that could break the company. Keep it
-            specific and Scout will generate the runbook, assets, and next-step threshold without
-            making you manage the underlying stack.
-          </p>
-          <div className="mt-6">
-            <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-ink">
-              <Sparkles className="h-4 w-4 text-teal-700" />
-              Demo examples
-            </div>
-            <div className="grid gap-3">
-              {scoutSamples.map((sample) => (
-                <button
-                  key={sample.id}
-                  type="button"
-                  onClick={() => onLoadSample(sample)}
-                  className={classNames(
-                    "rounded-lg border bg-white p-4 text-left transition hover:border-teal-200 hover:bg-teal-50",
-                    activeSampleId === sample.id ? "border-teal-300 ring-4 ring-teal-50" : "border-line"
-                  )}
-                >
-                  <span className="flex items-center justify-between gap-3">
-                    <span className="text-sm font-semibold text-ink">{sample.label}</span>
-                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
-                      {sample.result.experimentType}
-                    </span>
-                  </span>
-                  <span className="mt-2 block text-sm leading-6 text-slate-600">
-                    {sample.description}
-                  </span>
-                </button>
-              ))}
-            </div>
+          <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+            <Link href="/signup" className="pill-primary">
+              Get started free <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link href="/#how" className="link-underline text-sm">
+              See how it works
+            </Link>
           </div>
-        </div>
-
-        <form
-          className="rounded-[8px] border border-line bg-white p-5 shadow-panel sm:p-6"
-          onSubmit={(event) => {
-            event.preventDefault();
-            if (canSubmit) onSubmit();
-          }}
-        >
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Field
-              label="Idea name"
-              value={input.ideaName}
-              placeholder="RoboRoute"
-              onChange={(ideaName) => setInput({ ...input, ideaName })}
-            />
-            <label className="grid gap-2">
-              <span className="text-sm font-semibold text-ink">Validation stage</span>
-              <select
-                value={input.validationStage}
-                onChange={(event) => setInput({ ...input, validationStage: event.target.value })}
-                className="h-11 rounded-lg border border-line bg-white px-3 text-sm text-ink outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-50"
-              >
-                {stages.map((stage) => (
-                  <option key={stage}>{stage}</option>
-                ))}
-              </select>
-            </label>
-          </div>
-          <div className="mt-4 grid gap-4">
-            <TextArea
-              label="Target user / ICP"
-              value={input.targetUser}
-              placeholder="Operations leads at small warehouses with 20-150 employees"
-              onChange={(targetUser) => setInput({ ...input, targetUser })}
-            />
-            <TextArea
-              label="Problem being solved"
-              value={input.problem}
-              placeholder="Teams lose hours manually planning safe, efficient paths for mobile robots."
-              onChange={(problem) => setInput({ ...input, problem })}
-            />
-            <TextArea
-              label="Riskiest assumption / current belief"
-              value={input.riskiestAssumption}
-              placeholder="Ops leads will try a planning workflow before hardware integration."
-              onChange={(riskiestAssumption) => setInput({ ...input, riskiestAssumption })}
-            />
-          </div>
-          <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <button
-              type="button"
-              onClick={() => setInput(emptyInput)}
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-line px-4 text-sm font-semibold text-slate-700 hover:bg-mist"
-            >
-              <RotateCcw className="h-4 w-4" />
-              Reset
-            </button>
-            <button
-              type="submit"
-              disabled={!canSubmit || isLoading}
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-teal-600 px-5 text-sm font-semibold text-white hover:bg-teal-700 disabled:cursor-not-allowed disabled:bg-slate-300"
-            >
-              {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <ArrowRight className="h-4 w-4" />}
-              Generate experiment
-            </button>
-          </div>
-        </form>
-      </div>
-    </section>
-  );
-}
-
-function Field({
-  label,
-  value,
-  placeholder,
-  onChange
-}: {
-  label: string;
-  value: string;
-  placeholder: string;
-  onChange: (value: string) => void;
-}) {
-  return (
-    <label className="grid gap-2">
-      <span className="text-sm font-semibold text-ink">{label}</span>
-      <input
-        value={value}
-        placeholder={placeholder}
-        onChange={(event) => onChange(event.target.value)}
-        className="h-11 rounded-lg border border-line px-3 text-sm text-ink outline-none placeholder:text-slate-400 focus:border-teal-500 focus:ring-4 focus:ring-teal-50"
-      />
-    </label>
-  );
-}
-
-function TextArea({
-  label,
-  value,
-  placeholder,
-  onChange
-}: {
-  label: string;
-  value: string;
-  placeholder: string;
-  onChange: (value: string) => void;
-}) {
-  return (
-    <label className="grid gap-2">
-      <span className="text-sm font-semibold text-ink">{label}</span>
-      <textarea
-        value={value}
-        placeholder={placeholder}
-        rows={3}
-        onChange={(event) => onChange(event.target.value)}
-        className="min-h-24 resize-y rounded-lg border border-line px-3 py-3 text-sm leading-6 text-ink outline-none placeholder:text-slate-400 focus:border-teal-500 focus:ring-4 focus:ring-teal-50"
-      />
-    </label>
-  );
-}
-
-function Results({ result }: { result: ScoutResult }) {
-  return (
-    <section id="results" className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
-      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h2 className="text-3xl font-semibold tracking-normal text-ink">Experiment runbook</h2>
-          <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">
-            Scout prioritizes the fastest test that can change your decision, then turns it into
-            copy, checklists, thresholds, and managed execution workflows as the product grows.
+          <p className="mt-6 font-mono text-xs text-muted">
+            Lean Startup · The Mom Test · Continuous Discovery — turnkey.
           </p>
         </div>
-      </div>
 
-      <div className="grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
-        <div className="grid content-start gap-5">
-          <div className="rounded-[8px] border border-line bg-ink p-5 text-white shadow-panel sm:p-6">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-100">
-                  Experiment recommendation
-                </p>
-                <h3 className="mt-3 text-3xl font-semibold leading-tight">{result.experimentType}</h3>
+        <IdeaGate />
+      </section>
+
+      {/* How it works — the loop */}
+      <section id="how" className="bg-stone">
+        <div className="mx-auto w-full max-w-[1280px] px-5 py-20 sm:px-8 lg:py-28">
+          <div className="max-w-2xl">
+            <p className="mono-label">The validation loop</p>
+            <h2 className="mt-3 font-display text-4xl font-medium leading-none tracking-tighter text-ink sm:text-5xl">
+              One loop, run end to end
+            </h2>
+            <p className="mt-5 text-lg leading-7 text-bodymuted">
+              Don&apos;t validate the easy things. Find the single belief that would kill the idea if
+              it&apos;s wrong, and test it as cheaply as possible. Scout makes that loop turnkey.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {loop.map((node) => (
+              <div key={node.step} className="rounded-card border border-line bg-canvas p-6">
+                <span className="font-mono text-sm font-bold tracking-[0.08em] text-coral">
+                  {node.step}
+                </span>
+                <h3 className="mt-3 text-xl font-medium text-ink">{node.title}</h3>
+                <p className="mt-1.5 text-sm leading-6 text-bodymuted">{node.body}</p>
               </div>
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-white/10">
-                <Target className="h-6 w-6 text-teal-100" />
-              </span>
-            </div>
-            <p className="mt-5 text-base leading-7 text-slate-200">{result.rationale}</p>
-          </div>
-
-          <div className="rounded-[8px] border border-amber-100 bg-amber-50 p-5 sm:p-6">
-            <div className="flex items-start gap-3">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white text-amber-700">
-                <Gauge className="h-5 w-5" />
-              </span>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-amber-700">
-                  Success threshold
-                </p>
-                <p className="mt-2 text-lg font-semibold leading-7 text-ink">{result.successMetric}</p>
-              </div>
-            </div>
-          </div>
-
-          <DecisionRule result={result} />
-        </div>
-
-        <div className="grid gap-5">
-          <div className="rounded-[8px] border border-line bg-white p-5 shadow-panel sm:p-6">
-            <div className="mb-4 flex items-center gap-3">
-              <span className="grid h-10 w-10 place-items-center rounded-lg bg-teal-50 text-teal-700">
-                <ClipboardList className="h-5 w-5" />
-              </span>
-              <h3 className="text-xl font-semibold text-ink">Checklist</h3>
-            </div>
-            <div className="grid gap-3">
-              {result.checklist.map((item, index) => (
-                <div key={item} className="flex gap-3 rounded-lg border border-line p-3">
-                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-mist text-sm font-semibold text-ink">
-                    {index + 1}
-                  </span>
-                  <p className="text-sm leading-6 text-slate-700">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-[8px] border border-line bg-white p-5 shadow-panel sm:p-6">
-            <div className="mb-4 flex items-center gap-3">
-              <span className="grid h-10 w-10 place-items-center rounded-lg bg-teal-50 text-teal-700">
-                <FileText className="h-5 w-5" />
-              </span>
-              <h3 className="text-xl font-semibold text-ink">Generated assets</h3>
-            </div>
-            <div className="grid gap-4">
-              {result.assets.map((asset) => (
-                <article key={`${asset.type}-${asset.title}`} className="rounded-lg border border-line bg-mist p-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
-                      {asset.type}
-                    </p>
-                    <p className="text-sm font-semibold text-ink">{asset.title}</p>
-                  </div>
-                  <pre className="mt-3 whitespace-pre-wrap font-sans text-sm leading-6 text-slate-700">
-                    {asset.content}
-                  </pre>
-                  <div className="mt-4 rounded-lg border border-teal-100 bg-white p-4">
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
-                          Managed setup preview
-                        </p>
-                        <h4 className="mt-2 text-base font-semibold text-ink">
-                          {(asset.setupAction || defaultSetupAction(asset.type)).label}
-                        </h4>
-                        <p className="mt-1 text-sm font-semibold text-slate-600">
-                          {(asset.setupAction || defaultSetupAction(asset.type)).service}
-                        </p>
-                        <p className="mt-2 text-sm leading-6 text-slate-600">
-                          {(asset.setupAction || defaultSetupAction(asset.type)).description}
-                        </p>
-                      </div>
-                      <button
-                        type="button"
-                        className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-lg bg-ink px-4 text-sm font-semibold text-white opacity-90"
-                        aria-label={`Preview ${(asset.setupAction || defaultSetupAction(asset.type)).label}`}
-                      >
-                        Preview setup <ExternalLink className="h-4 w-4" />
-                      </button>
-                    </div>
-                    <p className="mt-3 text-xs leading-5 text-slate-500">
-                      Future premium action. Scout would configure the connector and keep billing
-                      unified behind the scenes.
-                    </p>
-                  </div>
-                </article>
-              ))}
-            </div>
+            ))}
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-function DecisionRule({ result }: { result: ScoutResult }) {
-  const rows = [
-    ["Continue", result.decisionRule.continue, "bg-teal-50 text-teal-700"],
-    ["Refine", result.decisionRule.refine, "bg-amber-50 text-amber-700"],
-    ["Pivot", result.decisionRule.pivot, "bg-slate-100 text-slate-700"]
-  ];
+      {/* Features */}
+      <section id="features" className="mx-auto w-full max-w-[1280px] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="max-w-2xl">
+          <p className="mono-label">What&apos;s inside</p>
+          <h2 className="mt-3 font-display text-4xl font-medium leading-none tracking-tighter text-ink sm:text-5xl">
+            Everything to run honest experiments
+          </h2>
+          <p className="mt-5 text-lg leading-7 text-bodymuted">
+            The moat isn&apos;t any single asset — it&apos;s the loop plus the evidence history that
+            compounds over time.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((feature) => {
+            const Icon = feature.icon;
+            return (
+              <article key={feature.title} className="bg-canvas p-7">
+                <span className="grid h-11 w-11 place-items-center rounded-sm bg-green-pale text-green-deep">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <h3 className="mt-5 text-xl font-medium text-ink">{feature.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-bodymuted">{feature.body}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
 
-  return (
-    <div className="rounded-[8px] border border-line bg-white p-5 shadow-panel sm:p-6">
-      <h3 className="text-xl font-semibold text-ink">Decision rule</h3>
-      <div className="mt-4 grid gap-3">
-        {rows.map(([label, body, style]) => (
-          <div key={label} className="grid gap-2 border-t border-line pt-3 first:border-t-0 first:pt-0">
-            <span className={classNames("w-fit rounded-md px-2 py-1 text-xs font-semibold", style)}>
-              {label}
+      {/* Two phases */}
+      <section className="mx-auto w-full max-w-[1280px] px-5 pb-20 sm:px-8 lg:pb-28">
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-media border border-line bg-stone p-8">
+            <span className="mono-label inline-flex items-center gap-2">
+              <Layers className="h-3.5 w-3.5 text-green-deep" /> Phase 1 — available now
             </span>
-            <p className="text-sm leading-6 text-slate-700">{body}</p>
+            <h3 className="mt-5 font-display text-3xl font-medium tracking-tighter text-ink">
+              Idea validation
+            </h3>
+            <p className="mt-3 text-base leading-7 text-bodymuted">
+              Validate that the problem and demand are real before allocating real resources. Problem
+              interviews, fake-door pages, smoke-test ads, pre-sales.
+            </p>
           </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+          <div className="rounded-media bg-green-deep p-8 text-white">
+            <span className="font-mono text-xs uppercase tracking-[0.08em] text-green-pale">
+              <TrendingUp className="mr-2 inline h-3.5 w-3.5" /> Phase 2 — coming soon
+            </span>
+            <h3 className="mt-5 font-display text-3xl font-medium tracking-tighter">
+              Feature validation
+            </h3>
+            <p className="mt-3 text-base leading-7 text-white/70">
+              Once you&apos;re building, validate each feature the same way — using the users you now
+              have. Painted-door buttons, feature-flag betas, A/B variants.
+            </p>
+          </div>
+        </div>
+      </section>
 
-export default function Home() {
-  const [input, setInput] = useState<ScoutInput>(roboticsSampleInput);
-  const [result, setResult] = useState<ScoutResult>(roboticsSampleResult);
-  const [activeSampleId, setActiveSampleId] = useState(scoutSamples[0].id);
-  const [isLoading, setIsLoading] = useState(false);
+      {/* Pricing teaser */}
+      <section className="bg-stone">
+        <div className="mx-auto w-full max-w-[1280px] px-5 py-20 sm:px-8 lg:py-28">
+          <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-2xl">
+              <p className="mono-label">Pricing</p>
+              <h2 className="mt-3 font-display text-4xl font-medium leading-none tracking-tighter text-ink sm:text-5xl">
+                Free to validate. Paid to scale.
+              </h2>
+            </div>
+            <Link href="/pricing" className="link-underline text-sm">
+              Full pricing details
+            </Link>
+          </div>
+          <div className="grid gap-5 lg:grid-cols-3">
+            {tiers.map((tier) => (
+              <article
+                key={tier.name}
+                className={[
+                  "flex flex-col rounded-sm p-8",
+                  tier.highlight ? "bg-primary text-white" : "border border-line bg-canvas"
+                ].join(" ")}
+              >
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-medium">{tier.name}</h3>
+                  {tier.highlight ? (
+                    <span className="rounded-pill bg-coral px-2.5 py-0.5 font-mono text-xs uppercase tracking-[0.08em] text-primary">
+                      Popular
+                    </span>
+                  ) : null}
+                </div>
+                <p className={`mt-1 text-sm ${tier.highlight ? "text-white/60" : "text-slate-500"}`}>
+                  {tier.tagline}
+                </p>
+                <p className="mt-5">
+                  <span className="font-display text-4xl font-medium tracking-tighter">{tier.price}</span>
+                  <span className={`ml-1 text-sm ${tier.highlight ? "text-white/60" : "text-slate-500"}`}>
+                    /mo
+                  </span>
+                </p>
+                <div className={`my-6 h-px ${tier.highlight ? "bg-white/15" : "bg-line"}`} />
+                <ul className="grid flex-1 gap-3 text-sm">
+                  {tier.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className={`flex items-start gap-2.5 leading-6 ${
+                        tier.highlight ? "text-white/80" : "text-bodymuted"
+                      }`}
+                    >
+                      <span
+                        className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full ${
+                          tier.highlight ? "bg-coral" : "bg-green-deep"
+                        }`}
+                      />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href="/signup"
+                  className={tier.highlight ? "pill-on-dark mt-7" : "pill-primary mt-7"}
+                >
+                  {tier.cta}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-  async function generate() {
-    setIsLoading(true);
-    setActiveSampleId("");
-    try {
-      const response = await fetch("/api/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(input)
-      });
-      const data = (await response.json()) as ScoutResult;
-      setResult(data);
-      window.setTimeout(() => document.getElementById("results")?.scrollIntoView({ behavior: "smooth" }), 80);
-    } catch {
-      setResult(roboticsSampleResult);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  return (
-    <SiteShell>
-      <Landing />
-      <ValidationForm
-        input={input}
-        setInput={setInput}
-        onSubmit={generate}
-        onLoadSample={(sample) => {
-          setInput(sample.input);
-          setResult(sample.result);
-          setActiveSampleId(sample.id);
-          window.setTimeout(() => document.getElementById("results")?.scrollIntoView({ behavior: "smooth" }), 80);
-        }}
-        activeSampleId={activeSampleId}
-        isLoading={isLoading}
-      />
-      <Results result={result} />
-    </SiteShell>
+      {/* Closing CTA */}
+      <section className="mx-auto w-full max-w-[1280px] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="flex flex-col items-start gap-8 rounded-media bg-green-deep p-10 text-white lg:flex-row lg:items-center lg:justify-between lg:p-16">
+          <div>
+            <h2 className="font-display text-3xl font-medium leading-none tracking-tighter sm:text-4xl">
+              Stop pouring months into untested ideas.
+            </h2>
+            <p className="mt-4 max-w-xl text-lg leading-7 text-white/70">
+              Validate the riskiest part first — with evidence, not optimism.
+            </p>
+          </div>
+          <Link href="/signup" className="pill-on-dark shrink-0">
+            Get started free <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </section>
+    </MarketingShell>
   );
 }

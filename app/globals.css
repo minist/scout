@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,8 +19,9 @@ html {
 body {
   margin: 0;
   background: #ffffff;
-  color: #111827;
-  font-family: Arial, Helvetica, sans-serif;
+  color: #212121;
+  font-family: Inter, Arial, ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 button,
@@ -29,6 +32,40 @@ select {
 }
 
 ::selection {
-  background: #ccfbef;
-  color: #0a645d;
+  background: #edfce9;
+  color: #003c33;
+}
+
+@layer base {
+  /* Monumental, tight display headlines (Cohere CohereText/Unica77 spirit). */
+  .font-display {
+    font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  /* Near-black pill CTA — the primary action on light surfaces. */
+  .pill-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-pill bg-primary px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-black disabled:cursor-not-allowed disabled:bg-muted;
+  }
+
+  /* White pill CTA — primary action on dark green / near-black bands. */
+  .pill-on-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-pill bg-white px-6 py-3 text-sm font-medium text-primary transition-colors hover:bg-stone;
+  }
+
+  /* Outlined pill — lightweight taxonomy / secondary controls. */
+  .pill-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-pill border border-ink/25 bg-transparent px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-ink;
+  }
+
+  /* Underlined text link — the companion secondary action. */
+  .link-underline {
+    @apply font-medium text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-ink;
+  }
+
+  /* Uppercase mono technical label. */
+  .mono-label {
+    @apply font-mono text-xs uppercase tracking-[0.08em] text-slate-500;
+  }
 }

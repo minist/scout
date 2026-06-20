@@ -5,6 +5,7 @@ import {
   ArrowRight,
   Check,
   ClipboardList,
+  ExternalLink,
   FileText,
   Gauge,
   Loader2,
@@ -34,6 +35,62 @@ const stages = ["Problem discovery", "Solution smoke test", "Manual delivery", "
 
 function classNames(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
+}
+
+function defaultSetupAction(assetType: string) {
+  const normalized = assetType.toLowerCase();
+
+  if (normalized.includes("email") || normalized.includes("outreach")) {
+    return {
+      label: "Set up outreach sequence",
+      service: "Gmail or HubSpot",
+      description:
+        "Create a draft email sequence, personalization fields, and reply tracking for this asset."
+    };
+  }
+
+  if (normalized.includes("interview") || normalized.includes("survey") || normalized.includes("form")) {
+    return {
+      label: "Generate response form",
+      service: "Google Forms or Tally",
+      description:
+        "Turn this asset into a structured form with score fields, notes, and follow-up tracking."
+    };
+  }
+
+  if (normalized.includes("landing")) {
+    return {
+      label: "Create landing page draft",
+      service: "Webflow, Framer, WordPress, or Vercel",
+      description:
+        "Create a draft page with CTA tracking, thank-you state, and motivation capture."
+    };
+  }
+
+  if (normalized.includes("ad") || normalized.includes("campaign")) {
+    return {
+      label: "Prepare campaign setup",
+      service: "Google Ads or Meta Ads",
+      description:
+        "Create campaign copy, audience notes, and conversion event mapping for the experiment."
+    };
+  }
+
+  if (normalized.includes("sheet") || normalized.includes("tracking") || normalized.includes("scorecard")) {
+    return {
+      label: "Create tracking workspace",
+      service: "Google Sheets",
+      description:
+        "Create a scorecard and roll up results against the success threshold."
+    };
+  }
+
+  return {
+    label: "Create managed setup",
+    service: "Scout workspace",
+    description:
+      "Turn this generated asset into an execution-ready workflow inside Scout."
+  };
 }
 
 function MiniResultPreview() {
@@ -355,6 +412,35 @@ function Results({ result }: { result: ScoutResult }) {
                   <pre className="mt-3 whitespace-pre-wrap font-sans text-sm leading-6 text-slate-700">
                     {asset.content}
                   </pre>
+                  <div className="mt-4 rounded-lg border border-teal-100 bg-white p-4">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
+                          Managed setup preview
+                        </p>
+                        <h4 className="mt-2 text-base font-semibold text-ink">
+                          {(asset.setupAction || defaultSetupAction(asset.type)).label}
+                        </h4>
+                        <p className="mt-1 text-sm font-semibold text-slate-600">
+                          {(asset.setupAction || defaultSetupAction(asset.type)).service}
+                        </p>
+                        <p className="mt-2 text-sm leading-6 text-slate-600">
+                          {(asset.setupAction || defaultSetupAction(asset.type)).description}
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-lg bg-ink px-4 text-sm font-semibold text-white opacity-90"
+                        aria-label={`Preview ${(asset.setupAction || defaultSetupAction(asset.type)).label}`}
+                      >
+                        Preview setup <ExternalLink className="h-4 w-4" />
+                      </button>
+                    </div>
+                    <p className="mt-3 text-xs leading-5 text-slate-500">
+                      Future premium action. Scout would configure the connector and keep billing
+                      unified behind the scenes.
+                    </p>
+                  </div>
                 </article>
               ))}
             </div>

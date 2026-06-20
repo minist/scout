@@ -14,6 +14,7 @@ import {
   Target,
   WandSparkles
 } from "lucide-react";
+import { SiteShell } from "@/components/site-shell";
 import {
   roboticsSampleInput,
   roboticsSampleResult,
@@ -35,36 +36,6 @@ function classNames(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
 }
 
-function Shell({ children }: { children: React.ReactNode }) {
-  return (
-    <main className="min-h-screen bg-white">
-      <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
-        <a href="#home" className="flex items-center gap-3" aria-label="Scout home">
-          <span className="grid h-9 w-9 place-items-center rounded-lg bg-ink text-white">
-            <Target className="h-5 w-5" />
-          </span>
-          <span className="text-xl font-semibold tracking-normal text-ink">Scout</span>
-        </a>
-        <nav className="hidden items-center gap-7 text-sm font-medium text-slate-600 sm:flex">
-          <a href="#validate" className="hover:text-ink">
-            Validate
-          </a>
-          <a href="#results" className="hover:text-ink">
-            Results
-          </a>
-        </nav>
-        <a
-          href="#validate"
-          className="inline-flex h-10 items-center gap-2 rounded-lg bg-teal-600 px-4 text-sm font-semibold text-white hover:bg-teal-700"
-        >
-          Start <ArrowRight className="h-4 w-4" />
-        </a>
-      </header>
-      {children}
-    </main>
-  );
-}
-
 function MiniResultPreview() {
   return (
     <div className="rounded-[8px] border border-line bg-white p-4 shadow-panel">
@@ -80,7 +51,7 @@ function MiniResultPreview() {
         </div>
       </div>
       <div className="grid gap-3 py-4">
-        {["Target 25 ops leads", "Book 8-10 interviews", "Score urgency and pilot intent"].map(
+        {["Generate outreach assets", "Connect execution tools", "Turn results into next actions"].map(
           (item) => (
             <div key={item} className="flex items-center gap-3 text-sm text-slate-700">
               <span className="grid h-5 w-5 place-items-center rounded-full bg-teal-50 text-teal-700">
@@ -111,7 +82,8 @@ function Landing() {
           Validate the riskiest part of your startup before you build.
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-          Scout turns a raw idea into the right validation experiment, ready-to-use assets, and a measurable decision rule for your next move.
+          Scout turns a raw idea into the right experiment, generates execution-ready assets,
+          connects the tools founders already use, and turns results into next actions.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <a
@@ -162,7 +134,8 @@ function ValidationForm({
         <div>
           <h2 className="text-3xl font-semibold tracking-normal text-ink">Tell Scout what needs proving.</h2>
           <p className="mt-4 text-base leading-7 text-slate-600">
-            The best experiment depends on the assumption that could break the company. Keep it specific and Scout will generate the runbook.
+            The best experiment depends on the assumption that could break the company. Keep it
+            specific and Scout will generate the runbook, assets, and next-step threshold.
           </p>
           <button
             type="button"
@@ -301,7 +274,8 @@ function Results({ result }: { result: ScoutResult }) {
         <div>
           <h2 className="text-3xl font-semibold tracking-normal text-ink">Experiment runbook</h2>
           <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">
-            Scout prioritizes the fastest test that can change your decision, then turns it into copy, checklists, and thresholds.
+            Scout prioritizes the fastest test that can change your decision, then turns it into
+            copy, checklists, thresholds, and future execution workflows.
           </p>
         </div>
       </div>
@@ -439,7 +413,7 @@ export default function Home() {
   }
 
   return (
-    <Shell>
+    <SiteShell>
       <Landing />
       <ValidationForm
         input={input}
@@ -452,6 +426,6 @@ export default function Home() {
         isLoading={isLoading}
       />
       <Results result={result} />
-    </Shell>
+    </SiteShell>
   );
 }

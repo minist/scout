@@ -51,7 +51,7 @@ function MiniResultPreview() {
         </div>
       </div>
       <div className="grid gap-3 py-4">
-        {["Generate outreach assets", "Connect execution tools", "Turn results into next actions"].map(
+        {["Generate research assets", "Manage services behind the scenes", "Turn results into next actions"].map(
           (item) => (
             <div key={item} className="flex items-center gap-3 text-sm text-slate-700">
               <span className="grid h-5 w-5 place-items-center rounded-full bg-teal-50 text-teal-700">
@@ -82,8 +82,9 @@ function Landing() {
           Validate the riskiest part of your startup before you build.
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-          Scout turns a raw idea into the right experiment, generates execution-ready assets,
-          connects the tools founders already use, and turns results into next actions.
+          Scout is a unified AI-powered research and growth workspace. It turns raw customer
+          evidence into the right experiment, execution-ready assets, managed workflows, and clear
+          next actions.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <a
@@ -135,7 +136,8 @@ function ValidationForm({
           <h2 className="text-3xl font-semibold tracking-normal text-ink">Tell Scout what needs proving.</h2>
           <p className="mt-4 text-base leading-7 text-slate-600">
             The best experiment depends on the assumption that could break the company. Keep it
-            specific and Scout will generate the runbook, assets, and next-step threshold.
+            specific and Scout will generate the runbook, assets, and next-step threshold without
+            making you manage the underlying stack.
           </p>
           <button
             type="button"
@@ -275,7 +277,7 @@ function Results({ result }: { result: ScoutResult }) {
           <h2 className="text-3xl font-semibold tracking-normal text-ink">Experiment runbook</h2>
           <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">
             Scout prioritizes the fastest test that can change your decision, then turns it into
-            copy, checklists, thresholds, and future execution workflows.
+            copy, checklists, thresholds, and managed execution workflows as the product grows.
           </p>
         </div>
       </div>

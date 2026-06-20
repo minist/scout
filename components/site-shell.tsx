@@ -21,6 +21,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <Link href="/pricing" className="hover:text-ink">
             Pricing
           </Link>
+          <Link href="/app" className="hover:text-ink">
+            Login
+          </Link>
         </nav>
         <Link
           href="/#validate"

@@ -19,6 +19,8 @@ import { SiteShell } from "@/components/site-shell";
 import {
   roboticsSampleInput,
   roboticsSampleResult,
+  scoutSamples,
+  type ScoutSample,
   type ScoutInput,
   type ScoutResult
 } from "@/lib/scout";
@@ -169,12 +171,14 @@ function ValidationForm({
   setInput,
   onSubmit,
   onLoadSample,
+  activeSampleId,
   isLoading
 }: {
   input: ScoutInput;
   setInput: (input: ScoutInput) => void;
   onSubmit: () => void;
-  onLoadSample: () => void;
+  onLoadSample: (sample: ScoutSample) => void;
+  activeSampleId: string;
   isLoading: boolean;
 }) {
   const canSubmit = useMemo(
@@ -196,14 +200,35 @@ function ValidationForm({
             specific and Scout will generate the runbook, assets, and next-step threshold without
             making you manage the underlying stack.
           </p>
-          <button
-            type="button"
-            onClick={onLoadSample}
-            className="mt-6 inline-flex h-10 items-center gap-2 rounded-lg border border-line bg-white px-4 text-sm font-semibold text-ink hover:bg-teal-50"
-          >
-            <Sparkles className="h-4 w-4 text-teal-700" />
-            Load robotics sample
-          </button>
+          <div className="mt-6">
+            <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-ink">
+              <Sparkles className="h-4 w-4 text-teal-700" />
+              Demo examples
+            </div>
+            <div className="grid gap-3">
+              {scoutSamples.map((sample) => (
+                <button
+                  key={sample.id}
+                  type="button"
+                  onClick={() => onLoadSample(sample)}
+                  className={classNames(
+                    "rounded-lg border bg-white p-4 text-left transition hover:border-teal-200 hover:bg-teal-50",
+                    activeSampleId === sample.id ? "border-teal-300 ring-4 ring-teal-50" : "border-line"
+                  )}
+                >
+                  <span className="flex items-center justify-between gap-3">
+                    <span className="text-sm font-semibold text-ink">{sample.label}</span>
+                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
+                      {sample.result.experimentType}
+                    </span>
+                  </span>
+                  <span className="mt-2 block text-sm leading-6 text-slate-600">
+                    {sample.description}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
         <form
@@ -478,10 +503,12 @@ function DecisionRule({ result }: { result: ScoutResult }) {
 export default function Home() {
   const [input, setInput] = useState<ScoutInput>(roboticsSampleInput);
   const [result, setResult] = useState<ScoutResult>(roboticsSampleResult);
+  const [activeSampleId, setActiveSampleId] = useState(scoutSamples[0].id);
   const [isLoading, setIsLoading] = useState(false);
 
   async function generate() {
     setIsLoading(true);
+    setActiveSampleId("");
     try {
       const response = await fetch("/api/generate", {
         method: "POST",
@@ -507,10 +534,13 @@ export default function Home() {
         input={input}
         setInput={setInput}
         onSubmit={generate}
-        onLoadSample={() => {
-          setInput(roboticsSampleInput);
-          setResult(roboticsSampleResult);
+        onLoadSample={(sample) => {
+          setInput(sample.input);
+          setResult(sample.result);
+          setActiveSampleId(sample.id);
+          window.setTimeout(() => document.getElementById("results")?.scrollIntoView({ behavior: "smooth" }), 80);
         }}
+        activeSampleId={activeSampleId}
         isLoading={isLoading}
       />
       <Results result={result} />

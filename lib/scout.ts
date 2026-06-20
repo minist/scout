@@ -30,6 +30,14 @@ export type ScoutResult = {
   };
 };
 
+export type ScoutSample = {
+  id: string;
+  label: string;
+  description: string;
+  input: ScoutInput;
+  result: ScoutResult;
+};
+
 export const roboticsSampleInput: ScoutInput = {
   ideaName: "RoboRoute",
   targetUser: "Operations leads at small warehouses with 20-150 employees",
@@ -100,3 +108,169 @@ export const roboticsSampleResult: ScoutResult = {
       "Pivot if most leads describe routing updates as infrequent, vendor-owned, or not worth solving before hardware integration."
   }
 };
+
+export const b2cAiSampleInput: ScoutInput = {
+  ideaName: "FitChef AI",
+  targetUser: "Busy professionals trying to eat healthier without meal planning",
+  problem:
+    "People want personalized healthy meals but abandon meal plans because shopping, substitutions, and prep feel like extra work.",
+  riskiestAssumption:
+    "Users will share diet preferences and pay attention to AI meal suggestions if the app turns them into a simple weekly grocery plan.",
+  validationStage: "Pre-launch demand"
+};
+
+export const b2cAiSampleResult: ScoutResult = {
+  experimentType: "fake landing page test",
+  rationale:
+    "FitChef AI needs proof that consumers want the outcome enough to join a waitlist before the app is built. A fake landing page can test the promise, collect dietary intent, and measure whether the audience wants AI-generated meal plans that turn into an actionable grocery workflow.",
+  checklist: [
+    "Publish a one-page promise focused on weekly meals, grocery planning, and fewer abandoned health goals.",
+    "Add a waitlist CTA with one qualifying question about diet style, household size, and current planning frustration.",
+    "Drive 250 qualified visitors from wellness communities, creator posts, and a small paid social test.",
+    "Track visitor-to-waitlist conversion, motivation notes, and which audience segments convert.",
+    "Invite the strongest 20 signups to preview a manual AI-generated plan before app development."
+  ],
+  assets: [
+    {
+      type: "Landing page copy",
+      title: "FitChef AI waitlist page",
+      content:
+        "Headline: Healthy meal planning that becomes your grocery list.\n\nSubhead: FitChef AI learns your tastes, schedule, and nutrition goals, then turns the week into simple meals and a shopping plan you can actually follow.\n\nCTA: Join the early access list\n\nSignup question: What makes meal planning fall apart for you today?",
+      setupAction: {
+        label: "Create waitlist landing page",
+        service: "Framer or Vercel",
+        description:
+          "Generate a polished smoke-test page with signup capture, thank-you copy, and conversion tracking."
+      }
+    },
+    {
+      type: "Signup form",
+      title: "Diet preference intake",
+      content:
+        "Fields: email, diet style, meals per week, grocery budget, cooking time, household size, biggest meal planning frustration, willingness to try a sample plan.",
+      setupAction: {
+        label: "Generate preference form",
+        service: "Typeform, Tally, or Google Forms",
+        description:
+          "Create a lightweight intake form that segments users and feeds the first manual meal-plan batch."
+      }
+    },
+    {
+      type: "Ad copy",
+      title: "B2C demand test creative",
+      content:
+        "Primary text: Tired of healthy meal plans that die at the grocery store? FitChef AI turns your tastes and schedule into meals plus a shopping plan.\n\nCTA: Join early access\n\nCreative angle: Before/after weekly grocery chaos versus a clean 5-meal plan.",
+      setupAction: {
+        label: "Prepare paid social test",
+        service: "Meta Ads",
+        description:
+          "Draft two campaign angles, audience notes, and conversion event mapping for the waitlist test."
+      }
+    }
+  ],
+  successMetric:
+    "Within 7 days, reach 250 qualified visitors and convert at least 10% to waitlist signups, with 25 signups completing diet preferences and 10 agreeing to preview a sample plan.",
+  decisionRule: {
+    continue:
+      "Continue if conversion reaches 10% or higher and preference responses show repeated frustration with shopping and planning.",
+    refine:
+      "Refine if people like the concept but only one diet segment or acquisition channel converts.",
+    pivot:
+      "Pivot if visitors treat the product as a generic recipe app and do not complete the preference intake."
+  }
+};
+
+export const saasSampleInput: ScoutInput = {
+  ideaName: "RenewalRadar",
+  targetUser: "Customer success leaders at B2B SaaS companies with 50-500 employees",
+  problem:
+    "Teams miss expansion and churn signals because renewal notes, product usage, support tickets, and meeting follow-ups are scattered across tools.",
+  riskiestAssumption:
+    "CS leaders will let a founder manually compile renewal risk briefs from existing tools before a full data integration exists.",
+  validationStage: "Manual delivery"
+};
+
+export const saasSampleResult: ScoutResult = {
+  experimentType: "concierge MVP",
+  rationale:
+    "RenewalRadar should validate whether customer success teams value the synthesized renewal brief before building integrations. A concierge MVP lets the founder manually gather exported context, produce a risk summary, and see whether teams would repeat the workflow or pay for an automated version.",
+  checklist: [
+    "Recruit 5 customer success leaders managing renewals in the next 30-60 days.",
+    "Ask each team to provide sanitized notes, usage screenshots, support themes, and meeting context for 3 accounts.",
+    "Manually create a renewal risk brief with risks, expansion signals, suggested next actions, and evidence links.",
+    "Review the brief live with the CS leader and capture what changed their renewal plan.",
+    "Ask for a second account batch, internal forward, or paid pilot commitment."
+  ],
+  assets: [
+    {
+      type: "Concierge workflow",
+      title: "Renewal risk brief runbook",
+      content:
+        "1. Intake: collect account list, renewal date, owner, and available evidence.\n2. Synthesis: group signals into risk, expansion, adoption, and relationship themes.\n3. Recommendation: write next actions by account owner.\n4. Review: run a 30-minute calibration call and capture changes to the plan.",
+      setupAction: {
+        label: "Create account review workspace",
+        service: "HubSpot, Salesforce, or Pipedrive",
+        description:
+          "Prepare fields for renewal date, account risk, next action, source evidence, and follow-up owner."
+      }
+    },
+    {
+      type: "Meeting agenda",
+      title: "30-minute renewal review",
+      content:
+        "Agenda: 5 min context, 10 min account risk review, 10 min expansion and next-action review, 5 min commitment to the next account batch or pilot.",
+      setupAction: {
+        label: "Schedule review sessions",
+        service: "Google Calendar, Calendly, or Zoom",
+        description:
+          "Create scheduling slots, meeting agenda, and reminder notes for each concierge review."
+      }
+    },
+    {
+      type: "Insight report",
+      title: "Renewal brief template",
+      content:
+        "Account, renewal date, risk level, risk evidence, expansion signal, recommended owner action, missing context, next customer touchpoint, expected impact.",
+      setupAction: {
+        label: "Generate shared report",
+        service: "Google Sheets or Notion",
+        description:
+          "Create a reusable renewal brief table and status summary that can be shared with CS leadership."
+      }
+    }
+  ],
+  successMetric:
+    "Within 14 days, complete briefs for 15 accounts across 5 CS leaders and get at least 3 teams to request a second batch or paid pilot conversation.",
+  decisionRule: {
+    continue:
+      "Continue if CS leaders use the brief to change renewal actions and ask to repeat it with more accounts.",
+    refine:
+      "Refine if the output is useful but the source data, buyer, or ideal account segment is inconsistent.",
+    pivot:
+      "Pivot if teams already have a strong renewal process or will not share enough context for Scout to create value."
+  }
+};
+
+export const scoutSamples: ScoutSample[] = [
+  {
+    id: "robotics",
+    label: "Robotics",
+    description: "Problem interviews for a warehouse robotics workflow.",
+    input: roboticsSampleInput,
+    result: roboticsSampleResult
+  },
+  {
+    id: "b2c-ai",
+    label: "B2C AI app",
+    description: "Landing page and ad test for an AI meal planning app.",
+    input: b2cAiSampleInput,
+    result: b2cAiSampleResult
+  },
+  {
+    id: "saas",
+    label: "SaaS service",
+    description: "Concierge MVP for a B2B customer success product.",
+    input: saasSampleInput,
+    result: saasSampleResult
+  }
+];

@@ -1,15 +1,15 @@
 import Link from "next/link";
 import {
   ArrowRight,
+  BarChart3,
   Building2,
   Check,
   ClipboardList,
+  HelpCircle,
   Layers3,
-  Mail,
-  Megaphone,
-  MousePointerClick,
-  Network,
-  Rocket,
+  Lock,
+  ReceiptText,
+  Settings2,
   Sparkles,
   Users,
   Workflow
@@ -18,127 +18,152 @@ import { SiteShell } from "@/components/site-shell";
 
 const plans = [
   {
-    name: "Free",
-    price: "$0",
-    cadence: "for early exploration",
+    name: "Starter",
+    price: "$29",
+    cadence: "per month",
     icon: ClipboardList,
-    stage: "Plan",
-    summary: "Basic experiment planning for founders shaping the riskiest assumption.",
+    label: "Research foundation",
+    summary: "For early teams organizing interviews, transcripts, and core insights.",
     features: [
-      "Core experiment recommendation",
-      "Limited monthly generations",
-      "Basic outreach and interview assets",
-      "Success metric and decision rule"
+      "Interview notes, uploads, and research workspace",
+      "Managed transcription and summarization",
+      "Core insight extraction and theme detection",
+      "AI-generated next-step recommendations",
+      "Simple reports for founder decisions"
     ],
     accent: "border-line bg-white"
   },
   {
-    name: "Pro",
-    price: "$19",
-    cadence: "per founder / month",
+    name: "Growth",
+    price: "$99",
+    cadence: "per month",
     icon: Sparkles,
-    stage: "Generate",
-    summary: "More generations and richer assets for running repeatable validation sprints.",
+    label: "Research to campaigns",
+    summary: "For teams connecting customer evidence, campaign signals, and recommendations.",
     features: [
-      "Higher generation limits",
-      "More asset types and variations",
-      "Copy-ready exports and saved snippets",
-      "Landing page, outreach, and concierge assets"
+      "Everything in Starter",
+      "Campaign and ad performance analysis",
+      "Managed data sync from connected work tools",
+      "Recommendation history and experiment memory",
+      "Exportable reports and copy-ready assets"
     ],
     accent: "border-teal-100 bg-teal-50"
   },
   {
-    name: "Team",
-    price: "$79",
-    cadence: "per team / month",
+    name: "Business",
+    price: "$249",
+    cadence: "per month",
     icon: Users,
-    stage: "Execute",
-    summary: "Collaboration, experiment memory, and premium execution integrations.",
+    label: "Team workflows",
+    summary: "For teams turning research and campaign learning into a shared operating rhythm.",
     features: [
-      "Team collaboration and shared workspace",
-      "Experiment history and learning log",
-      "CRM, meetings, and ads integration roadmap",
-      "Founder handoff notes and decision reviews"
+      "Everything in Growth",
+      "Team workspace, roles, and shared decisions",
+      "Advanced reporting across research and growth",
+      "Managed workflow orchestration by Scout",
+      "Priority support and onboarding guidance"
     ],
     accent: "border-ink bg-ink text-white"
   },
   {
-    name: "Enterprise",
+    name: "Scale",
     price: "Custom",
-    cadence: "for venture studios and innovation teams",
+    cadence: "for larger organizations",
     icon: Building2,
-    stage: "Automate",
-    summary: "Deeper orchestration for teams turning validation into an operating system.",
+    label: "Managed automation",
+    summary: "For organizations needing deeper analytics, higher usage, and custom controls.",
     features: [
-      "Premium workflow orchestration",
-      "Custom execution playbooks",
-      "Advanced automation and approvals",
-      "Dedicated support for validation programs"
+      "Everything in Business",
+      "Higher usage and custom reporting requirements",
+      "Enterprise controls and approval workflows",
+      "Custom provider preferences when required",
+      "Dedicated support for research and growth programs"
     ],
     accent: "border-amber-100 bg-amber-50"
   }
 ];
 
-const integrationGroups = [
+const included = [
+  ["Interview transcription and summarization", "Turn calls, notes, and raw research into clean source material."],
+  ["Insight extraction and theme detection", "Find repeated pains, buyer language, objections, and opportunity patterns."],
+  ["Campaign and ad performance analysis", "Connect growth signals to what customers actually said."],
+  ["Managed data connections", "Scout configures the underlying sync services needed for your workspace."],
+  ["AI-generated recommendations", "Get next experiments, campaign angles, and decision rules from one place."],
+  ["Unified workspace and reporting", "Keep evidence, recommendations, assets, and outcomes together."],
+  ["Managed service configuration", "Scout handles setup and orchestration behind the scenes."],
+  ["Consolidated billing", "One Scout plan instead of separate vendor contracts and scattered usage bills."]
+];
+
+const managedLayers = [
   {
-    category: "Email / outreach",
-    icon: Mail,
-    partners: ["Gmail", "Outlook", "Mailchimp", "HubSpot"]
-  },
-  {
-    category: "Ads",
-    icon: Megaphone,
-    partners: ["Google Ads", "Meta Ads"]
-  },
-  {
-    category: "Landing pages",
-    icon: MousePointerClick,
-    partners: ["Webflow", "Framer", "WordPress", "Vercel"]
-  },
-  {
-    category: "Forms / surveys",
+    title: "Research intake",
     icon: ClipboardList,
-    partners: ["Typeform", "Google Forms", "Tally"]
+    body: "Interviews, notes, transcripts, survey responses, and customer evidence flow into one workspace."
   },
   {
-    category: "Meetings",
-    icon: Users,
-    partners: ["Zoom", "Google Meet", "Microsoft Teams"]
+    title: "AI analysis",
+    icon: Sparkles,
+    body: "Scout manages the AI services needed for summaries, themes, recommendations, and next actions."
   },
   {
-    category: "CRM",
-    icon: Network,
-    partners: ["HubSpot", "Salesforce", "Pipedrive"]
+    title: "Growth signals",
+    icon: BarChart3,
+    body: "Campaign, ad, and conversion data can be analyzed alongside customer research."
   },
   {
-    category: "Analytics",
-    icon: Layers3,
-    partners: ["Google Analytics", "Mixpanel", "PostHog"]
-  },
-  {
-    category: "Scheduling",
+    title: "Workflow orchestration",
     icon: Workflow,
-    partners: ["Google Calendar", "Calendly"]
+    body: "Scout coordinates the hidden services, data movement, and automation required to run the workflow."
   }
 ];
 
-const progression = [
-  ["Plan", "Pick the leanest experiment for the riskiest assumption."],
-  ["Generate", "Create outreach, landing copy, scripts, and tracking assets."],
-  ["Execute", "Push assets into the tools founders already use."],
-  ["Automate", "Coordinate multi-step validation workflows and decisions."]
+const advancedOptions = [
+  "Custom provider preferences",
+  "Enterprise data controls",
+  "Specialized workflow routing",
+  "Procurement and security requirements",
+  "Custom reporting and usage limits",
+  "Dedicated onboarding for complex teams"
+];
+
+const faqs = [
+  {
+    question: "Do I need to choose my own AI vendors?",
+    answer:
+      "No. Scout automatically configures the services needed to power transcription, analysis, recommendations, and reporting. Most teams never need to choose or manage vendors directly."
+  },
+  {
+    question: "Does Scout use third-party services behind the scenes?",
+    answer:
+      "Yes. Scout may use trusted AI, data, and infrastructure services behind the scenes. That complexity stays mostly hidden so your team gets one unified product experience."
+  },
+  {
+    question: "Why is Scout billing unified?",
+    answer:
+      "Teams should not have to manage separate bills for transcription, AI analysis, data syncing, and campaign intelligence. Scout consolidates usage into one plan and one billing relationship."
+  },
+  {
+    question: "Can I connect my own providers later?",
+    answer:
+      "Advanced and enterprise teams can request custom provider preferences, data controls, or integration requirements without making the default experience more complex."
+  },
+  {
+    question: "What happens as my usage grows?",
+    answer:
+      "Scout scales the managed services behind the scenes and helps your team move into the right plan as research volume, campaign data, team size, or automation needs increase."
+  }
 ];
 
 function PlanCard({ plan }: { plan: (typeof plans)[number] }) {
   const Icon = plan.icon;
-  const dark = plan.name === "Team";
+  const dark = plan.name === "Business";
 
   return (
     <article className={`flex h-full flex-col rounded-[8px] border p-5 shadow-panel ${plan.accent}`}>
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className={`text-xs font-semibold uppercase tracking-[0.12em] ${dark ? "text-teal-100" : "text-teal-700"}`}>
-            {plan.stage}
+            {plan.label}
           </p>
           <h2 className="mt-2 text-2xl font-semibold tracking-normal">{plan.name}</h2>
         </div>
@@ -172,30 +197,57 @@ export default function PricingPage() {
   return (
     <SiteShell>
       <section className="mx-auto w-full max-w-7xl px-5 pb-14 pt-10 sm:px-8 lg:pb-20 lg:pt-16">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
           <div>
             <h1 className="max-w-3xl text-5xl font-semibold leading-[1.04] tracking-normal text-ink sm:text-6xl">
-              From validation plan to execution system.
+              Turn customer research into better campaigns, without managing the stack.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-              Scout starts by recommending the right experiment and generating assets. The roadmap
-              moves toward premium execution integrations that help founders launch, measure, and act
-              through the tools they already use.
+              Scout brings together transcription, research analysis, campaign insight, and AI
+              recommendations in one product. We automatically configure the services underneath, so
+              you get a simpler workflow and one consolidated billing experience.
             </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/#validate"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-ink px-5 text-sm font-semibold text-white hover:bg-slate-800"
+              >
+                Start with Scout <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a
+                href="#billing"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-line px-5 text-sm font-semibold text-ink hover:bg-mist"
+              >
+                How billing works
+              </a>
+            </div>
           </div>
+
           <div className="rounded-[8px] border border-line bg-mist p-4">
-            <div className="grid gap-3 sm:grid-cols-2">
-              {progression.map(([label, body], index) => (
-                <div key={label} className="rounded-lg border border-line bg-white p-4">
-                  <div className="flex items-center gap-3">
-                    <span className="grid h-8 w-8 place-items-center rounded-lg bg-teal-50 text-sm font-semibold text-teal-700">
-                      {index + 1}
-                    </span>
-                    <p className="font-semibold text-ink">{label}</p>
-                  </div>
-                  <p className="mt-3 text-sm leading-6 text-slate-600">{body}</p>
+            <div className="rounded-lg border border-line bg-white p-5">
+              <div className="flex items-center gap-3">
+                <span className="grid h-11 w-11 place-items-center rounded-lg bg-teal-50 text-teal-700">
+                  <Layers3 className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
+                    Product layer
+                  </p>
+                  <h2 className="text-xl font-semibold text-ink">Scout manages the stack.</h2>
                 </div>
-              ))}
+              </div>
+              <p className="mt-4 text-sm leading-6 text-slate-600">
+                Your team buys one workspace for research, insight, campaigns, and decisions. Scout
+                handles service setup, orchestration, usage, and billing behind the scenes.
+              </p>
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                {["No vendor setup", "One workspace", "Managed AI services", "One bill"].map((item) => (
+                  <div key={item} className="flex items-center gap-2 rounded-lg border border-line bg-mist px-3 py-2 text-sm font-semibold text-slate-700">
+                    <Check className="h-4 w-4 text-teal-700" />
+                    {item}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -206,19 +258,16 @@ export default function PricingPage() {
           <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h2 className="text-3xl font-semibold tracking-normal text-ink">
-                Plans that follow the validation workflow
+                Simple plans for turning research into growth
               </h2>
               <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">
-                The MVP stays focused on planning and generation. Execution and automation are
-                presented as roadmap and premium capabilities.
+                Start with organized research and core insights. Scale into campaign analysis,
+                recommendations, reporting, and managed automation as your team grows.
               </p>
             </div>
-            <Link
-              href="/#validate"
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-ink px-5 text-sm font-semibold text-white hover:bg-slate-800"
-            >
-              Try the MVP <ArrowRight className="h-4 w-4" />
-            </Link>
+            <p className="rounded-lg border border-line bg-white px-4 py-3 text-sm font-semibold text-slate-700">
+              Scout is the product layer. The vendors are infrastructure.
+            </p>
           </div>
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {plans.map((plan) => (
@@ -229,43 +278,57 @@ export default function PricingPage() {
       </section>
 
       <section className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
-        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
+        <div className="mb-8 max-w-3xl">
+          <h2 className="text-3xl font-semibold tracking-normal text-ink">
+            Everything you need to move from research to action
+          </h2>
+          <p className="mt-3 text-base leading-7 text-slate-600">
+            Scout sells value and outcomes, not infrastructure. The workspace combines research,
+            growth signals, recommendations, and reporting without asking teams to assemble the stack.
+          </p>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {included.map(([title, body]) => (
+            <article key={title} className="rounded-[8px] border border-line bg-white p-4 shadow-panel">
+              <div className="mb-3 flex items-start gap-3">
+                <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
+                  <Check className="h-4 w-4" />
+                </span>
+                <h3 className="font-semibold leading-6 text-ink">{title}</h3>
+              </div>
+              <p className="text-sm leading-6 text-slate-600">{body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="billing" className="border-y border-line bg-mist">
+        <div className="mx-auto grid w-full max-w-7xl gap-8 px-5 py-14 sm:px-8 lg:grid-cols-[0.75fr_1.25fr] lg:py-16">
           <div>
-            <div className="grid h-12 w-12 place-items-center rounded-lg bg-teal-50 text-teal-700">
-              <Rocket className="h-6 w-6" />
+            <div className="grid h-12 w-12 place-items-center rounded-lg bg-white text-teal-700">
+              <ReceiptText className="h-6 w-6" />
             </div>
-            <h2 className="mt-5 text-3xl font-semibold tracking-normal text-ink">
-              Execution Integrations
-            </h2>
+            <h2 className="mt-5 text-3xl font-semibold tracking-normal text-ink">One product, one bill</h2>
             <p className="mt-4 text-base leading-7 text-slate-600">
-              Scout is designed to become the operating layer between experiment strategy and the
-              tools founders already use to launch outreach, landing pages, meetings, ads, and
-              measurement. These integrations are roadmap and premium execution features, not part of
-              the current MVP.
+              Scout may use multiple AI and data services behind the scenes for tasks like
+              transcription, analysis, recommendation generation, and data processing. Instead of
+              asking your team to integrate, configure, and manage each vendor separately, Scout
+              handles setup, orchestration, monitoring, and billing in one place.
             </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            {integrationGroups.map((group) => {
-              const Icon = group.icon;
+            {managedLayers.map((layer) => {
+              const Icon = layer.icon;
               return (
-                <article key={group.category} className="rounded-[8px] border border-line bg-white p-4 shadow-panel">
+                <article key={layer.title} className="rounded-[8px] border border-line bg-white p-5 shadow-panel">
                   <div className="flex items-center gap-3">
                     <span className="grid h-10 w-10 place-items-center rounded-lg bg-teal-50 text-teal-700">
                       <Icon className="h-5 w-5" />
                     </span>
-                    <h3 className="font-semibold text-ink">{group.category}</h3>
+                    <h3 className="font-semibold text-ink">{layer.title}</h3>
                   </div>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {group.partners.map((partner) => (
-                      <span
-                        key={partner}
-                        className="rounded-md border border-line bg-mist px-2.5 py-1.5 text-xs font-semibold text-slate-700"
-                      >
-                        {partner}
-                      </span>
-                    ))}
-                  </div>
+                  <p className="mt-4 text-sm leading-6 text-slate-600">{layer.body}</p>
                 </article>
               );
             })}
@@ -273,20 +336,82 @@ export default function PricingPage() {
         </div>
       </section>
 
+      <section className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
+        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
+          <div>
+            <div className="grid h-12 w-12 place-items-center rounded-lg bg-teal-50 text-teal-700">
+              <Settings2 className="h-6 w-6" />
+            </div>
+            <h2 className="mt-5 text-3xl font-semibold tracking-normal text-ink">
+              Advanced integrations without default complexity
+            </h2>
+            <p className="mt-4 text-base leading-7 text-slate-600">
+              For most teams, Scout works out of the box. Advanced teams can configure provider
+              preferences, enterprise controls, or specialized workflows when needed, without making
+              the default product experience feel like a vendor marketplace.
+            </p>
+          </div>
+
+          <div className="rounded-[8px] border border-line bg-white p-5 shadow-panel">
+            <div className="flex items-center gap-3">
+              <span className="grid h-10 w-10 place-items-center rounded-lg bg-amber-50 text-amber-700">
+                <Lock className="h-5 w-5" />
+              </span>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-amber-700">
+                  Optional controls
+                </p>
+                <h3 className="text-xl font-semibold text-ink">Available when the team needs them</h3>
+              </div>
+            </div>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              {advancedOptions.map((option) => (
+                <div key={option} className="rounded-lg border border-line bg-mist px-3 py-3 text-sm font-semibold text-slate-700">
+                  {option}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-line bg-mist">
+        <div className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 lg:py-16">
+          <div className="mb-8 max-w-3xl">
+            <div className="grid h-12 w-12 place-items-center rounded-lg bg-white text-teal-700">
+              <HelpCircle className="h-6 w-6" />
+            </div>
+            <h2 className="mt-5 text-3xl font-semibold tracking-normal text-ink">Pricing FAQ</h2>
+            <p className="mt-3 text-base leading-7 text-slate-600">
+              Clear answers for teams that want one managed research and growth workspace, not
+              another stack to configure.
+            </p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {faqs.map((faq) => (
+              <article key={faq.question} className="rounded-[8px] border border-line bg-white p-5 shadow-panel">
+                <h3 className="text-lg font-semibold text-ink">{faq.question}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{faq.answer}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="border-t border-line bg-ink">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-5 px-5 py-10 text-white sm:px-8 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <h2 className="text-2xl font-semibold tracking-normal">Start with the MVP. Grow into execution.</h2>
+            <h2 className="text-2xl font-semibold tracking-normal">One workspace for research, insight, campaigns, and decisions.</h2>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-300">
-              Today Scout helps founders choose experiments and generate assets. Next, premium plans
-              will help run those experiments across the founder stack.
+              You buy Scout. Scout manages the stack, the orchestration, and the billing behind the
+              scenes.
             </p>
           </div>
           <Link
             href="/#validate"
             className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-teal-600 px-5 text-sm font-semibold text-white hover:bg-teal-700"
           >
-            Generate an experiment <ArrowRight className="h-4 w-4" />
+            Try the Scout MVP <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>

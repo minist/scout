@@ -61,7 +61,7 @@ function GeneratedAssets({ result }: { result: ScoutResult }) {
                   </div>
                   <button
                     type="button"
-                    className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-lg bg-ink px-4 text-sm font-semibold text-white opacity-90"
+                    className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-pill bg-primary px-4 text-sm font-medium text-white opacity-90"
                   >
                     Preview setup <ExternalLink className="h-4 w-4" />
                   </button>

@@ -139,7 +139,7 @@ function Results({ result }: { result: ScoutResult }) {
   return (
     <div id="plan-results" className="grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
       <div className="grid content-start gap-5">
-        <div className="rounded-[10px] border border-line bg-ink p-5 text-white shadow-panel sm:p-6">
+        <div className="rounded-media bg-green-deep p-5 text-white sm:p-6">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-100">
@@ -234,7 +234,7 @@ function Results({ result }: { result: ScoutResult }) {
                       </div>
                       <button
                         type="button"
-                        className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-lg bg-ink px-4 text-sm font-semibold text-white opacity-90"
+                        className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-pill bg-primary px-4 text-sm font-medium text-white opacity-90"
                         aria-label={`Preview ${setup.label}`}
                       >
                         Preview setup <ExternalLink className="h-4 w-4" />
@@ -405,16 +405,12 @@ export function PlanGenerator() {
                 setInput(emptyInput);
                 setActiveSampleId("");
               }}
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-line px-4 text-sm font-semibold text-slate-700 hover:bg-mist"
+              className="pill-outline h-11"
             >
               <RotateCcw className="h-4 w-4" />
               Reset
             </button>
-            <button
-              type="submit"
-              disabled={!canSubmit || isLoading}
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-teal-600 px-5 text-sm font-semibold text-white hover:bg-teal-700 disabled:cursor-not-allowed disabled:bg-slate-300"
-            >
+            <button type="submit" disabled={!canSubmit || isLoading} className="pill-primary h-11">
               {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <WandSparkles className="h-4 w-4" />}
               {result ? "Regenerate plan" : "Generate validation plan"}
             </button>

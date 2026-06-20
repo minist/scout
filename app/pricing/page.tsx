@@ -79,48 +79,59 @@ const faqs = [
 export default function PricingPage() {
   return (
     <MarketingShell>
-      <section className="mx-auto w-full max-w-6xl px-5 pb-12 pt-16 text-center sm:px-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-700">Pricing</p>
-        <h1 className="mx-auto mt-3 max-w-2xl text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+      <section className="mx-auto w-full max-w-[1280px] px-5 pb-14 pt-20 text-center sm:px-8">
+        <p className="mono-label">Pricing</p>
+        <h1 className="mx-auto mt-4 max-w-3xl font-display text-5xl font-medium leading-none tracking-tightest text-ink sm:text-6xl">
           Free to validate. Paid to scale.
         </h1>
-        <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+        <p className="mx-auto mt-6 max-w-2xl text-lg leading-7 text-bodymuted">
           Free idea-validation is the funnel; paid feature-validation is retention and expansion — a
           clean land-and-expand ladder.
         </p>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-5 pb-16 sm:px-8 lg:pb-20">
+      <section className="mx-auto w-full max-w-[1280px] px-5 pb-20 sm:px-8 lg:pb-28">
         <div className="grid gap-5 lg:grid-cols-3">
           {tiers.map((tier) => (
             <article
               key={tier.name}
               className={[
-                "flex flex-col rounded-[12px] border p-6",
-                tier.highlight
-                  ? "border-teal-200 bg-teal-50/40 shadow-panel"
-                  : "border-line bg-white shadow-panel"
+                "flex flex-col rounded-sm p-8",
+                tier.highlight ? "bg-primary text-white" : "border border-line bg-stone"
               ].join(" ")}
             >
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-semibold text-ink">{tier.name}</h2>
+                <h2 className="text-2xl font-medium">{tier.name}</h2>
                 {tier.highlight ? (
-                  <span className="rounded-md bg-teal-600 px-2 py-0.5 text-xs font-semibold text-white">
+                  <span className="rounded-pill bg-coral px-2.5 py-0.5 font-mono text-xs uppercase tracking-[0.08em] text-primary">
                     Popular
                   </span>
                 ) : null}
               </div>
-              <p className="mt-1 text-sm text-slate-500">{tier.tagline}</p>
-              <p className="mt-5">
-                <span className="text-4xl font-semibold tracking-tight text-ink">{tier.price}</span>
-                <span className="ml-1 text-sm text-slate-500">{tier.cadence}</span>
+              <p className={`mt-1 text-sm ${tier.highlight ? "text-white/60" : "text-slate-500"}`}>
+                {tier.tagline}
               </p>
-              <p className="mt-4 text-sm leading-6 text-slate-600">{tier.summary}</p>
-              <div className="my-5 h-px bg-line" />
+              <p className="mt-6">
+                <span className="font-display text-5xl font-medium tracking-tighter">{tier.price}</span>
+                <span className={`ml-1 text-sm ${tier.highlight ? "text-white/60" : "text-slate-500"}`}>
+                  {tier.cadence}
+                </span>
+              </p>
+              <p className={`mt-4 text-sm leading-6 ${tier.highlight ? "text-white/70" : "text-bodymuted"}`}>
+                {tier.summary}
+              </p>
+              <div className={`my-6 h-px ${tier.highlight ? "bg-white/15" : "bg-line"}`} />
               <ul className="grid flex-1 gap-3 text-sm">
                 {tier.features.map((feature) => (
-                  <li key={feature} className="flex gap-3 leading-6 text-slate-700">
-                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-teal-50 text-teal-700">
+                  <li
+                    key={feature}
+                    className={`flex gap-3 leading-6 ${tier.highlight ? "text-white/80" : "text-bodymuted"}`}
+                  >
+                    <span
+                      className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full ${
+                        tier.highlight ? "bg-white/10 text-coral" : "bg-green-pale text-green-deep"
+                      }`}
+                    >
                       <Check className="h-3.5 w-3.5" />
                     </span>
                     {feature}
@@ -129,12 +140,7 @@ export default function PricingPage() {
               </ul>
               <Link
                 href="/signup"
-                className={[
-                  "mt-6 inline-flex h-11 items-center justify-center gap-2 rounded-lg px-5 text-sm font-semibold",
-                  tier.highlight
-                    ? "bg-teal-600 text-white hover:bg-teal-700"
-                    : "border border-line text-ink hover:bg-mist"
-                ].join(" ")}
+                className={tier.highlight ? "pill-on-dark mt-7" : "pill-primary mt-7"}
               >
                 {tier.cta} <ArrowRight className="h-4 w-4" />
               </Link>
@@ -143,14 +149,16 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="border-t border-line bg-mist">
-        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 lg:py-20">
-          <h2 className="text-3xl font-semibold tracking-tight text-ink">Pricing FAQ</h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
+      <section className="bg-stone">
+        <div className="mx-auto w-full max-w-[1280px] px-5 py-20 sm:px-8 lg:py-28">
+          <h2 className="font-display text-4xl font-medium leading-none tracking-tighter text-ink">
+            Pricing FAQ
+          </h2>
+          <div className="mt-10 grid gap-4 md:grid-cols-2">
             {faqs.map((faq) => (
-              <article key={faq.question} className="rounded-[10px] border border-line bg-white p-5">
-                <h3 className="text-base font-semibold text-ink">{faq.question}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{faq.answer}</p>
+              <article key={faq.question} className="rounded-card border border-line bg-canvas p-6">
+                <h3 className="text-lg font-medium text-ink">{faq.question}</h3>
+                <p className="mt-2 text-sm leading-6 text-bodymuted">{faq.answer}</p>
               </article>
             ))}
           </div>

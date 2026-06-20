@@ -19,7 +19,7 @@ export default function LogPage() {
         <button
           type="button"
           disabled
-          className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-lg border border-line px-4 text-sm font-semibold text-slate-500 opacity-70"
+          className="pill-outline h-11 shrink-0 opacity-70"
         >
           <Download className="h-4 w-4" />
           Export report

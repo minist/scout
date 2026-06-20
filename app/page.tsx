@@ -7,7 +7,6 @@ import {
   GitBranch,
   Layers,
   MessagesSquare,
-  Target,
   TrendingUp
 } from "lucide-react";
 import { MarketingShell } from "@/components/marketing-shell";
@@ -86,35 +85,26 @@ export default function LandingPage() {
   return (
     <MarketingShell>
       {/* Hero */}
-      <section className="mx-auto grid w-full max-w-6xl gap-12 px-5 pb-16 pt-14 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pb-24 lg:pt-20">
+      <section className="mx-auto grid w-full max-w-[1280px] gap-12 px-5 pb-20 pt-16 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pb-28 lg:pt-24">
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-line bg-mist px-3 py-1 text-xs font-semibold text-slate-600">
-            <Target className="h-3.5 w-3.5 text-teal-700" />
-            Validation workspace
-          </span>
-          <h1 className="mt-5 text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-6xl">
+          <p className="mono-label">Validation workspace</p>
+          <h1 className="mt-5 font-display text-5xl font-medium leading-[0.98] tracking-tightest text-ink sm:text-6xl lg:text-7xl">
             Validate before you build.
           </h1>
-          <p className="mt-5 max-w-xl text-lg leading-8 text-slate-600">
+          <p className="mt-6 max-w-xl text-lg leading-7 text-bodymuted">
             Scout tells you the cheapest experiment to run before you build — and hands you the
             assets to run it — so you validate your idea with evidence instead of optimism.
           </p>
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/signup"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-ink px-5 text-sm font-semibold text-white hover:bg-slate-800"
-            >
+          <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+            <Link href="/signup" className="pill-primary">
               Get started free <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link
-              href="/#how"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-line px-5 text-sm font-semibold text-ink hover:bg-mist"
-            >
+            <Link href="/#how" className="link-underline text-sm">
               See how it works
             </Link>
           </div>
-          <p className="mt-5 text-sm text-slate-500">
-            Borrowed from Lean Startup, The Mom Test &amp; Continuous Discovery — turnkey.
+          <p className="mt-6 font-mono text-xs text-muted">
+            Lean Startup · The Mom Test · Continuous Discovery — turnkey.
           </p>
         </div>
 
@@ -122,28 +112,26 @@ export default function LandingPage() {
       </section>
 
       {/* How it works — the loop */}
-      <section id="how" className="border-y border-line bg-mist">
-        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 lg:py-20">
+      <section id="how" className="bg-stone">
+        <div className="mx-auto w-full max-w-[1280px] px-5 py-20 sm:px-8 lg:py-28">
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-700">
-              The validation loop
-            </p>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+            <p className="mono-label">The validation loop</p>
+            <h2 className="mt-3 font-display text-4xl font-medium leading-none tracking-tighter text-ink sm:text-5xl">
               One loop, run end to end
             </h2>
-            <p className="mt-4 text-base leading-7 text-slate-600">
+            <p className="mt-5 text-lg leading-7 text-bodymuted">
               Don&apos;t validate the easy things. Find the single belief that would kill the idea if
               it&apos;s wrong, and test it as cheaply as possible. Scout makes that loop turnkey.
             </p>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {loop.map((node) => (
-              <div key={node.step} className="rounded-[10px] border border-line bg-white p-5">
-                <span className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-300">
+              <div key={node.step} className="rounded-card border border-line bg-canvas p-6">
+                <span className="font-mono text-sm font-bold tracking-[0.08em] text-coral">
                   {node.step}
                 </span>
-                <h3 className="mt-2 text-lg font-semibold text-ink">{node.title}</h3>
-                <p className="mt-1.5 text-sm leading-6 text-slate-600">{node.body}</p>
+                <h3 className="mt-3 text-xl font-medium text-ink">{node.title}</h3>
+                <p className="mt-1.5 text-sm leading-6 text-bodymuted">{node.body}</p>
               </div>
             ))}
           </div>
@@ -151,29 +139,27 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section id="features" className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 lg:py-20">
+      <section id="features" className="mx-auto w-full max-w-[1280px] px-5 py-20 sm:px-8 lg:py-28">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-700">
-            What&apos;s inside
-          </p>
-          <h2 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+          <p className="mono-label">What&apos;s inside</p>
+          <h2 className="mt-3 font-display text-4xl font-medium leading-none tracking-tighter text-ink sm:text-5xl">
             Everything to run honest experiments
           </h2>
-          <p className="mt-4 text-base leading-7 text-slate-600">
+          <p className="mt-5 text-lg leading-7 text-bodymuted">
             The moat isn&apos;t any single asset — it&apos;s the loop plus the evidence history that
             compounds over time.
           </p>
         </div>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => {
             const Icon = feature.icon;
             return (
-              <article key={feature.title} className="rounded-[10px] border border-line bg-white p-5">
-                <span className="grid h-11 w-11 place-items-center rounded-lg bg-teal-50 text-teal-700">
+              <article key={feature.title} className="bg-canvas p-7">
+                <span className="grid h-11 w-11 place-items-center rounded-sm bg-green-pale text-green-deep">
                   <Icon className="h-5 w-5" />
                 </span>
-                <h3 className="mt-4 text-lg font-semibold text-ink">{feature.title}</h3>
-                <p className="mt-1.5 text-sm leading-6 text-slate-600">{feature.body}</p>
+                <h3 className="mt-5 text-xl font-medium text-ink">{feature.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-bodymuted">{feature.body}</p>
               </article>
             );
           })}
@@ -181,24 +167,28 @@ export default function LandingPage() {
       </section>
 
       {/* Two phases */}
-      <section className="border-y border-line bg-mist">
-        <div className="mx-auto grid w-full max-w-6xl gap-6 px-5 py-16 sm:px-8 lg:grid-cols-2 lg:py-20">
-          <div className="rounded-[12px] border border-line bg-white p-6">
-            <span className="inline-flex items-center gap-2 rounded-md bg-teal-50 px-2.5 py-1 text-xs font-semibold text-teal-700">
-              <Layers className="h-3.5 w-3.5" /> Phase 1 — available now
+      <section className="mx-auto w-full max-w-[1280px] px-5 pb-20 sm:px-8 lg:pb-28">
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-media border border-line bg-stone p-8">
+            <span className="mono-label inline-flex items-center gap-2">
+              <Layers className="h-3.5 w-3.5 text-green-deep" /> Phase 1 — available now
             </span>
-            <h3 className="mt-4 text-xl font-semibold text-ink">Idea validation</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-600">
-              Validate that the problem and demand are real before allocating real resources.
-              Problem interviews, fake-door pages, smoke-test ads, pre-sales.
+            <h3 className="mt-5 font-display text-3xl font-medium tracking-tighter text-ink">
+              Idea validation
+            </h3>
+            <p className="mt-3 text-base leading-7 text-bodymuted">
+              Validate that the problem and demand are real before allocating real resources. Problem
+              interviews, fake-door pages, smoke-test ads, pre-sales.
             </p>
           </div>
-          <div className="rounded-[12px] border border-line bg-ink p-6 text-white">
-            <span className="inline-flex items-center gap-2 rounded-md bg-white/10 px-2.5 py-1 text-xs font-semibold text-teal-100">
-              <TrendingUp className="h-3.5 w-3.5" /> Phase 2 — coming soon
+          <div className="rounded-media bg-green-deep p-8 text-white">
+            <span className="font-mono text-xs uppercase tracking-[0.08em] text-green-pale">
+              <TrendingUp className="mr-2 inline h-3.5 w-3.5" /> Phase 2 — coming soon
             </span>
-            <h3 className="mt-4 text-xl font-semibold">Feature validation</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-300">
+            <h3 className="mt-5 font-display text-3xl font-medium tracking-tighter">
+              Feature validation
+            </h3>
+            <p className="mt-3 text-base leading-7 text-white/70">
               Once you&apos;re building, validate each feature the same way — using the users you now
               have. Painted-door buttons, feature-flag betas, A/B variants.
             </p>
@@ -207,79 +197,87 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing teaser */}
-      <section className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 lg:py-20">
-        <div className="mb-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-700">Pricing</p>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-              Free to validate. Paid to scale.
-            </h2>
+      <section className="bg-stone">
+        <div className="mx-auto w-full max-w-[1280px] px-5 py-20 sm:px-8 lg:py-28">
+          <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-2xl">
+              <p className="mono-label">Pricing</p>
+              <h2 className="mt-3 font-display text-4xl font-medium leading-none tracking-tighter text-ink sm:text-5xl">
+                Free to validate. Paid to scale.
+              </h2>
+            </div>
+            <Link href="/pricing" className="link-underline text-sm">
+              Full pricing details
+            </Link>
           </div>
-          <Link href="/pricing" className="text-sm font-semibold text-teal-700 hover:text-teal-800">
-            Full pricing details →
-          </Link>
-        </div>
-        <div className="grid gap-5 lg:grid-cols-3">
-          {tiers.map((tier) => (
-            <article
-              key={tier.name}
-              className={[
-                "flex flex-col rounded-[12px] border p-6",
-                tier.highlight ? "border-teal-200 bg-teal-50/40 shadow-panel" : "border-line bg-white"
-              ].join(" ")}
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-ink">{tier.name}</h3>
-                {tier.highlight ? (
-                  <span className="rounded-md bg-teal-600 px-2 py-0.5 text-xs font-semibold text-white">
-                    Popular
-                  </span>
-                ) : null}
-              </div>
-              <p className="mt-1 text-sm text-slate-500">{tier.tagline}</p>
-              <p className="mt-4">
-                <span className="text-3xl font-semibold tracking-tight text-ink">{tier.price}</span>
-                <span className="text-sm text-slate-500">/mo</span>
-              </p>
-              <ul className="mt-5 grid flex-1 gap-2.5 text-sm text-slate-700">
-                {tier.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/signup"
+          <div className="grid gap-5 lg:grid-cols-3">
+            {tiers.map((tier) => (
+              <article
+                key={tier.name}
                 className={[
-                  "mt-6 inline-flex h-11 items-center justify-center rounded-lg px-5 text-sm font-semibold",
-                  tier.highlight
-                    ? "bg-teal-600 text-white hover:bg-teal-700"
-                    : "border border-line text-ink hover:bg-mist"
+                  "flex flex-col rounded-sm p-8",
+                  tier.highlight ? "bg-primary text-white" : "border border-line bg-canvas"
                 ].join(" ")}
               >
-                {tier.cta}
-              </Link>
-            </article>
-          ))}
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-medium">{tier.name}</h3>
+                  {tier.highlight ? (
+                    <span className="rounded-pill bg-coral px-2.5 py-0.5 font-mono text-xs uppercase tracking-[0.08em] text-primary">
+                      Popular
+                    </span>
+                  ) : null}
+                </div>
+                <p className={`mt-1 text-sm ${tier.highlight ? "text-white/60" : "text-slate-500"}`}>
+                  {tier.tagline}
+                </p>
+                <p className="mt-5">
+                  <span className="font-display text-4xl font-medium tracking-tighter">{tier.price}</span>
+                  <span className={`ml-1 text-sm ${tier.highlight ? "text-white/60" : "text-slate-500"}`}>
+                    /mo
+                  </span>
+                </p>
+                <div className={`my-6 h-px ${tier.highlight ? "bg-white/15" : "bg-line"}`} />
+                <ul className="grid flex-1 gap-3 text-sm">
+                  {tier.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className={`flex items-start gap-2.5 leading-6 ${
+                        tier.highlight ? "text-white/80" : "text-bodymuted"
+                      }`}
+                    >
+                      <span
+                        className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full ${
+                          tier.highlight ? "bg-coral" : "bg-green-deep"
+                        }`}
+                      />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href="/signup"
+                  className={tier.highlight ? "pill-on-dark mt-7" : "pill-primary mt-7"}
+                >
+                  {tier.cta}
+                </Link>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Closing CTA */}
-      <section className="border-t border-line">
-        <div className="mx-auto flex w-full max-w-6xl flex-col items-start gap-5 px-5 py-16 sm:px-8 lg:flex-row lg:items-center lg:justify-between">
+      <section className="mx-auto w-full max-w-[1280px] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="flex flex-col items-start gap-8 rounded-media bg-green-deep p-10 text-white lg:flex-row lg:items-center lg:justify-between lg:p-16">
           <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+            <h2 className="font-display text-3xl font-medium leading-none tracking-tighter sm:text-4xl">
               Stop pouring months into untested ideas.
             </h2>
-            <p className="mt-2 max-w-xl text-base leading-7 text-slate-600">
+            <p className="mt-4 max-w-xl text-lg leading-7 text-white/70">
               Validate the riskiest part first — with evidence, not optimism.
             </p>
           </div>
-          <Link
-            href="/signup"
-            className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-lg bg-ink px-6 text-sm font-semibold text-white hover:bg-slate-800"
-          >
+          <Link href="/signup" className="pill-on-dark shrink-0">
             Get started free <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

@@ -126,6 +126,41 @@ const advancedOptions = [
   "Dedicated onboarding for complex teams"
 ];
 
+const connectorCategories = [
+  {
+    category: "Email / outreach",
+    tools: ["Gmail", "Outlook", "Mailchimp", "HubSpot"]
+  },
+  {
+    category: "Ads",
+    tools: ["Google Ads", "Meta Ads"]
+  },
+  {
+    category: "Landing pages",
+    tools: ["Webflow", "Framer", "WordPress", "Vercel"]
+  },
+  {
+    category: "Forms / surveys",
+    tools: ["Typeform", "Google Forms", "Tally"]
+  },
+  {
+    category: "Meetings",
+    tools: ["Zoom", "Google Meet", "Microsoft Teams"]
+  },
+  {
+    category: "CRM",
+    tools: ["HubSpot", "Salesforce", "Pipedrive"]
+  },
+  {
+    category: "Analytics",
+    tools: ["Google Analytics", "Mixpanel", "PostHog"]
+  },
+  {
+    category: "Scheduling",
+    tools: ["Google Calendar", "Calendly"]
+  }
+];
+
 const faqs = [
   {
     question: "Do I need to choose my own AI vendors?",
@@ -371,6 +406,40 @@ export default function PricingPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        <div className="mt-8 rounded-[8px] border border-line bg-mist p-4">
+          <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
+                Supported connector categories
+              </p>
+              <h3 className="mt-2 text-2xl font-semibold tracking-normal text-ink">
+                The tools can be connected. Scout keeps the workflow unified.
+              </h3>
+            </div>
+            <p className="max-w-sm text-sm leading-6 text-slate-600">
+              These are optional roadmap and premium connectors. Customers should not need to
+              configure them one by one to get value from Scout.
+            </p>
+          </div>
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {connectorCategories.map((group) => (
+              <article key={group.category} className="rounded-lg border border-line bg-white p-4">
+                <h4 className="font-semibold text-ink">{group.category}</h4>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {group.tools.map((tool) => (
+                    <span
+                      key={tool}
+                      className="rounded-md border border-line bg-mist px-2.5 py-1.5 text-xs font-semibold text-slate-700"
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>

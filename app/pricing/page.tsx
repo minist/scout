@@ -18,80 +18,123 @@ import { SiteShell } from "@/components/site-shell";
 
 const plans = [
   {
+    name: "Preview",
+    price: "Free",
+    cadence: "limited product preview",
+    icon: Layers3,
+    label: "Try the promise",
+    bestFor: "Curious visitors and teams evaluating Scout",
+    summary:
+      "See how Scout thinks before committing. Preview shows the product direction without replacing the paid workflow.",
+    features: [
+      "Access to the demo/sample experience",
+      "Limited workflow preview",
+      "Partial output visibility",
+      "No saved projects, exports, integrations, or team workspace"
+    ],
+    accent: "border-line bg-white",
+    cta: "Preview Scout",
+    featured: false,
+    muted: true
+  },
+  {
     name: "Starter",
     price: "$29",
     cadence: "per month",
     icon: ClipboardList,
-    label: "Research foundation",
-    summary: "For early teams organizing interviews, transcripts, and core insights.",
+    label: "Early validation",
+    bestFor: "Solo founders and early operators",
+    summary:
+      "The first true usable version of Scout for turning scattered customer conversations into structured insight.",
     features: [
-      "Interview notes, uploads, and research workspace",
-      "Managed transcription and summarization",
-      "Core insight extraction and theme detection",
-      "AI-generated next-step recommendations",
-      "Simple reports for founder decisions"
+      "Full experiment plans and decision rules",
+      "Transcript summaries and research synthesis",
+      "Core pain point, theme, and objection extraction",
+      "Saved projects for early validation work",
+      "Basic exports for founder decisions"
     ],
-    accent: "border-line bg-white"
+    accent: "border-line bg-white",
+    cta: "Start validating",
+    featured: false,
+    muted: false
   },
   {
     name: "Growth",
     price: "$99",
     cadence: "per month",
     icon: Sparkles,
-    label: "Research to campaigns",
-    summary: "For teams connecting customer evidence, campaign signals, and recommendations.",
+    label: "Most teams start here",
+    bestFor: "Startup growth teams and product marketers",
+    summary:
+      "Where Scout becomes a business tool: repeated research, campaign intelligence, and saved recommendations that compound.",
     features: [
       "Everything in Starter",
-      "Campaign and ad performance analysis",
-      "Managed data sync from connected work tools",
-      "Recommendation history and experiment memory",
-      "Exportable reports and copy-ready assets"
+      "Higher usage and multiple projects",
+      "Campaign, ad, and search performance analysis",
+      "Cross-interview and cross-campaign recommendations",
+      "Recommendation history and saved intelligence",
+      "Stronger reporting and copy-ready assets"
     ],
-    accent: "border-teal-100 bg-teal-50"
+    accent: "border-ink bg-ink text-white",
+    cta: "Choose Growth",
+    featured: true,
+    muted: false
   },
   {
     name: "Business",
     price: "$249",
     cadence: "per month",
     icon: Users,
-    label: "Team workflows",
-    summary: "For teams turning research and campaign learning into a shared operating rhythm.",
+    label: "Team operations",
+    bestFor: "Teams, agencies, and cross-functional operators",
+    summary:
+      "Turn Scout into a shared operating layer for research, growth, product, and strategy decisions.",
     features: [
       "Everything in Growth",
-      "Team workspace, roles, and shared decisions",
+      "Shared workspaces and team collaboration",
+      "Role-based access and stronger integration controls",
       "Advanced reporting across research and growth",
-      "Managed workflow orchestration by Scout",
+      "Higher limits for ongoing team workflows",
       "Priority support and onboarding guidance"
     ],
-    accent: "border-ink bg-ink text-white"
+    accent: "border-teal-100 bg-teal-50",
+    cta: "Upgrade the team",
+    featured: false,
+    muted: false
   },
   {
     name: "Scale",
     price: "Custom",
     cadence: "for larger organizations",
     icon: Building2,
-    label: "Managed automation",
-    summary: "For organizations needing deeper analytics, higher usage, and custom controls.",
+    label: "Custom environment",
+    bestFor: "Larger organizations and specialized teams",
+    summary:
+      "For customers who want Scout tailored to their operating environment, data requirements, and workflow scale.",
     features: [
       "Everything in Business",
-      "Higher usage and custom reporting requirements",
-      "Enterprise controls and approval workflows",
+      "Custom onboarding and tailored usage structures",
+      "Higher-volume research and reporting needs",
+      "Enterprise controls, security, and procurement support",
       "Custom provider preferences when required",
       "Dedicated support for research and growth programs"
     ],
-    accent: "border-amber-100 bg-amber-50"
+    accent: "border-amber-100 bg-amber-50",
+    cta: "Talk to us",
+    featured: false,
+    muted: false
   }
 ];
 
 const included = [
-  ["Interview transcription and summarization", "Turn calls, notes, and raw research into clean source material."],
-  ["Insight extraction and theme detection", "Find repeated pains, buyer language, objections, and opportunity patterns."],
-  ["Campaign and ad performance analysis", "Connect growth signals to what customers actually said."],
-  ["Managed data connections", "Scout configures the underlying sync services needed for your workspace."],
-  ["AI-generated recommendations", "Get next experiments, campaign angles, and decision rules from one place."],
-  ["Unified workspace and reporting", "Keep evidence, recommendations, assets, and outcomes together."],
-  ["Managed service configuration", "Scout handles setup and orchestration behind the scenes."],
-  ["Consolidated billing", "One Scout plan instead of separate vendor contracts and scattered usage bills."]
+  ["Research synthesis", "Turn interviews, notes, transcripts, surveys, and raw evidence into structured source material."],
+  ["Theme and objection extraction", "Find repeated pains, buyer language, objections, triggers, and opportunity patterns."],
+  ["Campaign intelligence", "Connect what customers say to campaign, ad, search, and conversion performance."],
+  ["Experiment recommendations", "Generate next experiments, messaging angles, success thresholds, and decision rules."],
+  ["Saved business memory", "Keep projects, insights, recommendations, assets, and outcomes in one compounding system."],
+  ["Managed setup", "Scout configures the underlying AI and data services required for each workflow."],
+  ["Unified reporting", "Share decisions and evidence without assembling separate docs, exports, and dashboards."],
+  ["Consolidated billing", "One Scout relationship instead of separate tools, vendors, and usage bills."]
 ];
 
 const managedLayers = [
@@ -163,6 +206,11 @@ const connectorCategories = [
 
 const faqs = [
   {
+    question: "Is Preview a full free plan?",
+    answer:
+      "No. Preview is a limited product preview so new users can understand Scout's value. Paid plans unlock the real ongoing workflow: saved projects, full outputs, exports, integrations, collaboration, and repeated use."
+  },
+  {
     question: "Do I need to choose my own AI vendors?",
     answer:
       "No. Scout automatically configures the services needed to power transcription, analysis, recommendations, and reporting. Most teams never need to choose or manage vendors directly."
@@ -183,6 +231,11 @@ const faqs = [
       "Advanced and enterprise teams can request custom provider preferences, data controls, or integration requirements without making the default experience more complex."
   },
   {
+    question: "Why would I upgrade from Starter to Growth?",
+    answer:
+      "Starter helps an individual validate early ideas. Growth is for teams using Scout continuously across interviews, campaigns, messaging decisions, recommendation history, and stronger reporting."
+  },
+  {
     question: "What happens as my usage grows?",
     answer:
       "Scout scales the managed services behind the scenes and helps your team move into the right plan as research volume, campaign data, team size, or automation needs increase."
@@ -191,18 +244,23 @@ const faqs = [
 
 function PlanCard({ plan }: { plan: (typeof plans)[number] }) {
   const Icon = plan.icon;
-  const dark = plan.name === "Business";
+  const dark = plan.featured;
 
   return (
-    <article className={`flex h-full flex-col rounded-[8px] border p-5 shadow-panel ${plan.accent}`}>
+    <article className={`relative flex h-full flex-col rounded-[8px] border p-5 shadow-panel ${plan.accent}`}>
+      {plan.featured ? (
+        <div className="absolute right-4 top-4 rounded-md bg-teal-500 px-2.5 py-1 text-xs font-semibold text-white">
+          Recommended
+        </div>
+      ) : null}
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className={`text-xs font-semibold uppercase tracking-[0.12em] ${dark ? "text-teal-100" : "text-teal-700"}`}>
+          <p className={`text-xs font-semibold uppercase tracking-[0.12em] ${dark ? "text-teal-100" : plan.muted ? "text-slate-500" : "text-teal-700"}`}>
             {plan.label}
           </p>
           <h2 className="mt-2 text-2xl font-semibold tracking-normal">{plan.name}</h2>
         </div>
-        <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-lg ${dark ? "bg-white/10 text-teal-100" : "bg-white text-teal-700"}`}>
+        <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-lg ${dark ? "bg-white/10 text-teal-100" : plan.muted ? "bg-mist text-slate-500" : "bg-white text-teal-700"}`}>
           <Icon className="h-5 w-5" />
         </span>
       </div>
@@ -210,7 +268,10 @@ function PlanCard({ plan }: { plan: (typeof plans)[number] }) {
         <span className="text-4xl font-semibold tracking-normal">{plan.price}</span>
         <p className={`mt-1 text-sm ${dark ? "text-slate-300" : "text-slate-600"}`}>{plan.cadence}</p>
       </div>
-      <p className={`mt-5 text-sm leading-6 ${dark ? "text-slate-200" : "text-slate-700"}`}>
+      <p className={`mt-3 text-xs font-semibold uppercase tracking-[0.12em] ${dark ? "text-teal-100" : plan.muted ? "text-slate-500" : "text-teal-700"}`}>
+        Best for: {plan.bestFor}
+      </p>
+      <p className={`mt-4 text-sm leading-6 ${dark ? "text-slate-200" : "text-slate-700"}`}>
         {plan.summary}
       </p>
       <div className={`my-5 h-px ${dark ? "bg-white/15" : "bg-line"}`} />
@@ -224,6 +285,18 @@ function PlanCard({ plan }: { plan: (typeof plans)[number] }) {
           </li>
         ))}
       </ul>
+      <Link
+        href={plan.name === "Scale" ? "#billing" : "/#validate"}
+        className={`mt-6 inline-flex h-11 items-center justify-center rounded-lg px-4 text-sm font-semibold ${
+          dark
+            ? "bg-teal-500 text-white hover:bg-teal-400"
+            : plan.muted
+              ? "border border-line bg-white text-slate-700 hover:bg-mist"
+              : "bg-ink text-white hover:bg-slate-800"
+        }`}
+      >
+        {plan.cta}
+      </Link>
     </article>
   );
 }
@@ -235,19 +308,19 @@ export default function PricingPage() {
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
           <div>
             <h1 className="max-w-3xl text-5xl font-semibold leading-[1.04] tracking-normal text-ink sm:text-6xl">
-              Turn customer research into better campaigns, without managing the stack.
+              Pricing for turning research into compounding growth intelligence.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-              Scout brings together transcription, research analysis, campaign insight, and AI
-              recommendations in one product. We automatically configure the services underneath, so
-              you get a simpler workflow and one consolidated billing experience.
+              Scout is a premium AI-powered workspace for research synthesis, campaign intelligence,
+              and decision support. Preview the product for free, then unlock the ongoing system that
+              saves projects, connects signals, and turns insight into action.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/#validate"
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-ink px-5 text-sm font-semibold text-white hover:bg-slate-800"
               >
-                Start with Scout <ArrowRight className="h-4 w-4" />
+                Preview Scout <ArrowRight className="h-4 w-4" />
               </Link>
               <a
                 href="#billing"
@@ -266,17 +339,18 @@ export default function PricingPage() {
                 </span>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
-                    Product layer
+                    Managed product layer
                   </p>
-                  <h2 className="text-xl font-semibold text-ink">Scout manages the stack.</h2>
+                  <h2 className="text-xl font-semibold text-ink">One workspace. No vendor maze.</h2>
                 </div>
               </div>
               <p className="mt-4 text-sm leading-6 text-slate-600">
-                Your team buys one workspace for research, insight, campaigns, and decisions. Scout
-                handles service setup, orchestration, usage, and billing behind the scenes.
+                Scout may use multiple services underneath for transcription, analysis, campaign
+                intelligence, and AI processing. Your team experiences one product, one workflow, and
+                one billing relationship.
               </p>
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                {["No vendor setup", "One workspace", "Managed AI services", "One bill"].map((item) => (
+                {["Managed setup", "Saved intelligence", "Workflow depth", "One bill"].map((item) => (
                   <div key={item} className="flex items-center gap-2 rounded-lg border border-line bg-mist px-3 py-2 text-sm font-semibold text-slate-700">
                     <Check className="h-4 w-4 text-teal-700" />
                     {item}
@@ -296,16 +370,39 @@ export default function PricingPage() {
                 Simple plans for turning research into growth
               </h2>
               <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">
-                Start with organized research and core insights. Scale into campaign analysis,
-                recommendations, reporting, and managed automation as your team grows.
+                Preview is for trying. Starter is for solo validation. Growth is for active execution.
+                Business is for team operations. Scale is for tailored environments.
               </p>
             </div>
             <p className="rounded-lg border border-line bg-white px-4 py-3 text-sm font-semibold text-slate-700">
-              Scout is the product layer. The vendors are infrastructure.
+              Featured: Growth, the best fit for active teams.
             </p>
           </div>
+          <div className="mb-5 grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
+            <PlanCard plan={plans[0]} />
+            <div className="rounded-[8px] border border-line bg-white p-5 shadow-panel">
+              <div className="grid h-11 w-11 place-items-center rounded-lg bg-teal-50 text-teal-700">
+                <Layers3 className="h-5 w-5" />
+              </div>
+              <h3 className="mt-4 text-2xl font-semibold tracking-normal text-ink">
+                Preview shows the promise. Paid plans unlock the system.
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-slate-600">
+                The free preview helps teams understand Scout judgment and output quality. The
+                paid product adds persistence, full outputs, exports, integrations, collaboration,
+                and repeated workflows that compound over time.
+              </p>
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                {["Starter: solo validation", "Growth: active execution", "Business: team operations", "Scale: tailored environments"].map((item) => (
+                  <div key={item} className="rounded-lg border border-line bg-mist px-3 py-3 text-sm font-semibold text-slate-700">
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {plans.map((plan) => (
+            {plans.slice(1).map((plan) => (
               <PlanCard key={plan.name} plan={plan} />
             ))}
           </div>
@@ -315,11 +412,12 @@ export default function PricingPage() {
       <section className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
         <div className="mb-8 max-w-3xl">
           <h2 className="text-3xl font-semibold tracking-normal text-ink">
-            Everything you need to move from research to action
+            What paid plans unlock
           </h2>
           <p className="mt-3 text-base leading-7 text-slate-600">
-            Scout sells value and outcomes, not infrastructure. The workspace combines research,
-            growth signals, recommendations, and reporting without asking teams to assemble the stack.
+            Scout is not selling raw AI calls. Paid plans unlock organized insight, research
+            synthesis, campaign intelligence, decision support, and saved business memory that gets
+            more useful over time.
           </p>
         </div>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -346,9 +444,10 @@ export default function PricingPage() {
             <h2 className="mt-5 text-3xl font-semibold tracking-normal text-ink">One product, one bill</h2>
             <p className="mt-4 text-base leading-7 text-slate-600">
               Scout may use multiple AI and data services behind the scenes for tasks like
-              transcription, analysis, recommendation generation, and data processing. Instead of
-              asking your team to integrate, configure, and manage each vendor separately, Scout
-              handles setup, orchestration, monitoring, and billing in one place.
+              transcription, analysis, campaign intelligence, recommendation generation, and data
+              processing. Instead of asking your team to integrate, configure, and manage each
+              provider separately, Scout handles orchestration and gives you one streamlined product
+              experience and one billing relationship.
             </p>
           </div>
 
@@ -378,12 +477,12 @@ export default function PricingPage() {
               <Settings2 className="h-6 w-6" />
             </div>
             <h2 className="mt-5 text-3xl font-semibold tracking-normal text-ink">
-              Advanced integrations without default complexity
+              Optional integrations without default complexity
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-600">
-              For most teams, Scout works out of the box. Advanced teams can configure provider
-              preferences, enterprise controls, or specialized workflows when needed, without making
-              the default product experience feel like a vendor marketplace.
+              Scout should never feel like a marketplace of disconnected vendors. For most teams, it
+              works as one managed product. Advanced teams can request deeper controls, provider
+              preferences, or specialized workflows without making the default experience complex.
             </p>
           </div>
 
@@ -416,12 +515,12 @@ export default function PricingPage() {
                 Supported connector categories
               </p>
               <h3 className="mt-2 text-2xl font-semibold tracking-normal text-ink">
-                The tools can be connected. Scout keeps the workflow unified.
+                Tools can connect underneath. Scout keeps the product unified.
               </h3>
             </div>
             <p className="max-w-sm text-sm leading-6 text-slate-600">
-              These are optional roadmap and premium connectors. Customers should not need to
-              configure them one by one to get value from Scout.
+              These are roadmap and premium execution connectors. Customers should see them as
+              managed capabilities, not setup work they must assemble by hand.
             </p>
           </div>
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
@@ -452,8 +551,8 @@ export default function PricingPage() {
             </div>
             <h2 className="mt-5 text-3xl font-semibold tracking-normal text-ink">Pricing FAQ</h2>
             <p className="mt-3 text-base leading-7 text-slate-600">
-              Clear answers for teams that want one managed research and growth workspace, not
-              another stack to configure.
+              Clear answers for teams evaluating Scout as a unified research and growth intelligence
+              workspace, not another stack to configure.
             </p>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
@@ -470,10 +569,10 @@ export default function PricingPage() {
       <section className="border-t border-line bg-ink">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-5 px-5 py-10 text-white sm:px-8 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <h2 className="text-2xl font-semibold tracking-normal">One workspace for research, insight, campaigns, and decisions.</h2>
+            <h2 className="text-2xl font-semibold tracking-normal">Scout is the product layer. The vendors are infrastructure.</h2>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-300">
-              You buy Scout. Scout manages the stack, the orchestration, and the billing behind the
-              scenes.
+              You buy organized insight, campaign intelligence, decision support, and saved business
+              value. Scout manages the stack, orchestration, and billing behind the scenes.
             </p>
           </div>
           <Link

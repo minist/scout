@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  CreditCard,
   ClipboardList,
   LayoutDashboard,
   LogOut,
   MessagesSquare,
   PenLine,
+  PlugZap,
   Route,
   Sparkles,
   Target,
@@ -27,7 +29,9 @@ const navItems: NavItem[] = [
   { href: "/app/roadmap", label: "Validation Roadmap", icon: Route },
   { href: "/app/assets", label: "Asset Studio", icon: WandSparkles },
   { href: "/app/interviews", label: "Interviews", icon: MessagesSquare },
-  { href: "/app/log", label: "Decision Log", icon: ClipboardList }
+  { href: "/app/log", label: "Decision Log", icon: ClipboardList },
+  { href: "/app/integrations", label: "Integrations", icon: PlugZap },
+  { href: "/app/billing", label: "Billing", icon: CreditCard }
 ];
 
 function isActive(pathname: string, href: string) {

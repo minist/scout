@@ -5,6 +5,7 @@ import {
   ArrowRight,
   Check,
   ClipboardList,
+  Copy,
   ExternalLink,
   FileText,
   Gauge,
@@ -24,6 +25,13 @@ import {
   type ScoutInput,
   type ScoutResult
 } from "@/lib/scout";
+
+type SetupPreview = {
+  assetTitle: string;
+  assetType: string;
+  setup: ReturnType<typeof defaultSetupAction>;
+  content: string;
+};
 
 const emptyInput: ScoutInput = {
   ideaName: "",
@@ -352,6 +360,8 @@ function TextArea({
 }
 
 function Results({ result }: { result: ScoutResult }) {
+  const [setupPreview, setSetupPreview] = useState<SetupPreview | null>(null);
+
   return (
     <section id="results" className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
       <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -426,54 +436,231 @@ function Results({ result }: { result: ScoutResult }) {
               <h3 className="text-xl font-semibold text-ink">Generated assets</h3>
             </div>
             <div className="grid gap-4">
-              {result.assets.map((asset) => (
-                <article key={`${asset.type}-${asset.title}`} className="rounded-lg border border-line bg-mist p-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
-                      {asset.type}
-                    </p>
-                    <p className="text-sm font-semibold text-ink">{asset.title}</p>
-                  </div>
-                  <pre className="mt-3 whitespace-pre-wrap font-sans text-sm leading-6 text-slate-700">
-                    {asset.content}
-                  </pre>
-                  <div className="mt-4 rounded-lg border border-teal-100 bg-white p-4">
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
-                          Managed setup preview
-                        </p>
-                        <h4 className="mt-2 text-base font-semibold text-ink">
-                          {(asset.setupAction || defaultSetupAction(asset.type)).label}
-                        </h4>
-                        <p className="mt-1 text-sm font-semibold text-slate-600">
-                          {(asset.setupAction || defaultSetupAction(asset.type)).service}
-                        </p>
-                        <p className="mt-2 text-sm leading-6 text-slate-600">
-                          {(asset.setupAction || defaultSetupAction(asset.type)).description}
-                        </p>
-                      </div>
-                      <button
-                        type="button"
-                        className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-lg bg-ink px-4 text-sm font-semibold text-white opacity-90"
-                        aria-label={`Preview ${(asset.setupAction || defaultSetupAction(asset.type)).label}`}
-                      >
-                        Preview setup <ExternalLink className="h-4 w-4" />
-                      </button>
+              {result.assets.map((asset) => {
+                const setup = asset.setupAction || defaultSetupAction(asset.type);
+
+                return (
+                  <article key={`${asset.type}-${asset.title}`} className="rounded-lg border border-line bg-mist p-4">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
+                        {asset.type}
+                      </p>
+                      <p className="text-sm font-semibold text-ink">{asset.title}</p>
                     </div>
-                    <p className="mt-3 text-xs leading-5 text-slate-500">
-                      Future premium action. Scout would configure the connector and keep billing
-                      unified behind the scenes.
-                    </p>
-                  </div>
-                </article>
-              ))}
+                    <pre className="mt-3 whitespace-pre-wrap font-sans text-sm leading-6 text-slate-700">
+                      {asset.content}
+                    </pre>
+                    <div className="mt-4 rounded-lg border border-teal-100 bg-white p-4">
+                      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                        <div>
+                          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
+                            Managed setup preview
+                          </p>
+                          <h4 className="mt-2 text-base font-semibold text-ink">{setup.label}</h4>
+                          <p className="mt-1 text-sm font-semibold text-slate-600">{setup.service}</p>
+                          <p className="mt-2 text-sm leading-6 text-slate-600">{setup.description}</p>
+                        </div>
+                        <button
+                          type="button"
+                          className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-lg bg-ink px-4 text-sm font-semibold text-white opacity-90"
+                          aria-label={`Preview ${setup.label}`}
+                          onClick={() =>
+                            setSetupPreview({
+                              assetTitle: asset.title,
+                              assetType: asset.type,
+                              setup,
+                              content: asset.content
+                            })
+                          }
+                        >
+                          Preview setup <ExternalLink className="h-4 w-4" />
+                        </button>
+                      </div>
+                      <p className="mt-3 text-xs leading-5 text-slate-500">
+                        Future premium action. Scout would configure the connector and keep billing
+                        unified behind the scenes.
+                      </p>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </div>
       </div>
+      {setupPreview ? (
+        <SetupPreviewModal preview={setupPreview} onClose={() => setSetupPreview(null)} />
+      ) : null}
     </section>
   );
+}
+
+function SetupPreviewModal({
+  preview,
+  onClose
+}: {
+  preview: SetupPreview;
+  onClose: () => void;
+}) {
+  const isFormSetup =
+    preview.assetType.toLowerCase().includes("interview") ||
+    preview.assetType.toLowerCase().includes("form") ||
+    preview.setup.service.toLowerCase().includes("forms") ||
+    preview.setup.service.toLowerCase().includes("tally");
+  const questions = extractQuestions(preview.content);
+
+  return (
+    <div className="fixed inset-0 z-50 grid place-items-center bg-ink/50 px-4 py-6">
+      <div className="max-h-[88vh] w-full max-w-4xl overflow-y-auto rounded-[8px] border border-line bg-white shadow-panel">
+        <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-line bg-white p-5">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
+              Execution preview
+            </p>
+            <h3 className="mt-2 text-2xl font-semibold tracking-normal text-ink">
+              {isFormSetup ? "Google Forms draft ready" : `${preview.setup.label} ready`}
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Scout converts the generated asset into a managed setup preview. In the paid execution
+              layer, Scout would create and configure this through the connected tool.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="inline-flex h-9 items-center justify-center rounded-lg border border-line px-3 text-sm font-semibold text-slate-700 hover:bg-mist"
+          >
+            Close
+          </button>
+        </div>
+
+        <div className="grid gap-5 p-5 lg:grid-cols-[0.75fr_1.25fr]">
+          <div className="grid content-start gap-4">
+            {[
+              ["Connector", preview.setup.service],
+              ["Source asset", preview.assetTitle],
+              ["Status", "Demo draft generated"],
+              ["Billing", "Managed by Scout"]
+            ].map(([label, value]) => (
+              <div key={label} className="rounded-lg border border-line bg-mist p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
+                  {label}
+                </p>
+                <p className="mt-2 text-sm font-semibold leading-6 text-ink">{value}</p>
+              </div>
+            ))}
+            <div className="rounded-lg border border-amber-100 bg-amber-50 p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-amber-700">
+                Demo note
+              </p>
+              <p className="mt-2 text-sm leading-6 text-slate-700">
+                This does not call Google APIs yet. It shows the premium execution flow Scout would
+                automate after integrations are connected.
+              </p>
+            </div>
+          </div>
+
+          {isFormSetup ? (
+            <GoogleFormPreview questions={questions} />
+          ) : (
+            <GenericSetupPreview preview={preview} />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GoogleFormPreview({ questions }: { questions: string[] }) {
+  const visibleQuestions = questions.length ? questions : [
+    "What problem are you trying to solve today?",
+    "How painful is this workflow on a 1-5 scale?",
+    "Would you agree to a follow-up prototype review?"
+  ];
+
+  return (
+    <div className="rounded-[8px] border border-line bg-mist p-4">
+      <div className="rounded-lg border border-line bg-white">
+        <div className="border-t-8 border-teal-600 p-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
+            Google Forms preview
+          </p>
+          <h4 className="mt-2 text-2xl font-semibold tracking-normal text-ink">
+            Problem interview response form
+          </h4>
+          <p className="mt-2 text-sm leading-6 text-slate-600">
+            Created from the Scout interview guide with structured fields for pain, context, and
+            follow-up commitment.
+          </p>
+        </div>
+        <div className="grid gap-3 border-t border-line p-5">
+          {visibleQuestions.slice(0, 8).map((question, index) => (
+            <div key={question} className="rounded-lg border border-line bg-white p-4">
+              <div className="flex items-start justify-between gap-3">
+                <p className="text-sm font-semibold leading-6 text-ink">{question}</p>
+                <span className="rounded-md bg-mist px-2 py-1 text-xs font-semibold text-slate-600">
+                  {index === 4 ? "Scale" : "Short answer"}
+                </span>
+              </div>
+              <div className="mt-4 h-9 rounded-md border border-dashed border-slate-300 bg-mist" />
+            </div>
+          ))}
+          <div className="rounded-lg border border-teal-100 bg-teal-50 p-4">
+            <p className="text-sm font-semibold text-ink">Added by Scout</p>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Pain score, ICP fit, follow-up commitment, and notes fields are included so responses
+              can roll up into the success threshold.
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-col gap-3 border-t border-line p-5 sm:flex-row">
+          <button
+            type="button"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-teal-600 px-4 text-sm font-semibold text-white"
+          >
+            Open demo form <ExternalLink className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-line px-4 text-sm font-semibold text-ink hover:bg-mist"
+          >
+            Copy form outline <Copy className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GenericSetupPreview({ preview }: { preview: SetupPreview }) {
+  return (
+    <div className="rounded-[8px] border border-line bg-mist p-4">
+      <div className="rounded-lg border border-line bg-white p-5">
+        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
+          Managed setup draft
+        </p>
+        <h4 className="mt-2 text-2xl font-semibold tracking-normal text-ink">{preview.setup.label}</h4>
+        <p className="mt-3 text-sm leading-6 text-slate-600">{preview.setup.description}</p>
+        <div className="mt-5 grid gap-3">
+          {["Create draft asset", "Map tracking fields", "Prepare connector settings", "Keep billing under Scout"].map((step, index) => (
+            <div key={step} className="flex gap-3 rounded-lg border border-line bg-mist p-3">
+              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-white text-sm font-semibold text-ink">
+                {index + 1}
+              </span>
+              <p className="text-sm leading-6 text-slate-700">{step}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function extractQuestions(content: string) {
+  return content
+    .split("\n")
+    .map((line) => line.trim().replace(/^\d+\.\s*/, ""))
+    .filter((line) => line.endsWith("?"));
 }
 
 function DecisionRule({ result }: { result: ScoutResult }) {

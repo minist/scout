@@ -53,8 +53,8 @@ const proofPoints = ["Experiment logic", "Execution assets", "Success threshold"
 export default function Home() {
   return (
     <SiteShell>
-      <section className="relative mx-auto w-full max-w-7xl px-5 pb-14 pt-6 sm:px-8 lg:pb-20">
-        <div className="relative min-h-[680px] overflow-hidden rounded-[18px] border border-line bg-ink shadow-panel">
+      <section className="relative mx-auto w-full max-w-7xl px-5 pb-8 pt-6 sm:px-8 lg:pb-12">
+        <div className="relative min-h-[560px] overflow-hidden rounded-[18px] border border-line bg-ink shadow-panel sm:min-h-[620px]">
           <Image
             src={heroImage}
             alt="Founders reviewing customer research and validation notes in a professional workspace"
@@ -66,8 +66,8 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#161611]/92 via-[#161611]/64 to-[#161611]/18" />
           <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#161611]/82 to-transparent" />
 
-          <div className="relative z-10 flex min-h-[680px] max-w-3xl flex-col justify-center px-6 py-14 sm:px-10 lg:px-14">
-            <h1 className="max-w-3xl font-display text-5xl font-normal leading-[1.03] tracking-normal text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.45)] sm:text-6xl lg:text-[72px]">
+          <div className="relative z-10 flex min-h-[560px] max-w-3xl flex-col justify-center px-6 py-14 sm:min-h-[620px] sm:px-10 lg:px-14">
+            <h1 className="max-w-3xl font-display text-4xl font-normal leading-[1.04] tracking-normal text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.45)] sm:text-6xl lg:text-[72px]">
               Validate the riskiest part before you build.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/95 drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)]">
@@ -88,26 +88,28 @@ export default function Home() {
                 See the workflow
               </Link>
             </div>
-            <div className="mt-10 grid max-w-[610px] grid-cols-2 gap-px overflow-hidden rounded-lg border border-white/25 bg-white/20 sm:grid-cols-4">
-              {proofPoints.map((point) => (
-                <div key={point} className="bg-[#fffaf1]/90 px-4 py-3 backdrop-blur">
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-stone-600">{point}</p>
-                </div>
-              ))}
-            </div>
           </div>
+        </div>
+      </section>
 
-          <div className="absolute bottom-8 right-6 z-10 max-w-lg rounded-[10px] border border-line bg-[#fffaf1] p-4 shadow-panel sm:right-10">
-            <div className="flex items-start gap-3">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
-                <Sparkles className="h-5 w-5" />
-              </span>
-              <div>
-                <p className="text-sm font-semibold text-ink">Analyst-grade validation runbook</p>
-                <p className="mt-1 text-sm leading-6 text-stone-600">
-                  Recommendation, assets, threshold, and reasoning in one founder workspace.
-                </p>
-              </div>
+      <section className="mx-auto grid w-full max-w-7xl gap-4 px-5 pb-14 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:pb-20">
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-4">
+          {proofPoints.map((point) => (
+            <div key={point} className="bg-[#fffaf1] px-4 py-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-stone-600">{point}</p>
+            </div>
+          ))}
+        </div>
+        <div className="rounded-[10px] border border-line bg-[#fffaf1] p-4 shadow-panel">
+          <div className="flex items-start gap-3">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
+              <Sparkles className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-sm font-semibold text-ink">Analyst-grade validation runbook</p>
+              <p className="mt-1 text-sm leading-6 text-stone-600">
+                Recommendation, assets, threshold, and reasoning in one founder workspace.
+              </p>
             </div>
           </div>
         </div>

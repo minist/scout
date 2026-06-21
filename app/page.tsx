@@ -14,8 +14,7 @@ import {
 import { SiteShell } from "@/components/site-shell";
 import { roboticsSampleInput, roboticsSampleResult } from "@/lib/scout";
 
-const heroImage =
-  "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1800&q=86";
+const heroImage = "/scout-hero-facade.png";
 
 const inputFields = [
   { label: "Idea", value: roboticsSampleInput.ideaName },

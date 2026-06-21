@@ -1,14 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
-  Check,
   ClipboardList,
-  ExternalLink,
   Gauge,
-  Hammer,
   Lightbulb,
   Mail,
-  RefreshCw,
+  Route,
   Sparkles,
   Target,
   WandSparkles
@@ -16,311 +14,258 @@ import {
 import { SiteShell } from "@/components/site-shell";
 import { roboticsSampleInput, roboticsSampleResult } from "@/lib/scout";
 
+const heroImage =
+  "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=82";
+
 const inputFields = [
-  { label: "Idea name", value: roboticsSampleInput.ideaName },
-  { label: "Validation stage", value: roboticsSampleInput.validationStage },
-  { label: "Target user / ICP", value: roboticsSampleInput.targetUser },
-  { label: "Problem being solved", value: roboticsSampleInput.problem },
-  { label: "Riskiest assumption", value: roboticsSampleInput.riskiestAssumption }
+  { label: "Idea", value: roboticsSampleInput.ideaName },
+  { label: "Stage", value: roboticsSampleInput.validationStage },
+  { label: "ICP", value: roboticsSampleInput.targetUser },
+  { label: "Problem", value: roboticsSampleInput.problem },
+  { label: "Riskiest belief", value: roboticsSampleInput.riskiestAssumption }
 ];
 
 const sampleAsset = roboticsSampleResult.assets[0];
 
-const offers = [
+const steps = [
   {
-    icon: Target,
-    title: "The right experiment",
-    body: "Scout picks the single cheapest experiment that actually tests your riskiest assumption — not the easy one."
+    id: "01",
+    icon: Lightbulb,
+    title: "Name the belief",
+    body: "Scout starts with the assumption that could make the whole idea fail."
   },
   {
+    id: "02",
     icon: WandSparkles,
-    title: "The assets to run it",
-    body: "Outreach, interview scripts, landing copy, and ads — generated and ready, each with a managed setup to put it live."
+    title: "Generate the runbook",
+    body: "It prescribes one experiment, creates assets, and shows the success threshold."
   },
   {
-    icon: Gauge,
-    title: "The bar to clear",
-    body: "A measurable success threshold and a clear continue / refine / pivot rule, so the result actually changes your decision."
+    id: "03",
+    icon: Route,
+    title: "Turn results into action",
+    body: "Continue, refine, or pivot with a decision rule grounded in evidence."
   }
 ];
 
-const journey = [
-  {
-    icon: Lightbulb,
-    tag: "Starting idea",
-    title: "Validate the core idea",
-    body: "Prove the problem and demand are real before you write a line of code.",
-    status: "Validated"
-  },
-  {
-    icon: Hammer,
-    tag: "Build",
-    title: "Start building with confidence",
-    body: "You're building on evidence, not optimism — and the riskiest unknowns are already answered.",
-    status: "In progress"
-  },
-  {
-    icon: RefreshCw,
-    tag: "Every feature after",
-    title: "Validate each new feature",
-    body: "Every new direction is researched with the full context of everything you've already learned.",
-    status: "Ongoing"
-  }
-];
+const proofPoints = ["Experiment logic", "Execution assets", "Success threshold", "Next decision"];
 
 export default function Home() {
   return (
     <SiteShell>
-      {/* Hero */}
-      <section className="mx-auto w-full max-w-7xl px-5 pb-16 pt-10 text-center sm:px-8 lg:pb-24 lg:pt-16">
-        <span className="inline-flex items-center gap-2 rounded-full border border-line bg-mist px-3 py-1 text-xs font-semibold text-slate-600">
-          <Sparkles className="h-3.5 w-3.5 text-teal-700" />
-          AI-powered validation workspace
-        </span>
-        <h1 className="mx-auto mt-6 max-w-4xl text-5xl font-semibold leading-[1.02] tracking-normal text-ink sm:text-6xl lg:text-7xl">
-          Validate the riskiest part of your idea before you build.
-        </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-          Tell Scout what you&apos;re unsure about. It turns the belief that could break your idea into
-          the cheapest experiment that proves it, hands you the assets to run it, and remembers
-          everything — for this idea and every one that comes after.
-        </p>
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Link
-            href="/app"
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-ink px-6 text-sm font-semibold text-white hover:bg-slate-800"
-          >
-            Open Scout <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link
-            href="#how"
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-line px-6 text-sm font-semibold text-ink hover:bg-mist"
-          >
-            See how it works
-          </Link>
-        </div>
-      </section>
-
-      {/* Section 1 — Tell Scout what needs proving */}
-      <section id="how" className="border-y border-line bg-mist">
-        <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:py-24">
-          <div>
-            <span className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-700">
-              Step 01
-            </span>
-            <h2 className="mt-3 text-3xl font-semibold tracking-normal text-ink sm:text-4xl">
-              Tell Scout what needs proving.
-            </h2>
-            <p className="mt-4 text-lg leading-8 text-slate-600">
-              Start with what you&apos;re unsure about. Describe your idea, who it&apos;s for, and the
-              riskiest assumption — the belief that would sink the whole thing if you&apos;re wrong.
-              That&apos;s all Scout needs to get to work.
-            </p>
-            <ul className="mt-6 grid gap-3">
-              {["What you're building", "Who it's for", "The assumption that could break it"].map(
-                (item) => (
-                  <li key={item} className="flex items-center gap-3 text-sm text-slate-700">
-                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-teal-50 text-teal-700">
-                      <Check className="h-3.5 w-3.5" />
-                    </span>
-                    {item}
-                  </li>
-                )
-              )}
-            </ul>
+      <section className="mx-auto grid w-full max-w-7xl gap-10 px-5 pb-14 pt-10 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:pb-20 lg:pt-16">
+        <div>
+          <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] tracking-normal text-ink sm:text-6xl lg:text-7xl">
+            Validate the riskiest part before you build.
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-stone-600">
+            Scout turns a founder&apos;s belief into a testable experiment, generates the assets to run it,
+            and explains the threshold that decides what happens next.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/app"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-ink px-6 text-sm font-semibold text-white hover:bg-stone-800"
+            >
+              Open Scout <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="#how"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-line bg-[#fffaf1] px-6 text-sm font-semibold text-ink hover:bg-white"
+            >
+              See the workflow
+            </Link>
           </div>
+          <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-4">
+            {proofPoints.map((point) => (
+              <div key={point} className="bg-[#fffaf1] px-4 py-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-stone-500">{point}</p>
+              </div>
+            ))}
+          </div>
+        </div>
 
-          {/* Visual: the input fields */}
-          <div className="rounded-[12px] border border-line bg-white p-5 shadow-panel sm:p-6">
-            <div className="mb-4 flex items-center gap-2 text-sm font-semibold text-ink">
-              <Target className="h-4 w-4 text-teal-700" />
-              Tell Scout about your idea
-            </div>
-            <div className="grid gap-4">
-              {inputFields.map((field) => (
-                <div key={field.label}>
-                  <p className="mb-1.5 text-sm font-semibold text-ink">{field.label}</p>
-                  <div className="rounded-lg border border-line bg-mist px-3 py-2.5 text-sm leading-6 text-slate-600">
-                    {field.value}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="mt-5 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-teal-600 text-sm font-semibold text-white">
-              <WandSparkles className="h-4 w-4" />
-              Generate validation plan
+        <div className="relative">
+          <div className="aspect-[4/3] overflow-hidden rounded-[10px] border border-line bg-stone-200 shadow-panel">
+            <Image
+              src={heroImage}
+              alt="Founders reviewing a validation plan together"
+              width={1400}
+              height={1050}
+              priority
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <div className="absolute -bottom-6 left-4 right-4 rounded-[10px] border border-line bg-[#fffaf1] p-4 shadow-panel sm:left-8 sm:right-8">
+            <div className="flex items-start gap-3">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
+                <Sparkles className="h-5 w-5" />
+              </span>
+              <div>
+                <p className="text-sm font-semibold text-ink">Analyst-grade validation runbook</p>
+                <p className="mt-1 text-sm leading-6 text-stone-600">
+                  Recommendation, assets, threshold, and reasoning in one founder workspace.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section 2 — The output: experiment + assets + implementing it */}
-      <section className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
-          {/* Visual: the generated plan */}
-          <div className="order-2 grid gap-4 lg:order-1">
-            <div className="rounded-[12px] border border-line bg-ink p-5 text-white shadow-panel sm:p-6">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-100">
-                    Recommended experiment
-                  </p>
-                  <h3 className="mt-2 text-2xl font-semibold capitalize leading-tight">
-                    {roboticsSampleResult.experimentType}
-                  </h3>
-                </div>
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-white/10">
-                  <Target className="h-5 w-5 text-teal-100" />
-                </span>
-              </div>
-            </div>
-
-            <div className="rounded-[12px] border border-amber-100 bg-amber-50 p-4 sm:p-5">
-              <div className="flex items-start gap-3">
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-white text-amber-700">
-                  <Gauge className="h-4 w-4" />
-                </span>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-amber-700">
-                    Success threshold
-                  </p>
-                  <p className="mt-1 text-sm font-medium leading-6 text-ink">
-                    {roboticsSampleResult.successMetric}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {sampleAsset ? (
-              <div className="rounded-[12px] border border-line bg-white p-4 shadow-panel sm:p-5">
-                <div className="flex items-center gap-2 text-teal-700">
-                  <Mail className="h-4 w-4" />
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em]">{sampleAsset.type}</p>
-                </div>
-                <p className="mt-2 text-sm font-semibold text-ink">{sampleAsset.title}</p>
-                <div className="mt-3 flex items-center justify-between gap-3 rounded-lg border border-teal-100 bg-teal-50/60 px-3 py-2.5">
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-ink">
-                      {sampleAsset.setupAction?.label ?? "Create managed setup"}
-                    </p>
-                    <p className="truncate text-xs text-slate-600">
-                      {sampleAsset.setupAction?.service ?? "Scout workspace"}
-                    </p>
-                  </div>
-                  <span className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg bg-ink px-3 text-xs font-semibold text-white">
-                    Set up <ExternalLink className="h-3.5 w-3.5" />
+      <section className="border-y border-line bg-[#fffaf1]">
+        <div className="mx-auto grid w-full max-w-7xl gap-px border-x border-line bg-line">
+          {steps.map((step) => {
+            const Icon = step.icon;
+            return (
+              <div key={step.id} className="grid gap-5 bg-[#fffaf1] px-5 py-8 sm:grid-cols-[0.2fr_0.8fr] sm:px-8">
+                <p className="text-5xl font-semibold tracking-normal text-ink">{step.id}</p>
+                <div className="flex gap-4">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
+                    <Icon className="h-5 w-5" />
                   </span>
+                  <div>
+                    <h2 className="text-2xl font-semibold tracking-normal text-ink">{step.title}</h2>
+                    <p className="mt-2 max-w-2xl text-base leading-7 text-stone-600">{step.body}</p>
+                  </div>
                 </div>
               </div>
-            ) : null}
-          </div>
+            );
+          })}
+        </div>
+      </section>
 
-          <div className="order-1 lg:order-2">
-            <span className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-700">
-              Step 02
+      <section id="how" className="mx-auto grid w-full max-w-7xl items-start gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:py-24">
+        <div className="lg:sticky lg:top-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-700">Step 01</p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-normal text-ink sm:text-4xl">
+            Tell Scout what needs proving.
+          </h2>
+          <p className="mt-4 text-lg leading-8 text-stone-600">
+            Start with the idea, audience, problem, and riskiest belief. Scout treats that context like a
+            research brief, not a generic prompt.
+          </p>
+        </div>
+
+        <div className="rounded-[10px] border border-line bg-[#fffaf1] p-5 shadow-panel sm:p-6">
+          <div className="mb-5 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <span className="grid h-10 w-10 place-items-center rounded-lg bg-teal-50 text-teal-700">
+                <Target className="h-5 w-5" />
+              </span>
+              <p className="font-semibold text-ink">Founder context</p>
+            </div>
+            <span className="rounded-md border border-line bg-mist px-2.5 py-1 text-xs font-semibold text-stone-600">
+              Sample
             </span>
-            <h2 className="mt-3 text-3xl font-semibold tracking-normal text-ink sm:text-4xl">
-              Get the experiment — and everything to run it.
-            </h2>
-            <p className="mt-4 text-lg leading-8 text-slate-600">
-              Scout turns your idea into a complete validation plan. Then it helps you implement:
-              managed setup turns each generated asset into an execution-ready workflow, so you go from
-              plan to running experiment without juggling tools.
-            </p>
-            <div className="mt-6 grid gap-4">
-              {offers.map((offer) => {
-                const Icon = offer.icon;
-                return (
-                  <div key={offer.title} className="flex gap-4">
-                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <h3 className="font-semibold text-ink">{offer.title}</h3>
-                      <p className="mt-0.5 text-sm leading-6 text-slate-600">{offer.body}</p>
-                    </div>
-                  </div>
-                );
-              })}
+          </div>
+          <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line">
+            {inputFields.map((field) => (
+              <div key={field.label} className="grid gap-2 bg-[#fffaf1] px-4 py-3 sm:grid-cols-[0.28fr_0.72fr]">
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-stone-500">
+                  {field.label}
+                </p>
+                <p className="text-sm leading-6 text-stone-700">{field.value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="plan" className="border-y border-line bg-[#161611] text-white">
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
+          <div className="grid gap-4">
+            <div className="rounded-[10px] border border-white/15 bg-white/8 p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-100">
+                Recommended experiment
+              </p>
+              <h3 className="mt-3 text-2xl font-semibold capitalize leading-tight">
+                {roboticsSampleResult.experimentType}
+              </h3>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="rounded-[10px] border border-white/15 bg-white/8 p-5">
+                <Gauge className="h-5 w-5 text-teal-100" />
+                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.12em] text-teal-100">
+                  Success threshold
+                </p>
+                <p className="mt-2 text-sm leading-6 text-stone-200">{roboticsSampleResult.successMetric}</p>
+              </div>
+              {sampleAsset ? (
+                <div className="rounded-[10px] border border-white/15 bg-white/8 p-5">
+                  <Mail className="h-5 w-5 text-teal-100" />
+                  <p className="mt-4 text-xs font-semibold uppercase tracking-[0.12em] text-teal-100">
+                    Generated asset
+                  </p>
+                  <p className="mt-2 text-sm font-semibold text-white">{sampleAsset.title}</p>
+                  <p className="mt-1 text-sm leading-6 text-stone-300">
+                    {sampleAsset.setupAction?.label ?? "Create managed setup"}
+                  </p>
+                </div>
+              ) : null}
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Section 3 — Continuous validation with retained context */}
-      <section id="loop" className="border-y border-line bg-mist">
-        <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
-          <div className="mx-auto max-w-3xl text-center">
-            <span className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-700">
-              Step 03
-            </span>
-            <h2 className="mt-3 text-3xl font-semibold tracking-normal text-ink sm:text-4xl">
-              Validate every idea — not just the first one.
-            </h2>
-            <p className="mt-4 text-lg leading-8 text-slate-600">
-              Once you&apos;ve validated and started building, Scout doesn&apos;t stop being useful. Come
-              back to validate each new feature or direction — and every new question is researched with
-              the retained context of everything you&apos;ve already learned. Your evidence compounds,
-              so each validation makes the next one sharper.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-4 lg:grid-cols-3">
-            {journey.map((step, index) => {
-              const Icon = step.icon;
-              return (
-                <div
-                  key={step.title}
-                  className="relative rounded-[12px] border border-line bg-white p-6 shadow-panel"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="grid h-11 w-11 place-items-center rounded-lg bg-teal-50 text-teal-700">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <span className="rounded-md bg-mist px-2.5 py-1 text-xs font-semibold text-slate-500">
-                      {step.status}
-                    </span>
-                  </div>
-                  <p className="mt-5 text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
-                    {step.tag}
-                  </p>
-                  <h3 className="mt-2 text-lg font-semibold text-ink">{step.title}</h3>
-                  <p className="mt-1.5 text-sm leading-6 text-slate-600">{step.body}</p>
-                  {index < journey.length - 1 ? (
-                    <span className="absolute -right-2.5 top-1/2 z-10 hidden h-6 w-6 -translate-y-1/2 place-items-center rounded-full border border-line bg-white text-slate-400 lg:grid">
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </span>
-                  ) : null}
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="mt-10 flex items-center justify-center gap-3 rounded-[12px] border border-dashed border-line bg-white px-5 py-5 text-center">
-            <ClipboardList className="h-5 w-5 shrink-0 text-teal-700" />
-            <p className="text-sm leading-6 text-slate-600">
-              Every assumption, experiment, and decision is saved — a compounding source of truth that
-              makes Scout smarter about your business with each idea you validate.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Closing CTA */}
-      <section className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
-        <div className="flex flex-col items-start gap-6 rounded-[16px] bg-ink p-8 text-white sm:p-12 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <h2 className="text-2xl font-semibold tracking-normal sm:text-3xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-100">Step 02</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-normal sm:text-4xl">
+              Get the experiment and the assets to execute it.
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-stone-300">
+              Scout does more than recommend. It creates outreach, scripts, landing copy, and managed setup
+              previews that point toward the tools founders already use.
+            </p>
+            <Link
+              href="/app/canvas"
+              className="mt-7 inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-white px-6 text-sm font-semibold text-ink hover:bg-stone-100"
+            >
+              Generate a plan <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section id="loop" className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
+        <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-700">Step 03</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-normal text-ink sm:text-4xl">
+              Make every next decision sharper.
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-stone-600">
+              Each validation becomes reusable context. Scout helps founders keep research, assets, evidence,
+              and decisions connected as the company learns.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              ["Evidence memory", "Every assumption and outcome stays attached to the idea."],
+              ["Decision rule", "Continue, refine, or pivot with a visible threshold."],
+              ["Execution layer", "Future integrations turn assets into running experiments."],
+              ["Founder focus", "Less stack assembly, more learning from customers."]
+            ].map(([title, body]) => (
+              <div key={title} className="rounded-[10px] border border-line bg-[#fffaf1] p-5 shadow-panel">
+                <ClipboardList className="h-5 w-5 text-teal-700" />
+                <h3 className="mt-4 font-semibold text-ink">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-stone-600">{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto w-full max-w-7xl px-5 pb-16 sm:px-8 lg:pb-24">
+        <div className="flex flex-col items-start gap-6 rounded-[10px] border border-line bg-[#fffaf1] p-8 shadow-panel sm:p-12 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold tracking-normal text-ink sm:text-3xl">
               Stop building on guesses.
             </h2>
-            <p className="mt-3 max-w-xl text-base leading-7 text-slate-300">
-              Validate the riskiest part first — with evidence, not optimism — and keep validating every
-              idea that follows.
+            <p className="mt-3 max-w-xl text-base leading-7 text-stone-600">
+              Run the smallest credible test, then let the result tell you what to do next.
             </p>
           </div>
           <Link
             href="/app"
-            className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-lg bg-white px-6 text-sm font-semibold text-ink hover:bg-slate-100"
+            className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-lg bg-ink px-6 text-sm font-semibold text-white hover:bg-stone-800"
           >
             Open Scout <ArrowRight className="h-4 w-4" />
           </Link>

@@ -16,8 +16,8 @@ html {
 
 body {
   margin: 0;
-  background: #ffffff;
-  color: #111827;
+  background: #f8f4ec;
+  color: #161611;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -29,6 +29,6 @@ select {
 }
 
 ::selection {
-  background: #ccfbef;
-  color: #0a645d;
+  background: #d5efd2;
+  color: #174d27;
 }

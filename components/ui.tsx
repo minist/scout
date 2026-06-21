@@ -13,7 +13,7 @@ export function PageHeader({
     <header className="max-w-3xl">
       <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-700">{eyebrow}</p>
       <h1 className="mt-2 text-3xl font-semibold tracking-normal text-ink sm:text-4xl">{title}</h1>
-      <p className="mt-4 text-base leading-7 text-slate-600">{description}</p>
+      <p className="mt-4 text-base leading-7 text-stone-600">{description}</p>
     </header>
   );
 }
@@ -26,7 +26,7 @@ export function Card({
   className?: string;
 }) {
   return (
-    <div className={`rounded-[10px] border border-line bg-white p-5 shadow-panel ${className}`}>
+    <div className={`rounded-[10px] border border-line bg-[#fffaf1] p-5 shadow-panel ${className}`}>
       {children}
     </div>
   );

@@ -3,7 +3,7 @@ import { ArrowRight, Target } from "lucide-react";
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[#f8f4ec]">
       <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
         <Link href="/" className="flex items-center gap-3" aria-label="Scout home">
           <span className="grid h-9 w-9 place-items-center rounded-lg bg-ink text-white">
@@ -11,12 +11,12 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           </span>
           <span className="text-xl font-semibold tracking-normal text-ink">Scout</span>
         </Link>
-        <nav className="hidden items-center gap-7 text-sm font-medium text-slate-600 sm:flex">
+        <nav className="hidden items-center gap-7 text-sm font-medium text-stone-600 sm:flex">
           <Link href="/#how" className="hover:text-ink">
-            How it works
+            Step 1
           </Link>
-          <Link href="/#loop" className="hover:text-ink">
-            Continuous validation
+          <Link href="/#plan" className="hover:text-ink">
+            Step 2
           </Link>
           <Link href="/pricing" className="hover:text-ink">
             Pricing
@@ -27,7 +27,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         </nav>
         <Link
           href="/app"
-          className="inline-flex h-10 items-center gap-2 rounded-lg bg-teal-600 px-4 text-sm font-semibold text-white hover:bg-teal-700"
+          className="inline-flex h-10 items-center gap-2 rounded-lg bg-ink px-4 text-sm font-semibold text-white hover:bg-stone-800"
         >
           Open Scout <ArrowRight className="h-4 w-4" />
         </Link>

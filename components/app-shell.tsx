@@ -43,9 +43,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <div className="min-h-screen bg-mist text-ink">
+    <div className="min-h-screen bg-[#f8f4ec] text-ink">
       <div className="mx-auto flex w-full max-w-[1400px]">
-        <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-line bg-white px-4 py-6 lg:flex">
+        <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-line bg-[#fffaf1] px-4 py-6 lg:flex">
           <Link href="/app" className="flex items-center gap-3 px-2" aria-label="Scout home">
             <span className="grid h-9 w-9 place-items-center rounded-lg bg-ink text-white">
               <Target className="h-5 w-5" />
@@ -69,7 +69,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                     "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                     active
                       ? "bg-teal-50 text-teal-700"
-                      : "text-slate-600 hover:bg-mist hover:text-ink"
+                      : "text-stone-600 hover:bg-mist hover:text-ink"
                   ].join(" ")}
                 >
                   <Icon className={active ? "h-5 w-5 text-teal-700" : "h-5 w-5 text-slate-400"} />
@@ -101,7 +101,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
         <div className="flex min-w-0 flex-1 flex-col">
           {/* Mobile top nav */}
-          <header className="sticky top-0 z-10 flex items-center gap-4 border-b border-line bg-white/90 px-4 py-3 backdrop-blur lg:hidden">
+          <header className="sticky top-0 z-10 flex items-center gap-4 border-b border-line bg-[#fffaf1]/90 px-4 py-3 backdrop-blur lg:hidden">
             <Link href="/app" className="flex items-center gap-2" aria-label="Scout home">
               <span className="grid h-8 w-8 place-items-center rounded-lg bg-ink text-white">
                 <Target className="h-4 w-4" />

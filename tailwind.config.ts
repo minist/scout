@@ -9,15 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#111827",
-        mist: "#f6f8f9",
-        line: "#dbe2e5",
+        ink: "#161611",
+        mist: "#f4f0e7",
+        line: "#ded7c9",
         teal: {
-          50: "#ecfdf9",
-          100: "#ccfbef",
-          500: "#0f9f8f",
-          600: "#0b7f74",
-          700: "#0a645d"
+          50: "#edf8ec",
+          100: "#d5efd2",
+          500: "#367b44",
+          600: "#246532",
+          700: "#174d27"
         },
         amber: {
           50: "#fffbeb",
@@ -27,7 +27,7 @@ const config: Config = {
         }
       },
       boxShadow: {
-        panel: "0 18px 50px rgba(17, 24, 39, 0.08)"
+        panel: "0 18px 46px rgba(22, 22, 17, 0.07)"
       }
     }
   },

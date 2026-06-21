@@ -3,7 +3,17 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
+  --background: #0a0a0b;
+  --surface: #121316;
+  --surface-elevated: #1b1d22;
+  --text-primary: #ffffff;
+  --text-secondary: #b8bcc6;
+  --text-muted: #8a8f99;
+  --border: rgba(255, 255, 255, 0.08);
+  --accent-blue: #5e8bff;
+  --accent-lavender: #a58dff;
+  --accent-cyan: #6dd6ff;
 }
 
 * {
@@ -16,9 +26,9 @@ html {
 
 body {
   margin: 0;
-  background: #f8f4ec;
-  color: #161611;
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: Inter, "SF Pro Display", system-ui, sans-serif;
 }
 
 button,
@@ -29,6 +39,66 @@ select {
 }
 
 ::selection {
-  background: #d5efd2;
-  color: #174d27;
+  background: rgba(94, 139, 255, 0.35);
+  color: #ffffff;
+}
+
+@layer utilities {
+  .bg-white {
+    background-color: var(--surface) !important;
+  }
+
+  .bg-mist {
+    background-color: var(--surface) !important;
+  }
+
+  .bg-ink {
+    background-color: var(--surface-elevated) !important;
+  }
+
+  .bg-amber-50,
+  .bg-slate-100 {
+    background-color: rgba(165, 141, 255, 0.12) !important;
+  }
+
+  .border-amber-100,
+  .border-teal-100 {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .text-ink {
+    color: var(--text-primary) !important;
+  }
+
+  .text-white {
+    color: #ffffff !important;
+  }
+
+  .text-slate-200,
+  .text-slate-300,
+  .text-slate-400,
+  .text-slate-500,
+  .text-slate-600,
+  .text-slate-700,
+  .text-stone-200,
+  .text-stone-300,
+  .text-stone-500,
+  .text-stone-600,
+  .text-stone-700 {
+    color: var(--text-secondary) !important;
+  }
+
+  .text-amber-700,
+  .text-teal-100,
+  .text-teal-700 {
+    color: var(--accent-cyan) !important;
+  }
+
+  .border-line {
+    border-color: var(--border) !important;
+  }
+
+  .shadow-panel {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02) !important;
+  }
 }

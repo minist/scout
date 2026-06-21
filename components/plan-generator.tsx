@@ -234,7 +234,7 @@ function Results({ input, result }: { input: ScoutInput; result: ScoutResult }) 
         </div>
       </section>
 
-      <section className="rounded-[10px] border border-teal-100 bg-teal-50/60 p-5 sm:p-6">
+      <section className="rounded-[10px] border border-line bg-[#1B1D22] p-5 sm:p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex items-start gap-3">
             <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white text-teal-700">
@@ -303,68 +303,64 @@ function Results({ input, result }: { input: ScoutInput; result: ScoutResult }) 
         </div>
       </section>
 
-      <div className="grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
-        <div className="grid content-start gap-5">
-          <div className="rounded-[10px] border border-line bg-ink p-5 text-white shadow-panel sm:p-6">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-100">
-                  Recommended experiment
-                </p>
-                <h3 className="mt-3 text-2xl font-semibold leading-tight">{result.experimentType}</h3>
-              </div>
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-white/10">
-                <Target className="h-6 w-6 text-teal-100" />
-              </span>
+      <div className="grid gap-5 lg:grid-cols-2">
+        <div className="rounded-[10px] border border-line bg-ink p-5 text-white shadow-panel sm:p-6">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-100">
+                Recommended experiment
+              </p>
+              <h3 className="mt-3 text-2xl font-semibold leading-tight">{result.experimentType}</h3>
             </div>
-            <p className="mt-5 text-sm leading-7 text-slate-200">{result.rationale}</p>
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-white/10">
+              <Target className="h-6 w-6 text-teal-100" />
+            </span>
           </div>
+          <p className="mt-5 text-sm leading-7 text-slate-200">{result.rationale}</p>
+        </div>
 
-          <div className="rounded-[10px] border border-amber-100 bg-amber-50 p-5 sm:p-6">
-            <div className="flex items-start gap-3">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white text-amber-700">
-                <Gauge className="h-5 w-5" />
-              </span>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-amber-700">
-                  Success threshold
-                </p>
-                <p className="mt-2 text-base font-semibold leading-7 text-ink">{result.successMetric}</p>
-              </div>
+        <div className="rounded-[10px] border border-amber-100 bg-amber-50 p-5 sm:p-6">
+          <div className="flex items-start gap-3">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white text-amber-700">
+              <Gauge className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-amber-700">
+                Success threshold
+              </p>
+              <p className="mt-2 text-base font-semibold leading-7 text-ink">{result.successMetric}</p>
             </div>
           </div>
         </div>
 
-        <div className="grid content-start gap-5">
-          <div className="rounded-[10px] border border-line bg-white p-5 shadow-panel sm:p-6">
-            <div className="mb-4 flex items-center gap-3">
-              <span className="grid h-10 w-10 place-items-center rounded-lg bg-teal-50 text-teal-700">
-                <ClipboardList className="h-5 w-5" />
-              </span>
-              <h3 className="text-lg font-semibold text-ink">Checklist</h3>
-            </div>
-            <div className="grid gap-3">
-              {result.checklist.map((item, index) => (
-                <div key={item} className="flex gap-3 rounded-lg border border-line p-3">
-                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-mist text-sm font-semibold text-ink">
-                    {index + 1}
-                  </span>
-                  <p className="text-sm leading-6 text-slate-700">{item}</p>
-                </div>
-              ))}
-            </div>
+        <div className="rounded-[10px] border border-line bg-white p-5 shadow-panel sm:p-6">
+          <h3 className="text-lg font-semibold text-ink">Decision rule</h3>
+          <div className="mt-4 grid gap-3">
+            {rules.map(([label, body, style]) => (
+              <div key={label} className="grid gap-2 border-t border-line pt-3 first:border-t-0 first:pt-0">
+                <span className={cx("w-fit rounded-md px-2 py-1 text-xs font-semibold", style)}>{label}</span>
+                <p className="text-sm leading-6 text-slate-700">{body}</p>
+              </div>
+            ))}
           </div>
+        </div>
 
-          <div className="rounded-[10px] border border-line bg-white p-5 shadow-panel sm:p-6">
-            <h3 className="text-lg font-semibold text-ink">Decision rule</h3>
-            <div className="mt-4 grid gap-3">
-              {rules.map(([label, body, style]) => (
-                <div key={label} className="grid gap-2 border-t border-line pt-3 first:border-t-0 first:pt-0">
-                  <span className={cx("w-fit rounded-md px-2 py-1 text-xs font-semibold", style)}>{label}</span>
-                  <p className="text-sm leading-6 text-slate-700">{body}</p>
-                </div>
-              ))}
-            </div>
+        <div className="rounded-[10px] border border-line bg-white p-5 shadow-panel sm:p-6">
+          <div className="mb-4 flex items-center gap-3">
+            <span className="grid h-10 w-10 place-items-center rounded-lg bg-teal-50 text-teal-700">
+              <ClipboardList className="h-5 w-5" />
+            </span>
+            <h3 className="text-lg font-semibold text-ink">Checklist</h3>
+          </div>
+          <div className="grid gap-3">
+            {result.checklist.map((item, index) => (
+              <div key={item} className="flex gap-3 rounded-lg border border-line p-3">
+                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-mist text-sm font-semibold text-ink">
+                  {index + 1}
+                </span>
+                <p className="text-sm leading-6 text-slate-700">{item}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -384,37 +380,37 @@ function Results({ input, result }: { input: ScoutInput; result: ScoutResult }) 
             const setup = asset.setupAction || defaultSetupAction(asset.type);
             return (
               <article key={`${asset.type}-${asset.title}`} className="rounded-lg border border-line bg-mist p-4">
-                <div className="grid gap-4 lg:grid-cols-[1fr_0.44fr] lg:items-start">
-                  <div>
-                    <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
+                    {asset.type}
+                  </p>
+                  <p className="text-sm font-semibold text-ink">{asset.title}</p>
+                </div>
+                <pre className="mt-3 whitespace-pre-wrap font-sans text-sm leading-6 text-slate-700">
+                  {asset.content}
+                </pre>
+                <div className="mt-4 rounded-lg border border-teal-100 bg-white p-4">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
                       <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
-                        {asset.type}
+                        Managed setup preview
                       </p>
-                      <p className="text-sm font-semibold text-ink">{asset.title}</p>
+                      <h4 className="mt-2 text-sm font-semibold text-ink">{setup.label}</h4>
+                      <p className="mt-1 text-sm font-semibold text-slate-600">{setup.service}</p>
+                      <p className="mt-2 text-sm leading-6 text-slate-600">{setup.description}</p>
                     </div>
-                    <pre className="mt-3 whitespace-pre-wrap font-sans text-sm leading-6 text-slate-700">
-                      {asset.content}
-                    </pre>
-                  </div>
-                  <div className="rounded-lg border border-teal-100 bg-white p-4">
-                    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
-                      Managed setup preview
-                    </p>
-                    <h4 className="mt-2 text-sm font-semibold text-ink">{setup.label}</h4>
-                    <p className="mt-1 text-sm font-semibold text-slate-600">{setup.service}</p>
-                    <p className="mt-2 text-sm leading-6 text-slate-600">{setup.description}</p>
                     <button
                       type="button"
-                      className="mt-4 inline-flex h-10 w-full shrink-0 items-center justify-center gap-2 rounded-lg bg-ink px-4 text-sm font-semibold text-white opacity-90"
+                      className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 px-4 text-sm font-semibold text-white transition hover:scale-[0.98]"
                       aria-label={`Preview ${setup.label}`}
                     >
                       Preview setup <ExternalLink className="h-4 w-4" />
                     </button>
-                    <p className="mt-3 text-xs leading-5 text-slate-500">
-                      Future premium action. Scout would configure the connector and keep billing unified
-                      behind the scenes.
-                    </p>
                   </div>
+                  <p className="mt-3 text-xs leading-5 text-slate-500">
+                    Future premium action. Scout would configure the connector and keep billing unified
+                    behind the scenes.
+                  </p>
                 </div>
               </article>
             );

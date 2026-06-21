@@ -117,6 +117,12 @@ const scoutResultSchema = {
 };
 
 function buildPrompt(input: ScoutInput) {
+  const ideaDescription = input.ideaDescription || "Not specified";
+  const targetUser = input.targetUser || "Not specified";
+  const problem = input.problem || "Not specified";
+  const riskiestAssumption = input.riskiestAssumption || "Not specified";
+  const validationStage = input.validationStage || "Not specified";
+
   return `You are Scout, a startup validation strategist for founders.
 
 Recommend exactly one MVP validation experiment from this list:
@@ -159,10 +165,11 @@ Return only valid JSON with this exact shape:
 
 Founder input:
 Idea name: ${input.ideaName}
-Target user / ICP: ${input.targetUser}
-Problem: ${input.problem}
-Riskiest assumption / current belief: ${input.riskiestAssumption}
-Validation stage: ${input.validationStage}
+Product / service description: ${ideaDescription}
+Target user / ICP: ${targetUser}
+Problem: ${problem}
+Riskiest assumption / current belief: ${riskiestAssumption}
+Validation stage: ${validationStage}
 
 Guidelines:
 - Optimize for a hackathon demo: clear, specific, useful, measurable.
@@ -183,7 +190,8 @@ Guidelines:
 - checklistLogic should explain why the checklist creates evidence.
 - decisionRuleLogic should explain how continue/refine/pivot follows from the evidence.
 - Do not reveal hidden chain-of-thought or internal deliberation. Provide a clear audit trail founders can inspect.
-- Use the idea context in the copy.
+- Use the product/service description, problem, ICP, and riskiest assumption in the copy.
+- Recommendation, threshold, checklist, and decision rules must be grounded in what the product or service actually does.
 - The result must feel specific to this founder input, not a generic robotics example.`;
 }
 
@@ -193,6 +201,7 @@ function fallbackWithContext(input?: Partial<ScoutInput>): ScoutResult {
   }
 
   const ideaName = input.ideaName || "your idea";
+  const ideaDescription = input.ideaDescription || "the product or service you described";
   const targetUser = input.targetUser || "your target users";
   const problem = input.problem || "the problem you described";
   const assumption = input.riskiestAssumption || "your riskiest assumption";
@@ -208,7 +217,7 @@ function fallbackWithContext(input?: Partial<ScoutInput>): ScoutResult {
   if (experimentType === "fake landing page test") {
     return {
       experimentType,
-      rationale: `${ideaName} needs a fast demand signal before building. A fake landing page test checks whether ${targetUser} will respond to the promise of solving "${problem}" strongly enough to leave contact information or request access.`,
+      rationale: `${ideaName} needs a fast demand signal before building. Because the concept is ${ideaDescription}, a fake landing page test checks whether ${targetUser} will respond to the promise of solving "${problem}" strongly enough to leave contact information or request access.`,
       checklist: [
         "Write one clear promise that names the target user, problem, and expected outcome.",
         "Publish a single-page test with a waitlist or request-access CTA.",
@@ -219,10 +228,10 @@ function fallbackWithContext(input?: Partial<ScoutInput>): ScoutResult {
       reasoning: {
         observedSignals: [
           "Pre-launch or demand-sensitive validation stage",
+          `Product concept: ${ideaDescription}`,
           `Target audience: ${targetUser}`,
-          `Riskiest assumption: ${assumption}`
         ],
-        interpretation: `Scout reads the key risk as a demand signal: will ${targetUser} care enough about solving "${problem}" to exchange contact details and motivation before the product exists?`,
+        interpretation: `Scout reads the key risk as a demand signal: will ${targetUser} care enough about ${ideaDescription} as a way to solve "${problem}" to exchange contact details and motivation before the product exists?`,
         recommendationLogic:
           "A fake landing page is the lowest-effort way to test the promise, audience fit, and conversion intent before building the product experience.",
         thresholdLogic:
@@ -277,7 +286,7 @@ function fallbackWithContext(input?: Partial<ScoutInput>): ScoutResult {
   if (experimentType === "concierge MVP") {
     return {
       experimentType,
-      rationale: `${ideaName} should test whether ${targetUser} will accept a manually delivered version of the outcome before software is built. A concierge MVP validates urgency, workflow fit, and willingness to collaborate around "${problem}".`,
+      rationale: `${ideaName} should test whether ${targetUser} will accept a manually delivered version of the outcome before software is built. Because the concept is ${ideaDescription}, a concierge MVP validates urgency, workflow fit, and willingness to collaborate around "${problem}".`,
       checklist: [
         "Recruit 5-7 target users who recently experienced the problem.",
         "Manually deliver the promised outcome with lightweight tools and founder involvement.",
@@ -288,10 +297,10 @@ function fallbackWithContext(input?: Partial<ScoutInput>): ScoutResult {
       reasoning: {
         observedSignals: [
           "Manual delivery or serviceable workflow stage",
+          `Product concept: ${ideaDescription}`,
           `Target audience: ${targetUser}`,
-          `Riskiest assumption: ${assumption}`
         ],
-        interpretation: `Scout interprets the riskiest assumption as a willingness-to-use question: will ${targetUser} accept a manual version of the promised outcome for "${problem}" before software exists?`,
+        interpretation: `Scout interprets the riskiest assumption as a willingness-to-use question: will ${targetUser} accept a manual version of ${ideaDescription} for "${problem}" before software exists?`,
         recommendationLogic:
           "A concierge MVP fits because it validates the value of the delivered outcome and exposes workflow requirements without building automation first.",
         thresholdLogic:
@@ -345,7 +354,7 @@ function fallbackWithContext(input?: Partial<ScoutInput>): ScoutResult {
 
   return {
     experimentType,
-    rationale: `${ideaName} needs direct evidence that ${targetUser} feel urgent pain around "${problem}" before the team invests in building. A focused interview sprint tests ${assumption} with the least product work.`,
+    rationale: `${ideaName} needs direct evidence that ${targetUser} feel urgent pain around "${problem}" and see ${ideaDescription} as a plausible direction before the team invests in building. A focused interview sprint tests ${assumption} with the least product work.`,
     checklist: [
       `Create a list of 25-30 ${targetUser} with signs they recently encountered the problem.`,
       "Send a short problem-first outreach message without pitching the solution.",
@@ -356,10 +365,10 @@ function fallbackWithContext(input?: Partial<ScoutInput>): ScoutResult {
     reasoning: {
       observedSignals: [
         "Problem discovery or unclear-urgency stage",
+        `Product concept: ${ideaDescription}`,
         `Target audience: ${targetUser}`,
-        `Riskiest assumption: ${assumption}`
       ],
-      interpretation: `Scout sees the main risk as problem urgency: do ${targetUser} experience "${problem}" often and painfully enough to justify changing behavior?`,
+      interpretation: `Scout sees the main risk as problem-solution fit: do ${targetUser} experience "${problem}" often and painfully enough to consider a solution like ${ideaDescription}?`,
       recommendationLogic:
         "Problem interview outreach is the cheapest credible test because the team needs evidence about pain, frequency, current workaround, ownership, and willingness to take a next step before showing a solution.",
       thresholdLogic:

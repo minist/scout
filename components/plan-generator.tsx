@@ -28,6 +28,7 @@ import { loadPendingIdea, loadPlan, savePlan } from "@/lib/plan-store";
 
 const emptyInput: ScoutInput = {
   ideaName: "",
+  ideaDescription: "",
   targetUser: "",
   problem: "",
   riskiestAssumption: "",
@@ -35,6 +36,14 @@ const emptyInput: ScoutInput = {
 };
 
 const stages = ["Problem discovery", "Solution smoke test", "Manual delivery", "Pre-launch demand"];
+
+function normalizeInput(input: Partial<ScoutInput> | null | undefined): ScoutInput {
+  return {
+    ...emptyInput,
+    ...input,
+    ideaDescription: input?.ideaDescription || ""
+  };
+}
 
 function cx(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
@@ -94,6 +103,7 @@ function getReasoning(input: ScoutInput, result: ScoutResult) {
         ? reasoning.observedSignals.slice(0, 4)
         : [
             input.validationStage || "Early validation stage",
+            input.ideaDescription ? `Product concept: ${input.ideaDescription}` : "Product concept needs definition",
             input.targetUser ? `ICP: ${input.targetUser}` : "Specific target user defined",
             input.riskiestAssumption
               ? `Riskiest belief: ${input.riskiestAssumption}`
@@ -220,6 +230,7 @@ function Results({ input, result }: { input: ScoutInput; result: ScoutResult }) 
             {[
               ["Stage", input.validationStage],
               ["Experiment", result.experimentType],
+              ["Product", input.ideaDescription],
               ["ICP", input.targetUser],
               ["Riskiest belief", input.riskiestAssumption]
             ].map(([label, value]) => (
@@ -432,20 +443,21 @@ export function PlanGenerator() {
   useEffect(() => {
     const saved = loadPlan();
     if (saved.input && saved.result) {
-      setInput(saved.input);
+      setInput(normalizeInput(saved.input));
       setResult(saved.result);
       return;
     }
     const idea = loadPendingIdea();
     if (idea) {
-      setInput((prev) => ({ ...prev, problem: idea }));
+      setInput((prev) => ({ ...normalizeInput(prev), ideaDescription: idea }));
     }
   }, []);
 
   const canSubmit = useMemo(
     () =>
       Boolean(
-        input.ideaName.trim() &&
+          input.ideaName.trim() &&
+          input.ideaDescription.trim() &&
           input.targetUser.trim() &&
           input.problem.trim() &&
           input.riskiestAssumption.trim()
@@ -545,6 +557,12 @@ export function PlanGenerator() {
             </label>
           </div>
           <div className="mt-4 grid gap-4">
+            <TextArea
+              label="Product / service description"
+              value={input.ideaDescription}
+              placeholder="A workflow tool that helps warehouse teams sketch, compare, and approve safe mobile robot routes before connecting hardware."
+              onChange={(ideaDescription) => setInput({ ...input, ideaDescription })}
+            />
             <TextArea
               label="Target user / ICP"
               value={input.targetUser}

@@ -18,6 +18,7 @@ const heroImage = "/scout-hero-facade.png";
 
 const inputFields = [
   { label: "Idea", value: roboticsSampleInput.ideaName },
+  { label: "Product", value: roboticsSampleInput.ideaDescription },
   { label: "Stage", value: roboticsSampleInput.validationStage },
   { label: "ICP", value: roboticsSampleInput.targetUser },
   { label: "Problem", value: roboticsSampleInput.problem },

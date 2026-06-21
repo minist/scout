@@ -1,5 +1,6 @@
 export type ScoutInput = {
   ideaName: string;
+  ideaDescription: string;
   targetUser: string;
   problem: string;
   riskiestAssumption: string;
@@ -53,6 +54,8 @@ export type ScoutSample = {
 
 export const roboticsSampleInput: ScoutInput = {
   ideaName: "RoboRoute",
+  ideaDescription:
+    "A workflow tool that helps warehouse teams sketch, compare, and approve safe mobile robot routes before connecting to physical robot hardware.",
   targetUser: "Operations leads at small warehouses with 20-150 employees",
   problem:
     "Teams lose hours manually planning safe, efficient paths for mobile robots before every layout change.",
@@ -68,6 +71,7 @@ export const roboticsSampleResult: ScoutResult = {
   reasoning: {
     observedSignals: [
       "Problem discovery stage",
+      "Route planning workflow before hardware integration",
       "Behavior change before hardware integration",
       "Warehouse ops teams with recent layout or automation pressure"
     ],
@@ -144,6 +148,8 @@ export const roboticsSampleResult: ScoutResult = {
 
 export const b2cAiSampleInput: ScoutInput = {
   ideaName: "FitChef AI",
+  ideaDescription:
+    "A consumer AI app that turns dietary preferences, schedule, and budget into weekly meals plus a grocery list that users can actually follow.",
   targetUser: "Busy professionals trying to eat healthier without meal planning",
   problem:
     "People want personalized healthy meals but abandon meal plans because shopping, substitutions, and prep feel like extra work.",
@@ -159,6 +165,7 @@ export const b2cAiSampleResult: ScoutResult = {
   reasoning: {
     observedSignals: [
       "Pre-launch demand stage",
+      "AI meal planning plus grocery workflow",
       "Consumer willingness to share preferences",
       "Outcome depends on grocery-plan follow-through"
     ],
@@ -235,6 +242,8 @@ export const b2cAiSampleResult: ScoutResult = {
 
 export const saasSampleInput: ScoutInput = {
   ideaName: "RenewalRadar",
+  ideaDescription:
+    "A B2B SaaS workspace that synthesizes renewal notes, product usage, support signals, and meetings into account risk briefs with recommended next actions.",
   targetUser: "Customer success leaders at B2B SaaS companies with 50-500 employees",
   problem:
     "Teams miss expansion and churn signals because renewal notes, product usage, support tickets, and meeting follow-ups are scattered across tools.",
@@ -250,6 +259,7 @@ export const saasSampleResult: ScoutResult = {
   reasoning: {
     observedSignals: [
       "Manual delivery stage",
+      "Renewal risk brief before full data integration",
       "Data is scattered across customer tools",
       "Value can be tested before full integrations"
     ],

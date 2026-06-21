@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import {
   ArrowRight,
   ClipboardList,
@@ -13,9 +12,6 @@ import {
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import { roboticsSampleInput, roboticsSampleResult } from "@/lib/scout";
-
-const heroImage =
-  "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=82";
 
 const inputFields = [
   { label: "Idea", value: roboticsSampleInput.ideaName },
@@ -55,7 +51,7 @@ export default function Home() {
     <SiteShell>
       <section className="mx-auto grid w-full max-w-7xl gap-10 px-5 pb-14 pt-10 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:pb-20 lg:pt-16">
         <div>
-          <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] tracking-normal text-ink sm:text-6xl lg:text-7xl">
+          <h1 className="max-w-4xl font-display text-5xl font-semibold leading-[1.02] tracking-normal text-ink sm:text-6xl lg:text-7xl">
             Validate the riskiest part before you build.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
@@ -65,7 +61,7 @@ export default function Home() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/app"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 px-6 text-sm font-semibold text-white transition hover:scale-[0.98]"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-teal-500 px-6 text-sm font-semibold text-white transition hover:bg-teal-600 hover:scale-[0.98]"
             >
               Open Scout <ArrowRight className="h-4 w-4" />
             </Link>
@@ -86,17 +82,8 @@ export default function Home() {
         </div>
 
         <div className="relative">
-          <div className="aspect-[4/3] overflow-hidden rounded-[10px] border border-line bg-stone-200 shadow-panel">
-            <Image
-              src={heroImage}
-              alt="Founders reviewing a validation plan together"
-              width={1400}
-              height={1050}
-              priority
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="absolute -bottom-6 left-4 right-4 rounded-[10px] border border-line bg-[#1B1D22] p-4 shadow-panel sm:left-8 sm:right-8">
+          <HeroBlobScene />
+          <div className="absolute -bottom-6 left-4 right-4 rounded-[10px] border border-line bg-[#1B1D22]/95 p-4 shadow-panel backdrop-blur sm:left-8 sm:right-8">
             <div className="flex items-start gap-3">
               <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
                 <Sparkles className="h-5 w-5" />
@@ -118,7 +105,7 @@ export default function Home() {
             const Icon = step.icon;
             return (
               <div key={step.id} className="grid gap-5 bg-[#1B1D22] px-5 py-8 sm:grid-cols-[0.2fr_0.8fr] sm:px-8">
-                <p className="text-5xl font-semibold tracking-normal text-ink">{step.id}</p>
+                <p className="font-display text-5xl font-semibold tracking-normal text-ink">{step.id}</p>
                 <div className="flex gap-4">
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
                     <Icon className="h-5 w-5" />
@@ -216,7 +203,7 @@ export default function Home() {
             </p>
             <Link
               href="/app/canvas"
-              className="mt-7 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 px-6 text-sm font-semibold text-white transition hover:scale-[0.98]"
+              className="mt-7 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-teal-500 px-6 text-sm font-semibold text-white transition hover:bg-teal-600 hover:scale-[0.98]"
             >
               Generate a plan <ArrowRight className="h-4 w-4" />
             </Link>
@@ -265,12 +252,31 @@ export default function Home() {
           </div>
           <Link
             href="/app"
-            className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 px-6 text-sm font-semibold text-white transition hover:scale-[0.98]"
+            className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-teal-500 px-6 text-sm font-semibold text-white transition hover:bg-teal-600 hover:scale-[0.98]"
           >
             Open Scout <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
     </SiteShell>
+  );
+}
+
+function HeroBlobScene() {
+  return (
+    <div
+      className="hero-blob-scene aspect-[4/3] overflow-hidden rounded-[10px] border border-line shadow-panel"
+      aria-label="Abstract chrome validation workspace illustration"
+      role="img"
+    >
+      <div className="hero-blob blob-one" />
+      <div className="hero-blob blob-two" />
+      <div className="hero-blob blob-three" />
+      <div className="hero-blob blob-four" />
+      <div className="hero-orbit orbit-one" />
+      <div className="hero-orbit orbit-two" />
+      <div className="hero-bottom-bar" />
+      <div className="hero-grain" />
+    </div>
   );
 }

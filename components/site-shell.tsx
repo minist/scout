@@ -21,7 +21,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         </nav>
         <Link
           href="/app"
-          className="inline-flex h-10 items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 px-4 text-sm font-semibold text-white transition hover:scale-[0.98]"
+          className="inline-flex h-10 items-center gap-2 rounded-full bg-teal-500 px-4 text-sm font-semibold text-white transition hover:bg-teal-600 hover:scale-[0.98]"
         >
           Open Scout <ArrowRight className="h-4 w-4" />
         </Link>

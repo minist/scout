@@ -307,7 +307,7 @@ export default function PricingPage() {
       <section className="mx-auto w-full max-w-7xl px-5 pb-14 pt-10 sm:px-8 lg:pb-20 lg:pt-16">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
           <div>
-            <h1 className="max-w-3xl text-5xl font-semibold leading-[1.04] tracking-normal text-ink sm:text-6xl">
+            <h1 className="max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-normal text-ink sm:text-5xl lg:text-[56px]">
               Pricing for turning research into compounding growth intelligence.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
@@ -318,7 +318,7 @@ export default function PricingPage() {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/#validate"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-ink px-5 text-sm font-semibold text-white hover:bg-slate-800"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-teal-500 px-5 text-sm font-semibold text-white transition hover:bg-teal-600"
               >
                 Preview Scout <ArrowRight className="h-4 w-4" />
               </Link>

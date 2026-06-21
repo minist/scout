@@ -12,7 +12,7 @@ export function PageHeader({
   return (
     <header className="max-w-3xl">
       <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-700">{eyebrow}</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-normal text-ink sm:text-4xl">{title}</h1>
+      <h1 className="mt-2 font-display text-3xl font-semibold tracking-normal text-ink sm:text-4xl">{title}</h1>
       <p className="mt-4 text-base leading-7 text-slate-600">{description}</p>
     </header>
   );

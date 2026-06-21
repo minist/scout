@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        display: ["Georgia", "ui-serif", "serif"],
+        sans: ["Inter", "SF Pro Display", "system-ui", "sans-serif"]
+      },
       colors: {
         background: "#0A0A0B",
         surface: "#121316",

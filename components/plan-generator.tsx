@@ -401,7 +401,7 @@ function Results({ input, result }: { input: ScoutInput; result: ScoutResult }) 
                     </div>
                     <button
                       type="button"
-                      className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 px-4 text-sm font-semibold text-white transition hover:scale-[0.98]"
+                      className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full bg-teal-500 px-4 text-sm font-semibold text-white transition hover:bg-teal-600 hover:scale-[0.98]"
                       aria-label={`Preview ${setup.label}`}
                     >
                       Preview setup <ExternalLink className="h-4 w-4" />

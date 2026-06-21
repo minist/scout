@@ -12,11 +12,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <span className="text-xl font-semibold tracking-normal text-ink">Scout</span>
         </Link>
         <nav className="hidden items-center gap-7 text-sm font-medium text-slate-600 sm:flex">
-          <Link href="/#validate" className="hover:text-ink">
-            Validate
+          <Link href="/#how" className="hover:text-ink">
+            How it works
           </Link>
-          <Link href="/#results" className="hover:text-ink">
-            Results
+          <Link href="/#loop" className="hover:text-ink">
+            Continuous validation
           </Link>
           <Link href="/pricing" className="hover:text-ink">
             Pricing
@@ -26,10 +26,10 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           </Link>
         </nav>
         <Link
-          href="/#validate"
+          href="/app"
           className="inline-flex h-10 items-center gap-2 rounded-lg bg-teal-600 px-4 text-sm font-semibold text-white hover:bg-teal-700"
         >
-          Start <ArrowRight className="h-4 w-4" />
+          Open Scout <ArrowRight className="h-4 w-4" />
         </Link>
       </header>
       {children}

@@ -17,12 +17,25 @@ export type ScoutAsset = {
   };
 };
 
+export type ScoutReasoning = {
+  observedSignals?: string[];
+  interpretation?: string;
+  recommendationLogic?: string;
+  thresholdLogic?: string;
+  checklistLogic: string[];
+  decisionRuleLogic: string;
+  assumptionFocus?: string;
+  experimentChoice?: string;
+  successThreshold?: string;
+};
+
 export type ScoutResult = {
   experimentType: string;
   rationale: string;
   checklist: string[];
   assets: ScoutAsset[];
   successMetric: string;
+  reasoning?: ScoutReasoning;
   decisionRule: {
     continue: string;
     refine: string;
@@ -52,6 +65,26 @@ export const roboticsSampleResult: ScoutResult = {
   experimentType: "problem interview outreach",
   rationale:
     "The riskiest assumption is behavioral: whether warehouse operators feel enough pain to try a workflow before hardware is connected. A focused interview sprint validates urgency, current workarounds, buying context, and willingness to review a lightweight planning prototype before you build robot integrations.",
+  reasoning: {
+    observedSignals: [
+      "Problem discovery stage",
+      "Behavior change before hardware integration",
+      "Warehouse ops teams with recent layout or automation pressure"
+    ],
+    interpretation:
+      "The riskiest belief is not robot performance yet. It is whether ops leads feel enough workflow pain to trust a planning step before hardware is connected.",
+    recommendationLogic:
+      "Problem interviews are the lowest-build test for urgency, current workarounds, buyer ownership, and trust barriers.",
+    thresholdLogic:
+      "The threshold combines booked-call evidence, high pain intensity, and a prototype-review commitment so the team sees both urgency and next-step intent.",
+    checklistLogic: [
+      "Targeting leads with recent automation or layout-change signals increases the odds that interviews cover active pain.",
+      "Problem-first outreach avoids false positives from people reacting to a product pitch.",
+      "Recent-example questions and the scorecard turn qualitative interviews into comparable evidence."
+    ],
+    decisionRuleLogic:
+      "The continue/refine/pivot rules separate urgent, buyer-owned pain from cases where the segment, trigger, or pre-integration workflow is still too unclear to justify building."
+  },
   checklist: [
     "Create a list of 25 small warehouse operations leads with recent layout, automation, or labor efficiency signals.",
     "Send a concise outreach note that names the manual routing problem without pitching a product.",
@@ -123,6 +156,26 @@ export const b2cAiSampleResult: ScoutResult = {
   experimentType: "fake landing page test",
   rationale:
     "FitChef AI needs proof that consumers want the outcome enough to join a waitlist before the app is built. A fake landing page can test the promise, collect dietary intent, and measure whether the audience wants AI-generated meal plans that turn into an actionable grocery workflow.",
+  reasoning: {
+    observedSignals: [
+      "Pre-launch demand stage",
+      "Consumer willingness to share preferences",
+      "Outcome depends on grocery-plan follow-through"
+    ],
+    interpretation:
+      "The main risk is demand quality: users must want the promise enough to sign up and provide the inputs a personalized plan needs.",
+    recommendationLogic:
+      "A fake landing page validates the promise, segment, and signup motivation before the team builds personalization or grocery workflows.",
+    thresholdLogic:
+      "Qualified traffic plus waitlist conversion proves attention, while preference completions show users will provide the data needed for the product.",
+    checklistLogic: [
+      "A single sharp promise tests whether the outcome is clear enough to earn attention.",
+      "Preference intake checks whether users will provide the inputs required for personalization.",
+      "Motivation notes and manual previews separate real grocery-workflow demand from generic recipe curiosity."
+    ],
+    decisionRuleLogic:
+      "The rules distinguish real demand for a planning-to-grocery workflow from weak curiosity, channel-specific noise, or a product that users perceive as another recipe app."
+  },
   checklist: [
     "Publish a one-page promise focused on weekly meals, grocery planning, and fewer abandoned health goals.",
     "Add a waitlist CTA with one qualifying question about diet style, household size, and current planning frustration.",
@@ -194,6 +247,26 @@ export const saasSampleResult: ScoutResult = {
   experimentType: "concierge MVP",
   rationale:
     "RenewalRadar should validate whether customer success teams value the synthesized renewal brief before building integrations. A concierge MVP lets the founder manually gather exported context, produce a risk summary, and see whether teams would repeat the workflow or pay for an automated version.",
+  reasoning: {
+    observedSignals: [
+      "Manual delivery stage",
+      "Data is scattered across customer tools",
+      "Value can be tested before full integrations"
+    ],
+    interpretation:
+      "The riskiest belief is whether CS leaders will share enough context and trust a synthesized renewal brief before automation exists.",
+    recommendationLogic:
+      "A concierge MVP lets Scout test whether the judgment layer changes renewal decisions before building CRM, support, and product-data connectors.",
+    thresholdLogic:
+      "Fifteen account briefs test repeatability across teams, while second-batch or paid-pilot requests show operational value beyond polite feedback.",
+    checklistLogic: [
+      "Recruiting leaders with near-term renewals keeps the test tied to urgent business decisions.",
+      "Sanitized exports lower integration friction while still exposing whether the needed evidence exists.",
+      "Live reviews and follow-up asks reveal whether the brief changes decisions and earns repeat demand."
+    ],
+    decisionRuleLogic:
+      "The rules continue only when briefs affect renewal actions and earn repeat demand, refine when value exists but the segment or data inputs are inconsistent, and pivot when teams already solve the job or cannot share enough evidence."
+  },
   checklist: [
     "Recruit 5 customer success leaders managing renewals in the next 30-60 days.",
     "Ask each team to provide sanitized notes, usage screenshots, support themes, and meeting context for 3 accounts.",

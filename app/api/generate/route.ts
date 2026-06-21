@@ -32,6 +32,7 @@ const scoutResultSchema = {
     "checklist",
     "assets",
     "successMetric",
+    "reasoning",
     "decisionRule"
   ],
   properties: {
@@ -72,6 +73,36 @@ const scoutResultSchema = {
       }
     },
     successMetric: { type: "string" },
+    reasoning: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "observedSignals",
+        "interpretation",
+        "recommendationLogic",
+        "thresholdLogic",
+        "checklistLogic",
+        "decisionRuleLogic"
+      ],
+      properties: {
+        observedSignals: {
+          type: "array",
+          minItems: 3,
+          maxItems: 4,
+          items: { type: "string" }
+        },
+        interpretation: { type: "string" },
+        recommendationLogic: { type: "string" },
+        thresholdLogic: { type: "string" },
+        checklistLogic: {
+          type: "array",
+          minItems: 3,
+          maxItems: 6,
+          items: { type: "string" }
+        },
+        decisionRuleLogic: { type: "string" }
+      }
+    },
     decisionRule: {
       type: "object",
       additionalProperties: false,
@@ -111,6 +142,14 @@ Return only valid JSON with this exact shape:
     }
   ],
   "successMetric": "",
+  "reasoning": {
+    "observedSignals": ["", "", ""],
+    "interpretation": "",
+    "recommendationLogic": "",
+    "thresholdLogic": "",
+    "checklistLogic": [""],
+    "decisionRuleLogic": ""
+  },
   "decisionRule": {
     "continue": "",
     "refine": "",
@@ -135,6 +174,15 @@ Guidelines:
 - Present connector setup as a future/premium managed action. Do not imply the integration is live today.
 - Success metric must include a timeframe, denominator, and threshold.
 - Decision rules must be practical and measurable.
+- Include concise user-facing reasoning that explains the evaluation logic behind the recommendation.
+- Reasoning should feel like an analyst-grade trust layer, not model internals.
+- observedSignals should list 3-4 short signals Scout used from the founder input.
+- interpretation should explain what Scout inferred from those signals.
+- recommendationLogic should explain why the chosen experiment is the cheapest credible test.
+- thresholdLogic should explain why the success threshold is meaningful and not arbitrary.
+- checklistLogic should explain why the checklist creates evidence.
+- decisionRuleLogic should explain how continue/refine/pivot follows from the evidence.
+- Do not reveal hidden chain-of-thought or internal deliberation. Provide a clear audit trail founders can inspect.
 - Use the idea context in the copy.
 - The result must feel specific to this founder input, not a generic robotics example.`;
 }
@@ -168,6 +216,27 @@ function fallbackWithContext(input?: Partial<ScoutInput>): ScoutResult {
         "Track visitor-to-signup conversion and collect one open-ended motivation question.",
         "Review signups by ICP fit before deciding whether demand is real."
       ],
+      reasoning: {
+        observedSignals: [
+          "Pre-launch or demand-sensitive validation stage",
+          `Target audience: ${targetUser}`,
+          `Riskiest assumption: ${assumption}`
+        ],
+        interpretation: `Scout reads the key risk as a demand signal: will ${targetUser} care enough about solving "${problem}" to exchange contact details and motivation before the product exists?`,
+        recommendationLogic:
+          "A fake landing page is the lowest-effort way to test the promise, audience fit, and conversion intent before building the product experience.",
+        thresholdLogic:
+          "The threshold uses qualified visitors as the denominator, signup conversion as the primary demand signal, and ICP-fit signups as the guardrail against misleading traffic.",
+        checklistLogic: [
+          "The one-page promise tests whether the outcome is clear and compelling.",
+          "The waitlist CTA creates a measurable commitment instead of relying on opinions.",
+          "Qualified traffic keeps the test focused on the intended audience.",
+          "The motivation question explains why people converted or hesitated.",
+          "ICP review prevents the team from overvaluing signups from the wrong segment."
+        ],
+        decisionRuleLogic:
+          "The rules separate strong qualified demand from weak conversion, unclear messaging, or interest from an audience the business should not build for."
+      },
       assets: [
         {
           type: "Landing page copy",
@@ -216,6 +285,27 @@ function fallbackWithContext(input?: Partial<ScoutInput>): ScoutResult {
         "Ask each participant to commit to a second run, referral, or paid pilot.",
         "Compare delivery effort against the value users say they received."
       ],
+      reasoning: {
+        observedSignals: [
+          "Manual delivery or serviceable workflow stage",
+          `Target audience: ${targetUser}`,
+          `Riskiest assumption: ${assumption}`
+        ],
+        interpretation: `Scout interprets the riskiest assumption as a willingness-to-use question: will ${targetUser} accept a manual version of the promised outcome for "${problem}" before software exists?`,
+        recommendationLogic:
+          "A concierge MVP fits because it validates the value of the delivered outcome and exposes workflow requirements without building automation first.",
+        thresholdLogic:
+          "Five completed runs creates enough examples to spot repeatable patterns, while three follow-up commitments show the value is strong enough to earn more time, referrals, or budget.",
+        checklistLogic: [
+          "Recruiting people with recent pain keeps the test anchored in active need.",
+          "Manual delivery isolates the value of the outcome before investing in product infrastructure.",
+          "Timing each step reveals what would need to be automated later.",
+          "Follow-up commitments are stronger evidence than verbal praise.",
+          "Comparing effort against perceived value shows whether the business can become scalable."
+        ],
+        decisionRuleLogic:
+          "The rules continue when users ask for the outcome again, refine when the value is real but delivery is not yet repeatable, and pivot when the job is not urgent enough."
+      },
       assets: [
         {
           type: "Concierge workflow",
@@ -263,6 +353,27 @@ function fallbackWithContext(input?: Partial<ScoutInput>): ScoutResult {
       "Score each call by pain intensity, frequency, existing spend, and commitment to a follow-up.",
       "Only show solution concepts after the participant confirms the problem is real."
     ],
+    reasoning: {
+      observedSignals: [
+        "Problem discovery or unclear-urgency stage",
+        `Target audience: ${targetUser}`,
+        `Riskiest assumption: ${assumption}`
+      ],
+      interpretation: `Scout sees the main risk as problem urgency: do ${targetUser} experience "${problem}" often and painfully enough to justify changing behavior?`,
+      recommendationLogic:
+        "Problem interview outreach is the cheapest credible test because the team needs evidence about pain, frequency, current workaround, ownership, and willingness to take a next step before showing a solution.",
+      thresholdLogic:
+        "Eight qualified interviews is enough for an early pattern check, five high-pain ratings indicate the problem is not isolated, and three prototype or pilot commitments test whether interest can become action.",
+      checklistLogic: [
+        "Targeted lead sourcing raises the odds of finding people with recent problem exposure.",
+        "Problem-first outreach avoids biasing users toward a solution pitch.",
+        "Recent-example questions verify lived pain instead of abstract agreement.",
+        "The scorecard makes qualitative evidence comparable across interviews.",
+        "Solution concepts are only shown after the problem is validated, preserving the quality of the signal."
+      ],
+      decisionRuleLogic:
+        "The rules continue when urgency and commitment appear together, refine when pain exists but the ICP or trigger is unclear, and pivot when the problem is infrequent or already solved well enough."
+    },
     assets: [
       {
         type: "Outreach email",

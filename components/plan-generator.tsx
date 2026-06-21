@@ -3,12 +3,17 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
+  BrainCircuit,
   ClipboardList,
   ExternalLink,
   FileText,
   Gauge,
+  GitBranch,
+  Lightbulb,
+  ListChecks,
   Loader2,
   RotateCcw,
+  ScanSearch,
   Sparkles,
   Target,
   WandSparkles
@@ -80,6 +85,66 @@ function defaultSetupAction(assetType: string) {
   };
 }
 
+function getReasoning(input: ScoutInput, result: ScoutResult) {
+  const reasoning = result.reasoning;
+
+  return {
+    observedSignals:
+      reasoning?.observedSignals?.length
+        ? reasoning.observedSignals.slice(0, 4)
+        : [
+            input.validationStage || "Early validation stage",
+            input.targetUser ? `ICP: ${input.targetUser}` : "Specific target user defined",
+            input.riskiestAssumption
+              ? `Riskiest belief: ${input.riskiestAssumption}`
+              : "A behavior or demand assumption needs evidence"
+          ],
+    interpretation:
+      reasoning?.interpretation ||
+      reasoning?.assumptionFocus ||
+      "Scout turns the founder input into one testable risk: whether the target user shows enough urgency or commitment to justify the next product step.",
+    recommendationLogic:
+      reasoning?.recommendationLogic ||
+      reasoning?.experimentChoice ||
+      `${result.experimentType} is the lowest-build experiment that can create a measurable signal for this assumption.`,
+    thresholdLogic:
+      reasoning?.thresholdLogic ||
+      reasoning?.successThreshold ||
+      `The threshold is tied to a timeframe, denominator, and action signal: ${result.successMetric}`,
+    checklistLogic:
+      reasoning?.checklistLogic?.slice(0, 3) || [
+        "The checklist starts with qualified participants or traffic.",
+        "It captures evidence before pitching the solution.",
+        "It turns learning into a comparable decision signal."
+      ],
+    decisionRuleLogic:
+      reasoning?.decisionRuleLogic ||
+      "The decision rule converts evidence into continue, refine, or pivot so the next step is not based on instinct alone."
+  };
+}
+
+function ReasoningCard({
+  title,
+  body,
+  icon: Icon
+}: {
+  title: string;
+  body: string;
+  icon: typeof ScanSearch;
+}) {
+  return (
+    <div className="rounded-lg border border-line bg-white p-4">
+      <div className="flex items-center gap-2">
+        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
+          <Icon className="h-4 w-4" />
+        </span>
+        <h4 className="text-sm font-semibold text-ink">{title}</h4>
+      </div>
+      <p className="mt-3 text-sm leading-6 text-slate-600">{body}</p>
+    </div>
+  );
+}
+
 function Field({
   label,
   value,
@@ -129,7 +194,8 @@ function TextArea({
   );
 }
 
-function Results({ result }: { result: ScoutResult }) {
+function Results({ input, result }: { input: ScoutInput; result: ScoutResult }) {
+  const reasoning = getReasoning(input, result);
   const rules: Array<[string, string, string]> = [
     ["Continue", result.decisionRule.continue, "bg-teal-50 text-teal-700"],
     ["Refine", result.decisionRule.refine, "bg-amber-50 text-amber-700"],
@@ -137,8 +203,108 @@ function Results({ result }: { result: ScoutResult }) {
   ];
 
   return (
-    <div id="plan-results" className="grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
-      <div className="grid content-start gap-5">
+    <div id="plan-results" className="space-y-5">
+      <section className="rounded-[10px] border border-line bg-white p-5 shadow-panel sm:p-6">
+        <div className="grid gap-5 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
+              Generated validation plan
+            </p>
+            <h2 className="mt-2 text-2xl font-semibold leading-tight text-ink">{input.ideaName || "Scout plan"}</h2>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">
+              Scout translated the founder context into a measurable experiment plan, then connected the
+              recommendation to the evidence it needs to earn trust.
+            </p>
+          </div>
+          <div className="grid gap-2 rounded-lg border border-line bg-mist p-4 sm:grid-cols-2">
+            {[
+              ["Stage", input.validationStage],
+              ["Experiment", result.experimentType],
+              ["ICP", input.targetUser],
+              ["Riskiest belief", input.riskiestAssumption]
+            ].map(([label, value]) => (
+              <div key={label} className={cx(label.length > 6 && "sm:col-span-2")}>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">
+                  {label}
+                </p>
+                <p className="mt-1 line-clamp-2 text-sm font-semibold leading-5 text-ink">{value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-[10px] border border-teal-100 bg-teal-50/60 p-5 sm:p-6">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex items-start gap-3">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white text-teal-700">
+              <BrainCircuit className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
+                Trust layer
+              </p>
+              <h3 className="mt-2 text-lg font-semibold text-ink">Why Scout recommended this plan</h3>
+            </div>
+          </div>
+          <p className="max-w-xl text-sm leading-6 text-slate-600">
+            Business-facing rationale only: Scout shows the signals and interpretation behind the plan,
+            without exposing raw model chain-of-thought.
+          </p>
+        </div>
+
+        <div className="mt-5 grid gap-3 lg:grid-cols-3">
+          <div className="rounded-lg border border-teal-100 bg-white p-4">
+            <div className="flex items-center gap-2">
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
+                <ScanSearch className="h-4 w-4" />
+              </span>
+              <h4 className="text-sm font-semibold text-ink">Observed Signals</h4>
+            </div>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {reasoning.observedSignals.map((signal) => (
+                <span
+                  key={signal}
+                  className="rounded-md border border-line bg-mist px-2.5 py-1.5 text-xs font-semibold leading-5 text-slate-700"
+                >
+                  {signal}
+                </span>
+              ))}
+            </div>
+          </div>
+          <ReasoningCard title="Scout's Interpretation" body={reasoning.interpretation} icon={Lightbulb} />
+          <ReasoningCard
+            title="Why This Recommendation"
+            body={reasoning.recommendationLogic}
+            icon={Target}
+          />
+          <ReasoningCard
+            title="Why This Success Threshold"
+            body={reasoning.thresholdLogic}
+            icon={Gauge}
+          />
+          <div className="rounded-lg border border-line bg-white p-4">
+            <div className="flex items-center gap-2">
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
+                <ListChecks className="h-4 w-4" />
+              </span>
+              <h4 className="text-sm font-semibold text-ink">Why This Checklist Matters</h4>
+            </div>
+            <ul className="mt-3 grid gap-2">
+              {reasoning.checklistLogic.map((item) => (
+                <li key={item} className="flex gap-2 text-sm leading-6 text-slate-600">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-600" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <ReasoningCard title="Why This Decision Rule" body={reasoning.decisionRuleLogic} icon={GitBranch} />
+        </div>
+      </section>
+
+      <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="grid content-start gap-5">
         <div className="rounded-[10px] border border-line bg-ink p-5 text-white shadow-panel sm:p-6">
           <div className="flex items-start justify-between gap-4">
             <div>
@@ -181,7 +347,7 @@ function Results({ result }: { result: ScoutResult }) {
         </div>
       </div>
 
-      <div className="grid content-start gap-5">
+        <div className="grid content-start gap-5">
         <div className="rounded-[10px] border border-line bg-white p-5 shadow-panel sm:p-6">
           <div className="mb-4 flex items-center gap-3">
             <span className="grid h-10 w-10 place-items-center rounded-lg bg-teal-50 text-teal-700">
@@ -251,6 +417,7 @@ function Results({ result }: { result: ScoutResult }) {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
@@ -423,7 +590,7 @@ export function PlanGenerator() {
       </div>
 
       {result ? (
-        <Results result={result} />
+        <Results input={input} result={result} />
       ) : (
         <div className="grid place-items-center rounded-[10px] border border-dashed border-line bg-white px-6 py-14 text-center">
           <span className="grid h-12 w-12 place-items-center rounded-xl bg-teal-50 text-teal-700">

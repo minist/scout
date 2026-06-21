@@ -138,9 +138,9 @@ function ReasoningCard({
         <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
           <Icon className="h-4 w-4" />
         </span>
-        <h4 className="text-sm font-semibold text-ink">{title}</h4>
+        <h4 className="font-display text-base font-medium text-ink">{title}</h4>
       </div>
-      <p className="mt-3 text-sm leading-6 text-slate-600">{body}</p>
+      <p className="mt-3 text-sm leading-6 text-stone-600">{body}</p>
     </div>
   );
 }
@@ -210,8 +210,8 @@ function Results({ input, result }: { input: ScoutInput; result: ScoutResult }) 
             <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
               Generated validation plan
             </p>
-            <h2 className="mt-2 text-2xl font-semibold leading-tight text-ink">{input.ideaName || "Scout plan"}</h2>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">
+            <h2 className="mt-2 font-display text-2xl font-medium leading-tight text-ink">{input.ideaName || "Scout plan"}</h2>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-stone-600">
               Scout translated the founder context into a measurable experiment plan, then connected the
               recommendation to the evidence it needs to earn trust.
             </p>
@@ -234,7 +234,7 @@ function Results({ input, result }: { input: ScoutInput; result: ScoutResult }) 
         </div>
       </section>
 
-      <section className="rounded-[10px] border border-line bg-[#1B1D22] p-5 sm:p-6">
+      <section className="rounded-[10px] border border-line bg-[#fffaf1] p-5 shadow-panel sm:p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex items-start gap-3">
             <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white text-teal-700">
@@ -244,10 +244,10 @@ function Results({ input, result }: { input: ScoutInput; result: ScoutResult }) 
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
                 Trust layer
               </p>
-              <h3 className="mt-2 text-lg font-semibold text-ink">Why Scout recommended this plan</h3>
+              <h3 className="mt-2 font-display text-lg font-medium text-ink">Why Scout recommended this plan</h3>
             </div>
           </div>
-          <p className="max-w-xl text-sm leading-6 text-slate-600">
+          <p className="max-w-xl text-sm leading-6 text-stone-600">
             Business-facing rationale only: Scout shows the signals and interpretation behind the plan,
             without exposing raw model chain-of-thought.
           </p>
@@ -259,7 +259,7 @@ function Results({ input, result }: { input: ScoutInput; result: ScoutResult }) 
               <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
                 <ScanSearch className="h-4 w-4" />
               </span>
-              <h4 className="text-sm font-semibold text-ink">Observed Signals</h4>
+              <h4 className="font-display text-base font-medium text-ink">Observed Signals</h4>
             </div>
             <div className="mt-3 flex flex-wrap gap-2">
               {reasoning.observedSignals.map((signal) => (
@@ -288,11 +288,11 @@ function Results({ input, result }: { input: ScoutInput; result: ScoutResult }) 
               <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
                 <ListChecks className="h-4 w-4" />
               </span>
-              <h4 className="text-sm font-semibold text-ink">Why This Checklist Matters</h4>
+              <h4 className="font-display text-base font-medium text-ink">Why This Checklist Matters</h4>
             </div>
             <ul className="mt-3 grid gap-2">
               {reasoning.checklistLogic.map((item) => (
-                <li key={item} className="flex gap-2 text-sm leading-6 text-slate-600">
+                <li key={item} className="flex gap-2 text-sm leading-6 text-stone-600">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-600" />
                   <span>{item}</span>
                 </li>
@@ -310,7 +310,7 @@ function Results({ input, result }: { input: ScoutInput; result: ScoutResult }) 
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-100">
                 Recommended experiment
               </p>
-              <h3 className="mt-3 text-2xl font-semibold leading-tight">{result.experimentType}</h3>
+              <h3 className="mt-3 font-display text-2xl font-medium leading-tight">{result.experimentType}</h3>
             </div>
             <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-white/10">
               <Target className="h-6 w-6 text-teal-100" />
@@ -334,7 +334,7 @@ function Results({ input, result }: { input: ScoutInput; result: ScoutResult }) 
         </div>
 
         <div className="rounded-[10px] border border-line bg-white p-5 shadow-panel sm:p-6">
-          <h3 className="text-lg font-semibold text-ink">Decision rule</h3>
+          <h3 className="font-display text-lg font-medium text-ink">Decision rule</h3>
           <div className="mt-4 grid gap-3">
             {rules.map(([label, body, style]) => (
               <div key={label} className="grid gap-2 border-t border-line pt-3 first:border-t-0 first:pt-0">
@@ -350,7 +350,7 @@ function Results({ input, result }: { input: ScoutInput; result: ScoutResult }) 
             <span className="grid h-10 w-10 place-items-center rounded-lg bg-teal-50 text-teal-700">
               <ClipboardList className="h-5 w-5" />
             </span>
-            <h3 className="text-lg font-semibold text-ink">Checklist</h3>
+            <h3 className="font-display text-lg font-medium text-ink">Checklist</h3>
           </div>
           <div className="grid gap-3">
             {result.checklist.map((item, index) => (
@@ -371,7 +371,7 @@ function Results({ input, result }: { input: ScoutInput; result: ScoutResult }) 
             <FileText className="h-5 w-5" />
           </span>
           <div>
-            <h3 className="text-lg font-semibold text-ink">Generated assets</h3>
+            <h3 className="font-display text-lg font-medium text-ink">Generated assets</h3>
             <p className="mt-1 text-sm text-slate-500">Execution-ready assets shown in a single wide column.</p>
           </div>
         </div>
@@ -395,7 +395,7 @@ function Results({ input, result }: { input: ScoutInput; result: ScoutResult }) 
                       <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
                         Managed setup preview
                       </p>
-                      <h4 className="mt-2 text-sm font-semibold text-ink">{setup.label}</h4>
+                      <h4 className="mt-2 font-display text-base font-medium text-ink">{setup.label}</h4>
                       <p className="mt-1 text-sm font-semibold text-slate-600">{setup.service}</p>
                       <p className="mt-2 text-sm leading-6 text-slate-600">{setup.description}</p>
                     </div>
@@ -595,7 +595,7 @@ export function PlanGenerator() {
           <span className="grid h-12 w-12 place-items-center rounded-xl bg-teal-50 text-teal-700">
             <ArrowRight className="h-6 w-6" />
           </span>
-          <h3 className="mt-4 text-lg font-semibold text-ink">Your validation plan will appear here</h3>
+          <h3 className="mt-4 font-display text-lg font-medium text-ink">Your validation plan will appear here</h3>
           <p className="mt-2 max-w-md text-sm leading-6 text-slate-500">
             Fill in the fields (or load an example) and Scout will prescribe the cheapest experiment,
             generate the assets to run it, and set the success threshold — then surface them across your

@@ -52,7 +52,7 @@ function GeneratedRoadmap({ result }: { result: ScoutResult }) {
           </span>
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-3">
-              <h3 className="text-lg font-semibold text-ink">{result.experimentType}</h3>
+              <h3 className="font-display text-lg font-medium text-ink">{result.experimentType}</h3>
               <Badge tone="teal">Prescribed</Badge>
             </div>
             <p className="mt-2 text-sm leading-6 text-slate-600">{result.rationale}</p>
@@ -116,7 +116,7 @@ function PlaceholderRoadmap() {
               </span>
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-3">
-                  <h3 className="text-lg font-semibold text-ink">{experiment.title}</h3>
+                  <h3 className="font-display text-lg font-medium text-ink">{experiment.title}</h3>
                   <Badge tone={experiment.status === "Prescribed" ? "teal" : "neutral"}>
                     {experiment.status}
                   </Badge>

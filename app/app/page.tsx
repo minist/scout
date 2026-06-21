@@ -127,7 +127,7 @@ export default function OverviewPage() {
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0">
                   <div className="flex items-center gap-3">
-                    <h3 className="text-lg font-semibold text-ink">{validation.name}</h3>
+                    <h3 className="font-display text-lg font-medium text-ink">{validation.name}</h3>
                     <Badge tone="teal">{validation.phase}</Badge>
                   </div>
                   <p className="mt-1.5 flex items-center gap-2 text-sm text-slate-500">
@@ -140,7 +140,7 @@ export default function OverviewPage() {
                     <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">
                       Tested
                     </p>
-                    <p className="mt-1 text-xl font-semibold text-ink">
+                    <p className="mt-1 font-display text-xl font-medium text-ink">
                       {validation.tested}
                       <span className="text-sm font-normal text-slate-400">/{validation.pending}</span>
                     </p>

@@ -128,7 +128,7 @@ export default function IntegrationsPage() {
                     </span>
                     <Badge tone={statusTone(group.status)}>{group.status}</Badge>
                   </div>
-                  <h3 className="mt-4 text-lg font-semibold text-ink">{group.category}</h3>
+                  <h3 className="mt-4 font-display text-lg font-medium text-ink">{group.category}</h3>
                   <p className="mt-2 text-sm leading-6 text-slate-500">{group.description}</p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {group.tools.map((tool) => (
@@ -175,7 +175,7 @@ export default function IntegrationsPage() {
               </span>
               <div>
                 <SectionLabel>Default experience</SectionLabel>
-                <h3 className="mt-1 text-lg font-semibold text-white">No vendor maze</h3>
+                <h3 className="mt-1 font-display text-lg font-medium text-white">No vendor maze</h3>
               </div>
             </div>
             <p className="mt-4 text-sm leading-6 text-slate-300">

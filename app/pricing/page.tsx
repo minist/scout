@@ -258,14 +258,14 @@ function PlanCard({ plan }: { plan: (typeof plans)[number] }) {
           <p className={`text-xs font-semibold uppercase tracking-[0.12em] ${dark ? "text-teal-100" : plan.muted ? "text-slate-500" : "text-teal-700"}`}>
             {plan.label}
           </p>
-          <h2 className="mt-2 text-2xl font-semibold tracking-normal">{plan.name}</h2>
+          <h2 className="mt-2 font-display text-2xl font-medium tracking-normal">{plan.name}</h2>
         </div>
         <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-lg ${dark ? "bg-white/10 text-teal-100" : plan.muted ? "bg-mist text-slate-500" : "bg-white text-teal-700"}`}>
           <Icon className="h-5 w-5" />
         </span>
       </div>
       <div className="mt-5">
-        <span className="text-4xl font-semibold tracking-normal">{plan.price}</span>
+        <span className="font-display text-4xl font-medium tracking-normal">{plan.price}</span>
         <p className={`mt-1 text-sm ${dark ? "text-slate-300" : "text-slate-600"}`}>{plan.cadence}</p>
       </div>
       <p className={`mt-3 text-xs font-semibold uppercase tracking-[0.12em] ${dark ? "text-teal-100" : plan.muted ? "text-slate-500" : "text-teal-700"}`}>
@@ -307,7 +307,7 @@ export default function PricingPage() {
       <section className="mx-auto w-full max-w-7xl px-5 pb-14 pt-10 sm:px-8 lg:pb-20 lg:pt-16">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
           <div>
-            <h1 className="max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-normal text-ink sm:text-5xl lg:text-[56px]">
+            <h1 className="max-w-3xl font-display text-4xl font-normal leading-[1.05] tracking-normal text-ink sm:text-5xl lg:text-[56px]">
               Pricing for turning research into compounding growth intelligence.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
@@ -341,7 +341,7 @@ export default function PricingPage() {
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
                     Managed product layer
                   </p>
-                  <h2 className="text-xl font-semibold text-ink">One workspace. No vendor maze.</h2>
+                  <h2 className="font-display text-xl font-medium text-ink">One workspace. No vendor maze.</h2>
                 </div>
               </div>
               <p className="mt-4 text-sm leading-6 text-slate-600">
@@ -366,7 +366,7 @@ export default function PricingPage() {
         <div className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 lg:py-16">
           <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="text-3xl font-semibold tracking-normal text-ink">
+              <h2 className="font-display text-3xl font-medium tracking-normal text-ink">
                 Simple plans for turning research into growth
               </h2>
               <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">
@@ -384,7 +384,7 @@ export default function PricingPage() {
               <div className="grid h-11 w-11 place-items-center rounded-lg bg-teal-50 text-teal-700">
                 <Layers3 className="h-5 w-5" />
               </div>
-              <h3 className="mt-4 text-2xl font-semibold tracking-normal text-ink">
+              <h3 className="mt-4 font-display text-2xl font-medium tracking-normal text-ink">
                 Preview shows the promise. Paid plans unlock the system.
               </h3>
               <p className="mt-3 text-sm leading-6 text-slate-600">
@@ -411,7 +411,7 @@ export default function PricingPage() {
 
       <section className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
         <div className="mb-8 max-w-3xl">
-          <h2 className="text-3xl font-semibold tracking-normal text-ink">
+          <h2 className="font-display text-3xl font-medium tracking-normal text-ink">
             What paid plans unlock
           </h2>
           <p className="mt-3 text-base leading-7 text-slate-600">
@@ -427,7 +427,7 @@ export default function PricingPage() {
                 <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
                   <Check className="h-4 w-4" />
                 </span>
-                <h3 className="font-semibold leading-6 text-ink">{title}</h3>
+                <h3 className="font-display text-lg font-medium leading-6 text-ink">{title}</h3>
               </div>
               <p className="text-sm leading-6 text-slate-600">{body}</p>
             </article>
@@ -441,7 +441,7 @@ export default function PricingPage() {
             <div className="grid h-12 w-12 place-items-center rounded-lg bg-white text-teal-700">
               <ReceiptText className="h-6 w-6" />
             </div>
-            <h2 className="mt-5 text-3xl font-semibold tracking-normal text-ink">One product, one bill</h2>
+            <h2 className="mt-5 font-display text-3xl font-medium tracking-normal text-ink">One product, one bill</h2>
             <p className="mt-4 text-base leading-7 text-slate-600">
               Scout may use multiple AI and data services behind the scenes for tasks like
               transcription, analysis, campaign intelligence, recommendation generation, and data
@@ -460,7 +460,7 @@ export default function PricingPage() {
                     <span className="grid h-10 w-10 place-items-center rounded-lg bg-teal-50 text-teal-700">
                       <Icon className="h-5 w-5" />
                     </span>
-                    <h3 className="font-semibold text-ink">{layer.title}</h3>
+                    <h3 className="font-display text-lg font-medium text-ink">{layer.title}</h3>
                   </div>
                   <p className="mt-4 text-sm leading-6 text-slate-600">{layer.body}</p>
                 </article>
@@ -476,7 +476,7 @@ export default function PricingPage() {
             <div className="grid h-12 w-12 place-items-center rounded-lg bg-teal-50 text-teal-700">
               <Settings2 className="h-6 w-6" />
             </div>
-            <h2 className="mt-5 text-3xl font-semibold tracking-normal text-ink">
+            <h2 className="mt-5 font-display text-3xl font-medium tracking-normal text-ink">
               Optional integrations without default complexity
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-600">
@@ -495,7 +495,7 @@ export default function PricingPage() {
                 <p className="text-xs font-semibold uppercase tracking-[0.12em] text-amber-700">
                   Optional controls
                 </p>
-                <h3 className="text-xl font-semibold text-ink">Available when the team needs them</h3>
+                <h3 className="font-display text-xl font-medium text-ink">Available when the team needs them</h3>
               </div>
             </div>
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -514,7 +514,7 @@ export default function PricingPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
                 Supported connector categories
               </p>
-              <h3 className="mt-2 text-2xl font-semibold tracking-normal text-ink">
+              <h3 className="mt-2 font-display text-2xl font-medium tracking-normal text-ink">
                 Tools can connect underneath. Scout keeps the product unified.
               </h3>
             </div>
@@ -526,7 +526,7 @@ export default function PricingPage() {
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
             {connectorCategories.map((group) => (
               <article key={group.category} className="rounded-lg border border-line bg-white p-4">
-                <h4 className="font-semibold text-ink">{group.category}</h4>
+                <h4 className="font-display text-lg font-medium text-ink">{group.category}</h4>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {group.tools.map((tool) => (
                     <span
@@ -549,7 +549,7 @@ export default function PricingPage() {
             <div className="grid h-12 w-12 place-items-center rounded-lg bg-white text-teal-700">
               <HelpCircle className="h-6 w-6" />
             </div>
-            <h2 className="mt-5 text-3xl font-semibold tracking-normal text-ink">Pricing FAQ</h2>
+            <h2 className="mt-5 font-display text-3xl font-medium tracking-normal text-ink">Pricing FAQ</h2>
             <p className="mt-3 text-base leading-7 text-slate-600">
               Clear answers for teams evaluating Scout as a unified research and growth intelligence
               workspace, not another stack to configure.
@@ -558,7 +558,7 @@ export default function PricingPage() {
           <div className="grid gap-4 md:grid-cols-2">
             {faqs.map((faq) => (
               <article key={faq.question} className="rounded-[8px] border border-line bg-white p-5 shadow-panel">
-                <h3 className="text-lg font-semibold text-ink">{faq.question}</h3>
+                <h3 className="font-display text-lg font-medium text-ink">{faq.question}</h3>
                 <p className="mt-3 text-sm leading-6 text-slate-600">{faq.answer}</p>
               </article>
             ))}
@@ -569,7 +569,7 @@ export default function PricingPage() {
       <section className="border-t border-line bg-ink">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-5 px-5 py-10 text-white sm:px-8 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <h2 className="text-2xl font-semibold tracking-normal">Scout is the product layer. The vendors are infrastructure.</h2>
+            <h2 className="font-display text-2xl font-medium tracking-normal">Scout is the product layer. The vendors are infrastructure.</h2>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-300">
               You buy organized insight, campaign intelligence, decision support, and saved business
               value. Scout manages the stack, orchestration, and billing behind the scenes.

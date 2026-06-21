@@ -55,7 +55,7 @@ function GeneratedAssets({ result }: { result: ScoutResult }) {
                     <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-700">
                       Managed setup preview
                     </p>
-                    <h4 className="mt-2 text-sm font-semibold text-ink">{asset.setupAction.label}</h4>
+                    <h4 className="mt-2 font-display text-base font-medium text-ink">{asset.setupAction.label}</h4>
                     <p className="mt-1 text-sm font-semibold text-slate-600">{asset.setupAction.service}</p>
                     <p className="mt-2 text-sm leading-6 text-slate-600">{asset.setupAction.description}</p>
                   </div>
@@ -95,7 +95,7 @@ function PlaceholderStudio() {
                 <span className="grid h-11 w-11 place-items-center rounded-lg bg-teal-50 text-teal-700">
                   <Icon className="h-5 w-5" />
                 </span>
-                <h3 className="mt-4 font-semibold text-ink">{generator.title}</h3>
+                <h3 className="mt-4 font-display text-lg font-medium text-ink">{generator.title}</h3>
                 <p className="mt-1.5 flex-1 text-sm leading-6 text-slate-500">{generator.description}</p>
                 <Link
                   href="/app/canvas"

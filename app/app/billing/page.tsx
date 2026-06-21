@@ -80,7 +80,7 @@ export default function BillingPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-100">
                 Current plan
               </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-normal">Growth</h2>
+              <h2 className="mt-3 font-display text-3xl font-medium tracking-normal">Growth</h2>
               <p className="mt-2 text-sm leading-6 text-slate-300">
                 For teams connecting interviews, campaign signals, and saved AI recommendations.
               </p>
@@ -132,7 +132,7 @@ export default function BillingPage() {
             </span>
             <div>
               <SectionLabel>Invoice preview</SectionLabel>
-              <h3 className="mt-1 text-xl font-semibold text-ink">June 2026 billing summary</h3>
+              <h3 className="mt-1 font-display text-xl font-medium text-ink">June 2026 billing summary</h3>
             </div>
           </div>
           <div className="mt-5 divide-y divide-line rounded-lg border border-line">
@@ -156,7 +156,7 @@ export default function BillingPage() {
             </span>
             <div>
               <SectionLabel>Trust model</SectionLabel>
-              <h3 className="mt-1 text-xl font-semibold text-ink">Scout abstracts vendor complexity</h3>
+              <h3 className="mt-1 font-display text-xl font-medium text-ink">Scout abstracts vendor complexity</h3>
             </div>
           </div>
           <div className="mt-5 grid gap-4">
